@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HISTORIA — A Digital Museum of History</title>
+<meta name="description" content="Journey through the civilizations, empires and people that shaped our world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Floating navigation -->
+<header class="nav glass" id="nav">
+  <a href="#home" class="logo">HISTORIA</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav class="links" id="links">
+    <a href="#home">Home</a>
+    <a href="#civilizations">Civilizations</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#figures">Historical Figures</a>
+    <a href="#discover">Discover</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <h1>History is not just the past. It's our story.</h1>
+    <p>Journey through the civilizations, empires and extraordinary people that shaped our world.</p>
+    <div class="btns">
+      <a href="#civilizations" class="btn gold">Explore History</a>
+      <a href="#timeline" class="btn ghost">Discover Timeline</a>
+    </div>
+  </div>
+  <a href="#civilizations" class="scroll" aria-label="Scroll down"><span></span></a>
+</section>
+
+<main>
+  <section id="civilizations" class="sec">
+    <h2>Explore Civilizations</h2>
+    <p class="lead">Eight societies that built cities, wrote laws and left lasting marks on human knowledge.</p>
+    <div class="grid" id="civGrid"></div>
+  </section>
+
+  <section id="timeline" class="sec">
+    <h2>Timeline of the Ancient World</h2>
+    <p class="lead">Select a milestone. Each is marked as established history or a traditional date.</p>
+    <div class="rail" id="rail"></div>
+    <article class="tl-panel glass" id="tlPanel" aria-live="polite"></article>
+  </section>
+
+  <section id="figures" class="sec">
+    <h2>Historical Figures</h2>
+    <p class="lead">Six people whose decisions and ideas changed the course of history.</p>
+    <div class="grid" id="figGrid"></div>
+  </section>
+
+  <section id="discover" class="sec">
+    <h2>Did You Know?</h2>
+    <div class="fact glass">
+      <p id="factText" aria-live="polite"></p>
+      <button class="btn gold" id="factBtn">Show another fact</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <a href="#home" class="logo">HISTORIA</a>
+      <p>An interactive digital museum exploring the civilizations, events and people of world history.</p>
+    </div>
+    <nav>
+      <a href="#civilizations">Civilizations</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#figures">Historical Figures</a>
+      <a href="#discover">Discover</a>
+    </nav>
+  </div>
+  <p class="copy">© 2026 HISTORIA. Preserving the past. Exploring the future.</p>
+</footer>
+
+<button class="top glass" id="top" aria-label="Back to top">↑</button>
+
+<!-- Modal (filled by script.js) -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-box glass">
+    <button class="close" id="close" aria-label="Close">✕</button>
+    <div class="modal-img" id="mImg"></div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
