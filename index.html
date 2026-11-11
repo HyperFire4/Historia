@@ -470,17 +470,17 @@ links.addEventListener('click', e => {
 
 const navLinks = [...links.querySelectorAll('a')];
 const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
-const top = $('top');
+const toTop = $('top');
 function onScroll() {
   const y = window.scrollY + window.innerHeight * 0.35;
   let cur = 0;
   sections.forEach((s, i) => { if (s.offsetTop <= y) cur = i; });
   navLinks.forEach((a, i) => a.classList.toggle('active', i === cur));
-  top.classList.toggle('show', window.scrollY > 600);
+  toTop.classList.toggle('show', window.scrollY > 600);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
-top.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+toTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
 /* ---------- SCROLL REVEAL ---------- */
 const io = new IntersectionObserver(es => es.forEach(en => {
