@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
 <title>HISTORIA — A Digital Museum of History</title>
 <meta name="description" content="Journey through the civilizations, empires and people that shaped our world.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -280,6 +281,137 @@ h2::after{width:0;transition:width 1.1s .3s cubic-bezier(.2,.8,.2,1)}h2.in::afte
   .c-year{font-size:1.7rem}.c-body{padding:.8rem 1rem 1rem}.c-body h3{font-size:1.25rem}.c-body p{font-size:.86rem}
   .cine-ui{gap:.6rem;bottom:1rem}.c-era{display:none}.sd{width:7px;height:7px}
 }
+
+/* ===== Update 3: mobile UX, full screen, soundtrack ===== */
+*{-webkit-tap-highlight-color:transparent}
+button,a,.sd,.dot{touch-action:manipulation}
+html{-webkit-text-size-adjust:100%}
+.hero{min-height:100vh;min-height:100svh}
+.nav{top:calc(14px + env(safe-area-inset-top))}
+.top{right:max(1rem,env(safe-area-inset-right));bottom:calc(1rem + env(safe-area-inset-bottom))}
+footer{padding-bottom:calc(2rem + env(safe-area-inset-bottom))}
+.rail{scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
+
+/* Soundtrack button (in the nav) + panel */
+.music-btn{position:relative;flex:0 0 auto;width:42px;height:42px;margin-left:.4rem;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);display:grid;place-items:center;transition:.25s}
+.music-btn:hover,.music-btn[aria-expanded="true"]{background:rgba(212,175,55,.2)}
+.eq{display:flex;align-items:flex-end;gap:2px;height:14px}
+.eq i{width:3px;height:28%;border-radius:1px;background:var(--gold)}
+.music-btn.on .eq i{animation:eq 1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.4s}.eq i:nth-child(3){animation-delay:-.7s}.eq i:nth-child(4){animation-delay:-.2s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.music-btn.nudge::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--gold);animation:nudge 2.2s ease-out infinite}
+@keyframes nudge{0%{opacity:.8;transform:scale(.9)}100%{opacity:0;transform:scale(1.5)}}
+.mpanel{position:fixed;z-index:60;top:calc(78px + env(safe-area-inset-top));right:max(4%,calc((100vw - 1100px)/2));width:min(350px,92vw);padding:1rem;border-radius:22px;background:rgba(14,20,42,.94);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.3s}
+.mpanel.open{opacity:1;visibility:visible;transform:none}
+.mp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem}
+.mp-head b{font:600 1.35rem var(--serif);letter-spacing:.05em;color:var(--gold2)}
+.mp-x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:none}
+.mp-list{display:grid;gap:.4rem}
+.mp-t{display:flex;align-items:center;gap:.85rem;width:100%;min-height:56px;padding:.6rem .9rem;text-align:left;border-radius:14px;border:1px solid transparent;background:rgba(255,255,255,.04);transition:.25s}
+.mp-t:hover{background:rgba(212,175,55,.1)}
+.mp-t.on{border-color:var(--gold);background:rgba(212,175,55,.14)}
+.mp-n{flex:0 0 1.6rem;font:600 1.3rem var(--serif);color:var(--gold)}
+.mp-t b{display:block;font:600 1.1rem/1.2 var(--serif)}
+.mp-t small{display:block;color:var(--muted);font-size:.78rem;line-height:1.3}
+.mp-ctl{display:flex;align-items:center;gap:.9rem;margin-top:.9rem}
+.mp-play{flex:0 0 52px;width:52px;height:52px;border-radius:50%;border:0;background:var(--gold);color:#1a1405;font-size:1.1rem}
+.mp-vol{flex:1;display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:.8rem}
+.mp-vol input{flex:1;min-width:0;height:32px;accent-color:var(--gold)}
+.mp-note{margin-top:.7rem;font-size:.74rem;line-height:1.5;color:var(--muted)}
+
+/* Cinematic timeline: tools + full screen */
+.cine{touch-action:pan-y}
+.cine-tools{position:absolute;z-index:6;top:5.4rem;right:clamp(1rem,5vw,4rem);display:flex;gap:.5rem}
+.cine-tools button{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(18,26,51,.75);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:.25s}
+.cine-tools button:hover,.cine-tools button[aria-pressed="true"]{background:#ffb86b;color:#1a1405}
+.fs-hint{position:absolute;z-index:7;left:50%;top:calc(4.6rem + env(safe-area-inset-top));transform:translate(-50%,-8px);padding:.5rem 1rem;border-radius:999px;font-size:.82rem;color:var(--gold2);white-space:nowrap;background:rgba(12,18,38,.85);border:1px solid var(--line);opacity:0;pointer-events:none;transition:.5s}
+.fs-hint.show{opacity:1;transform:translate(-50%,0)}
+body.fs-lock{overflow:hidden;overscroll-behavior:none}
+.cine.is-fs{margin:0;min-height:0;touch-action:none}
+.cine.is-fs::before,.cine.is-fs::after{display:none}
+.cine.is-fs .cine-card{touch-action:pan-y}
+.cine.is-fs .cine-head{top:calc(1.4rem + env(safe-area-inset-top))}
+.cine.is-fs .cine-tools{top:calc(1rem + env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right))}
+.cine.is-fs .cine-ui{bottom:calc(1rem + env(safe-area-inset-bottom))}
+.cine.is-fs .cine-card{bottom:calc(6.4rem + env(safe-area-inset-bottom))}
+.cine.fake-fs{position:fixed;inset:0;z-index:400;height:100vh;height:100dvh;margin:0}
+
+/* Navigation: hamburger up to 980px, bigger tap targets */
+@media(max-width:980px){
+  .nav{border-radius:26px;flex-wrap:wrap}
+  .logo{order:1}
+  .music-btn{order:2;margin-left:auto}
+  .burger{order:3;display:grid;place-items:center;width:44px;height:44px;margin-right:-.4rem;font-size:1.5rem}
+  .links{order:4;display:none;flex-direction:column;width:100%;padding:.6rem 0 .4rem;max-height:calc(100svh - 120px);overflow-y:auto}
+  .links.open{display:flex}
+  .links a{padding:.9rem 1rem;font-size:1.02rem;border-radius:14px}
+}
+
+/* Cinematic timeline on phones/tablets: scrub bar gets its own full-width row */
+@media(max-width:860px){
+  .cine-tools{top:4.4rem;right:.8rem}
+  .cine-head{max-width:calc(100% - 7.5rem)}
+  .cine-ui{flex-wrap:wrap;gap:.5rem .8rem;bottom:calc(.8rem + env(safe-area-inset-bottom));padding:0 max(.8rem,env(safe-area-inset-left))}
+  .scrub{order:-1;flex:1 1 100%;height:34px;touch-action:none;cursor:pointer}
+  .sd{width:6px;height:6px}
+  .sd.on{transform:scale(2.1)}
+  .ctl button{width:44px;height:44px}
+  .c-era{display:block;min-width:0;margin-left:auto;font-size:.78rem}
+  .cine-card{bottom:calc(7rem + env(safe-area-inset-bottom));max-height:44%;overscroll-behavior:contain}
+  .cine.is-fs .cine-card{bottom:calc(7rem + env(safe-area-inset-bottom))}
+  .mpanel{top:calc(76px + env(safe-area-inset-top))}
+  .close{width:44px;height:44px}
+  .modal-box{overscroll-behavior:contain}
+  .modal-body{padding-bottom:calc(1.4rem + env(safe-area-inset-bottom))}
+}
+
+/* Small phones */
+@media(max-width:520px){
+  html{scroll-padding-top:84px}
+  .hero{padding:6.5rem 1.2rem 5.5rem}
+  .hero p{font-size:1.02rem}
+  .btns{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
+  .btn{min-height:48px;display:grid;place-items:center;padding:.7rem 1.4rem;text-align:center}
+  .scroll{display:none}
+  .hero-meta{left:0;right:0;align-items:center;text-align:center;bottom:calc(1.2rem + env(safe-area-inset-bottom))}
+  .particles span:nth-child(n+11){display:none}
+  .sec{padding:3.5rem 1.1rem .5rem}
+  .lead{margin-bottom:1.8rem;font-size:.98rem}
+  .stats{gap:1.6rem .8rem;padding-top:2.5rem}
+  .thumb{height:170px}
+  .card .btn{min-height:44px}
+  .fact p{min-height:7em}
+  .tl-scene{border-radius:20px}
+  .arr{width:44px;height:44px;margin-top:-22px}
+  .tl-ctl{flex-direction:column;align-items:stretch;text-align:center}
+  .tl-ctl .btn{min-height:46px}
+  .mpanel{left:.8rem;right:.8rem;width:auto}
+  footer{margin-top:4rem}
+}
+
+/* Touch screens: no sticky hover states */
+@media(hover:none){
+  .card:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .card:hover .thumb img,.card:hover .art svg{transform:none}
+  .btn.gold:hover,.btn.ghost:hover{transform:none}
+}
+
+/* Phones held sideways: card on the left, controls in one row */
+@media(max-height:520px) and (orientation:landscape){
+  .cine{min-height:0}
+  .cine-head p{display:none}
+  .cine-head{top:3.6rem;max-width:40%}
+  .cine-head h2{font-size:1.5rem;margin:0}
+  .cine-card,.cine.is-fs .cine-card{left:max(1rem,env(safe-area-inset-left));right:auto;width:min(46%,380px);bottom:4.3rem;max-height:calc(100% - 7.5rem)}
+  .cine-ui{flex-wrap:nowrap;bottom:.6rem}
+  .scrub{order:0;flex:1 1 auto;height:30px}
+  .c-era{display:none}
+  .cine-tools,.cine.is-fs .cine-tools{top:3.4rem}
+  .cine.is-fs .cine-head{top:1rem}
+  .cine.is-fs .cine-tools{top:.8rem}
+  .cine.is-fs .cine-ui{bottom:.6rem}
+}
 </style>
 </head>
 <body>
@@ -297,6 +429,7 @@ h2::after{width:0;transition:width 1.1s .3s cubic-bezier(.2,.8,.2,1)}h2.in::afte
     <a href="#figures">Historical Figures</a>
     <a href="#discover">Discover</a>
   </nav>
+  <button class="music-btn nudge" id="musicBtn" aria-label="Soundtrack" aria-expanded="false" aria-controls="mPanel"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
 </header>
 
 <!-- Hero -->
@@ -325,6 +458,11 @@ h2::after{width:0;transition:width 1.1s .3s cubic-bezier(.2,.8,.2,1)}h2.in::afte
   </section>
   <section id="journey" class="cine" aria-label="Cinematic timeline from the formation of Earth to the Moon landing">
     <canvas id="cineCv"></canvas>
+    <div class="cine-tools">
+      <button id="cMusic" aria-pressed="false" aria-label="Play music"></button>
+      <button id="cFs" aria-pressed="false" aria-label="Enter full screen"></button>
+    </div>
+    <div class="fs-hint" id="fsHint" aria-hidden="true">Rotate your phone for a wider view</div>
     <div class="cine-head">
       <h2>Journey Through Time</h2>
       <p>Follow the glowing line from the birth of Earth to the Moon landing. Spacing between stops is for storytelling, not to scale.</p>
@@ -396,6 +534,16 @@ h2::after{width:0;transition:width 1.1s .3s cubic-bezier(.2,.8,.2,1)}h2.in::afte
 </footer>
 
 <button class="top glass" id="top" aria-label="Back to top">↑</button>
+
+<section class="mpanel glass" id="mPanel" aria-label="Soundtrack" aria-hidden="true">
+  <div class="mp-head"><b>Soundtrack</b><button class="mp-x" id="mpClose" aria-label="Close soundtrack panel">✕</button></div>
+  <div class="mp-list" id="mpList"></div>
+  <div class="mp-ctl">
+    <button class="mp-play" id="mpPlay" aria-label="Play music">▶</button>
+    <label class="mp-vol"><span>Volume</span><input type="range" id="mpVol" min="0" max="100" value="60"></label>
+  </div>
+  <p class="mp-note">Original orchestral pieces composed live in your browser. Turn off silent mode on iPhone to hear them.</p>
+</section>
 
 <!-- Modal (filled by script.js) -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
@@ -842,11 +990,13 @@ scene.addEventListener('keydown', e => {
 // Drag / swipe, plus a gentle mouse-follow tilt
 scene.addEventListener('pointerdown', e => { sx = e.clientX; moved = false; });
 scene.addEventListener('pointermove', e => {
-  const r = scene.getBoundingClientRect(), mx = (e.clientX - r.left) / r.width - .5, my = (e.clientY - r.top) / r.height - .5;
-  stage.style.transform = `rotateX(${-my * 5}deg) rotateY(${mx * 8}deg)`;
+  if (e.pointerType === 'mouse') {
+    const r = scene.getBoundingClientRect(), mx = (e.clientX - r.left) / r.width - .5, my = (e.clientY - r.top) / r.height - .5;
+    stage.style.transform = `rotateX(${-my * 5}deg) rotateY(${mx * 8}deg)`;
+  }
   if (sx !== null && Math.abs(e.clientX - sx) > 60) { stopTour(); go(cur + (e.clientX < sx ? 1 : -1)); sx = e.clientX; moved = true; }
 });
-scene.addEventListener('pointerup', () => sx = null);
+['pointerup', 'pointercancel'].forEach(n => scene.addEventListener(n, () => sx = null));
 scene.addEventListener('pointerleave', () => { sx = null; stage.style.transform = ''; });
 // Auto tour
 function stopTour() { if (tour) { clearInterval(tour); tour = null; $('tlPlay').textContent = '▶ Auto tour'; } }
@@ -1155,6 +1305,250 @@ new IntersectionObserver(es => es.forEach(en => {
   } else { cancelAnimationFrame(craf); craf = 0; pausedAt = performance.now(); }
 }), { threshold: .2 }).observe(cineSec);
 syncCine();
+
+/* ============ UPDATE 3 ============ */
+
+/* ---------- Cinematic timeline: drag along the scrub bar (works with a finger) ---------- */
+const scrubEl = $('cScrub');
+let sdrag = false;
+const scrubTo = e => {
+  const r = scrubEl.getBoundingClientRect(), k = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+  goCine(Math.round(k * (CM.length - 1)));
+};
+scrubEl.addEventListener('pointerdown', e => { sdrag = true; try { scrubEl.setPointerCapture(e.pointerId); } catch (x) {} scrubTo(e); e.stopPropagation(); });
+scrubEl.addEventListener('pointermove', e => { if (sdrag) scrubTo(e); });
+['pointerup', 'pointercancel'].forEach(n => scrubEl.addEventListener(n, e => { sdrag = false; e.stopPropagation(); }));
+
+/* ---------- Cinematic timeline: full screen ---------- */
+const fsBtn = $('cFs'), fsHint = $('fsHint');
+const ICO = d => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const FS_IN = ICO('<path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>'), FS_OUT = ICO('<path d="M3 8h5V3M21 8h-5V3M3 16h5v5M21 16h-5v5"/>');
+fsBtn.innerHTML = FS_IN;
+let fakeFs = false, hintTimer = 0;
+const fsNow = () => document.fullscreenElement || document.webkitFullscreenElement;
+function paintFs(on) {
+  cineSec.classList.toggle('is-fs', on);
+  cineSec.classList.toggle('fake-fs', on && fakeFs);
+  document.body.classList.toggle('fs-lock', on);
+  fsBtn.innerHTML = on ? FS_OUT : FS_IN;
+  fsBtn.setAttribute('aria-pressed', on);
+  fsBtn.setAttribute('aria-label', on ? 'Exit full screen' : 'Enter full screen');
+  [60, 400].forEach(ms => setTimeout(() => { if (cvis) sizeCine(); }, ms));
+  clearTimeout(hintTimer); fsHint.classList.remove('show');
+  if (on && window.innerHeight > window.innerWidth && window.matchMedia('(pointer:coarse)').matches) {
+    fsHint.classList.add('show'); hintTimer = setTimeout(() => fsHint.classList.remove('show'), 3800);
+  }
+}
+async function toggleFs() {
+  if (fsNow() || fakeFs) {
+    if (fsNow()) { try { await (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} }
+    fakeFs = false; paintFs(false); return;
+  }
+  const req = cineSec.requestFullscreen || cineSec.webkitRequestFullscreen;
+  if (req) { try { await req.call(cineSec); fakeFs = false; paintFs(true); return; } catch (e) {} }
+  fakeFs = true; paintFs(true); // iPhone Safari has no element full screen: fill the whole viewport instead
+}
+fsBtn.onclick = toggleFs;
+['fullscreenchange', 'webkitfullscreenchange'].forEach(n => document.addEventListener(n, () => {
+  if (fsNow() === cineSec) paintFs(true); else if (!fakeFs) paintFs(false);
+}));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && fakeFs) toggleFs(); });
+
+/* ---------- Soundtrack: original orchestral pieces, synthesised live with the Web Audio API ---------- */
+const Music = (() => {
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  const CH = {maj: [0, 4, 7], min: [0, 3, 7]};
+  // Optional: add your own audio files here, e.g. {name:'My Theme', mood:'Short description', src:'assets/music/my-theme.mp3'}
+  const FILES = [];
+  // prog = [bass note (MIDI), chord] for 4 bars that loop; mel = melody per bar as [beat, MIDI note, length in beats]
+  const TRACKS = [
+    {name: 'Ancient Dawn', mood: 'Slow sunrise over the Nile', bpm: 66, dp: 62, style: 'none', choir: true,
+      prog: [[38, 'min'], [34, 'maj'], [41, 'maj'], [36, 'maj']], drums: [[0, .8], [2, .5]],
+      mel: [[[0, 69, 3], [3, 74, 1]], [[0, 72, 2], [2, 70, 2]], [[0, 72, 3], [3, 77, 1]], [[0, 76, 2], [2, 74, 1], [3, 72, 1]]]},
+    {name: 'March of Empires', mood: 'Driving war drums and brass', bpm: 104, dp: 66, style: 'march', choir: false,
+      prog: [[36, 'min'], [32, 'maj'], [39, 'maj'], [34, 'maj']], drums: [[0, 1], [1, .5], [1.5, .6], [2, .85], [3, .5], [3.5, .7]],
+      mel: [[[0, 67, 1], [1, 72, 1], [2, 75, 2]], [[0, 75, 1], [1, 72, 1], [2, 80, 2]], [[0, 79, 1.5], [1.5, 75, .5], [2, 77, 1], [3, 79, 1]], [[0, 74, 1], [1, 77, 1], [2, 77, 2]]]},
+    {name: 'Eternal Horizon', mood: 'Hopeful strings, harp and choir', bpm: 84, dp: 60, style: 'arp', choir: true,
+      prog: [[38, 'maj'], [33, 'maj'], [35, 'min'], [31, 'maj']], drums: [[0, .7], [2, .5]],
+      mel: [[[0, 78, 2], [2, 81, 2]], [[0, 81, 2], [2, 76, 2]], [[0, 78, 2], [2, 83, 2]], [[0, 79, 2], [2, 78, 1], [3, 74, 1]]]},
+    {name: 'Fall of Giants', mood: 'Dark, heavy and cinematic', bpm: 62, dp: 48, style: 'none', choir: true,
+      prog: [[33, 'min'], [29, 'maj'], [38, 'min'], [40, 'maj']], drums: [[0, 1], [2, .45], [3.5, .35]],
+      mel: [[[0, 76, 3], [3, 72, 1]], [[0, 77, 3], [3, 76, 1]], [[0, 74, 2], [2, 77, 2]], [[0, 76, 2], [2, 80, 2]]]}
+  ];
+  const all = () => TRACKS.concat(FILES.map(f => Object.assign({file: true}, f)));
+  let ctx, master, conv, noiseBuf, sessD = null, sessW = null, timer = 0, playing = false, cur = 0, barN = 0, nextT = 0, vol = .6, aud = null;
+  const listeners = [], changed = () => listeners.forEach(f => f());
+  const level = () => Math.pow(vol, 1.6) * .9;
+
+  function init() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 5; comp.attack.value = .01; comp.release.value = .3;
+    master = ctx.createGain(); master.gain.value = level(); master.connect(comp); comp.connect(ctx.destination);
+    const len = ctx.sampleRate * 3, ir = ctx.createBuffer(2, len, ctx.sampleRate);   // hall reverb from decaying noise
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    conv = ctx.createConvolver(); conv.buffer = ir;
+    const wet = ctx.createGain(); wet.gain.value = .9; conv.connect(wet); wet.connect(master);
+    noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+    const nd = noiseBuf.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+  }
+  function newSession() {
+    sessD = ctx.createGain(); sessW = ctx.createGain(); sessD.connect(master); sessW.connect(conv);
+    [sessD, sessW].forEach(g => { g.gain.setValueAtTime(0, ctx.currentTime); g.gain.linearRampToValueAtTime(1, ctx.currentTime + .8); });
+  }
+  function killSession() {
+    if (!sessD) return; const d = sessD, w = sessW; sessD = sessW = null;
+    [d, w].forEach(g => g.gain.setTargetAtTime(0, ctx.currentTime, .12));
+    setTimeout(() => { try { d.disconnect(); w.disconnect(); } catch (e) {} }, 1500);
+  }
+  function send(node, w) {
+    node.connect(sessD);
+    if (w) { const s = ctx.createGain(); s.gain.value = w; node.connect(s); s.connect(sessW); }
+  }
+
+  // ----- instruments -----
+  function tone(type, f, t, dur, o = {}) {
+    const {a = .05, r = .4, peak = .05, det = 0, lp = 2000, wet: wt = .3, vib = 0} = o;
+    const g = ctx.createGain(), fl = ctx.createBiquadFilter(), end = t + dur + r + .05;
+    fl.type = 'lowpass'; fl.Q.value = .6; fl.frequency.setValueAtTime(lp * .45, t); fl.frequency.linearRampToValueAtTime(lp, t + Math.min(dur, a + .25));
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setValueAtTime(peak, t + Math.max(a, dur)); g.gain.linearRampToValueAtTime(0, t + dur + r);
+    fl.connect(g); send(g, wt);
+    (det ? [-det, det] : [0]).forEach(c => {
+      const os = ctx.createOscillator(); os.type = type; os.frequency.value = f; os.detune.value = c;
+      if (vib) { const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = 5.2; lg.gain.value = f * .006; l.connect(lg); lg.connect(os.frequency); l.start(t); l.stop(end); }
+      os.connect(fl); os.start(t); os.stop(end);
+    });
+  }
+  function choir(f, t, d) {   // two vowel-like formant filters on detuned, vibrato saws
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.11, t + d * .3); g.gain.setValueAtTime(.11, t + d); g.gain.linearRampToValueAtTime(0, t + d + 1.2);
+    send(g, .75);
+    [[800, 3], [1250, 5]].forEach(([fr, Q]) => {
+      const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = fr; bp.Q.value = Q; bp.connect(g);
+      [-9, 9].forEach(c => {
+        const os = ctx.createOscillator(), l = ctx.createOscillator(), lg = ctx.createGain();
+        os.type = 'sawtooth'; os.frequency.value = f; os.detune.value = c; l.frequency.value = 5; lg.gain.value = f * .008;
+        l.connect(lg); lg.connect(os.frequency); os.connect(bp); os.start(t); os.stop(t + d + 1.3); l.start(t); l.stop(t + d + 1.3);
+      });
+    });
+  }
+  function pluck(f, t, v) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0005, t + 1.2); send(g, .55);
+    [['triangle', 1], ['sine', 2]].forEach(([ty, m]) => { const os = ctx.createOscillator(); os.type = ty; os.frequency.value = f * m; os.connect(g); os.start(t); os.stop(t + 1.3); });
+  }
+  function hit(t, d, fr, pk, type) {
+    const s = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+    s.buffer = noiseBuf; fl.type = type; fl.frequency.value = fr;
+    g.gain.setValueAtTime(pk, t); g.gain.exponentialRampToValueAtTime(.001, t + d);
+    s.connect(fl); fl.connect(g); send(g, .4); s.start(t); s.stop(t + d + .05);
+  }
+  function taiko(t, v, p) {
+    const os = ctx.createOscillator(), g = ctx.createGain();
+    os.frequency.setValueAtTime(p * 2.4, t); os.frequency.exponentialRampToValueAtTime(p, t + .14);
+    g.gain.setValueAtTime(.001, t); g.gain.linearRampToValueAtTime(.5 * v, t + .006); g.gain.exponentialRampToValueAtTime(.001, t + 1.1);
+    os.connect(g); send(g, .45); os.start(t); os.stop(t + 1.2);
+    hit(t, .09, 1400, .16 * v, 'bandpass');
+  }
+  function riser(t, d) {
+    const s = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+    s.buffer = noiseBuf; s.loop = true; fl.type = 'bandpass'; fl.Q.value = .8;
+    fl.frequency.setValueAtTime(400, t); fl.frequency.exponentialRampToValueAtTime(5000, t + d);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.12, t + d); g.gain.linearRampToValueAtTime(0, t + d + .15);
+    s.connect(fl); fl.connect(g); send(g, .4); s.start(t); s.stop(t + d + .2);
+  }
+
+  // ----- one bar of music. 16-bar cycle: 4 bars strings only, 4 bars building, 8 bars full -----
+  function bar(T, b, t) {
+    const bt = 60 / T.bpm, [bass, kind] = T.prog[b % 4], q = CH[kind], pos = b % 16, lvl = pos < 4 ? 0 : pos < 8 ? 1 : 2, len = 4 * bt;
+    tone('triangle', mtof(bass), t, len, {a: .3, r: 1.2, peak: .15, lp: 450, wet: .15});
+    tone('triangle', mtof(bass + 12), t, len, {a: .5, r: 1.2, peak: .05, lp: 700, wet: .2});
+    const pad = q.map(i => bass + 12 + i); if (lvl) pad.push(bass + 24 + q[0], bass + 24 + q[1]);
+    pad.forEach(n => tone('sawtooth', mtof(n), t, len, {a: bt * 1.6, r: bt * 2, peak: .028, det: 8, lp: 700 + lvl * 650, wet: .7}));
+    if (T.choir && lvl) [bass + 24 + q[1], bass + 24 + q[2], bass + 36 + q[0]].forEach(n => choir(mtof(n), t, len));
+    if (T.style === 'arp') {
+      const N = [q[0], q[1], q[2], 12 + q[0]], P = [0, 1, 2, 3, 2, 1, 2, 1];
+      for (let k = 0; k < 8; k++) pluck(mtof(bass + 24 + N[P[k]]), t + k * bt / 2, .045 + lvl * .012);
+    }
+    if (T.style === 'march' && lvl) {
+      const O = [0, 0, 7, 0, 0, 7, 12, 7];
+      for (let k = 0; k < 8; k++) tone('sawtooth', mtof(bass + 24 + O[k]), t + k * bt / 2, bt * .42, {a: .012, r: .12, peak: .028 + lvl * .012, lp: 1400, wet: .25});
+    }
+    if (lvl) T.drums.slice(0, lvl > 1 ? 99 : 2).forEach(([d, v]) => taiko(t + d * bt, v * (lvl > 1 ? 1 : .65), T.dp));
+    if (lvl && T.mel) T.mel[b % 4].forEach(([d, m, l]) => {
+      const s = t + d * bt;
+      tone('sawtooth', mtof(m), s, l * bt * .96, {a: .14, r: .6, peak: .06, det: 5, lp: 1500 + lvl * 900, wet: .55, vib: 1});
+      if (lvl > 1) tone('sawtooth', mtof(m - 12), s, l * bt * .96, {a: .18, r: .6, peak: .035, lp: 1100, wet: .4});
+    });
+    if (pos === 8) hit(t, 2.2, 5500, .09, 'highpass');
+    if (pos === 3 || pos === 7 || pos === 15) riser(t + 2 * bt, 2 * bt);
+  }
+  function tick() {
+    if (!playing || !sessD) return;
+    const T = TRACKS[cur];
+    while (nextT < ctx.currentTime + 1.5) { bar(T, barN, nextT); nextT += 240 / T.bpm; barN++; }
+  }
+
+  // ----- transport -----
+  async function play(i) {
+    if (typeof i === 'number') cur = i;
+    const T = all()[cur];
+    clearInterval(timer); timer = 0; if (aud) aud.pause();
+    if (!ctx) init();
+    if (T.file) {
+      killSession(); aud = aud || new Audio(); aud.src = T.src; aud.loop = true; aud.volume = Math.min(1, level());
+      aud.play().catch(() => {}); playing = true; changed(); return;
+    }
+    await ctx.resume();
+    killSession(); newSession();
+    master.gain.setTargetAtTime(level(), ctx.currentTime, .1);
+    barN = 0; nextT = ctx.currentTime + .15; playing = true;
+    tick(); timer = setInterval(tick, 300); changed();
+  }
+  function stop() {
+    if (!playing) return;
+    playing = false; clearInterval(timer); timer = 0; if (aud) aud.pause();
+    if (ctx) { killSession(); setTimeout(() => { if (!playing && ctx.state === 'running') ctx.suspend(); }, 900); }
+    changed();
+  }
+  function setVolume(v) {
+    vol = v; if (ctx) master.gain.setTargetAtTime(level(), ctx.currentTime, .05); if (aud) aud.volume = Math.min(1, level());
+  }
+  document.addEventListener('visibilitychange', () => {   // pause when the tab is hidden
+    if (!ctx || !playing) return;
+    if (document.hidden) { ctx.suspend(); if (aud) aud.pause(); }
+    else { ctx.resume(); if (aud && all()[cur].file) aud.play().catch(() => {}); }
+  });
+  return {tracks: all, play, stop, setVolume, toggle: () => playing ? stop() : play(),
+    get playing() { return playing; }, get cur() { return cur; }, onChange: f => listeners.push(f)};
+})();
+
+/* ---------- Soundtrack UI ---------- */
+const musicBtn = $('musicBtn'), mPanel = $('mPanel'), mpList = $('mpList'), mpPlay = $('mpPlay'), cMusic = $('cMusic');
+cMusic.innerHTML = ICO('<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>');
+mpList.innerHTML = Music.tracks().map((t, i) => `<button class="mp-t" data-i="${i}"><span class="mp-n">${i + 1}</span><span><b>${t.name}</b><small>${t.mood}</small></span></button>`).join('');
+function paintMusic() {
+  const on = Music.playing;
+  musicBtn.classList.toggle('on', on); cMusic.setAttribute('aria-pressed', on);
+  cMusic.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
+  mpPlay.textContent = on ? '❚❚' : '▶'; mpPlay.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
+  [...mpList.children].forEach((b, i) => b.classList.toggle('on', i === Music.cur));
+}
+Music.onChange(paintMusic); paintMusic();
+const setPanel = open => {
+  mPanel.classList.toggle('open', open); mPanel.setAttribute('aria-hidden', !open); musicBtn.setAttribute('aria-expanded', open);
+  if (open) { musicBtn.classList.remove('nudge'); closeMenu(); }
+};
+function closeMenu() { links.classList.remove('open'); burger.textContent = '☰'; burger.setAttribute('aria-expanded', 'false'); }
+musicBtn.onclick = () => setPanel(!mPanel.classList.contains('open'));
+$('mpClose').onclick = () => setPanel(false);
+mpList.addEventListener('click', e => { const b = e.target.closest('.mp-t'); if (b) Music.play(+b.dataset.i); });
+mpPlay.onclick = () => Music.toggle();
+cMusic.onclick = () => { musicBtn.classList.remove('nudge'); Music.toggle(); };
+$('mpVol').addEventListener('input', e => Music.setVolume(e.target.value / 100));
+burger.addEventListener('click', () => { if (links.classList.contains('open')) setPanel(false); });
+document.addEventListener('pointerdown', e => {   // tap outside closes the menu / music panel
+  if (links.classList.contains('open') && !e.target.closest('#nav')) closeMenu();
+  if (mPanel.classList.contains('open') && !e.target.closest('#mPanel, #musicBtn')) setPanel(false);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { setPanel(false); closeMenu(); } });
 </script>
 </body>
 </html>
