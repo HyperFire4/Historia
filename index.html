@@ -433,6 +433,58 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
 .why b{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
 @media(max-width:980px){.lang-btn{order:2;margin-left:auto}.music-btn:not(.lang-btn){margin-left:.4rem}}
 @media(max-width:700px){.tl-scene{height:620px}}
+
+/* ===== Update 5: eras + gate ===== */
+.era-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.era-card .thumb{height:250px;border-radius:50% 50% 0 0 / 38% 38% 0 0}
+.era-card .card-body{text-align:center;align-items:center}
+.era-card .btn{align-self:center}
+.ec-count{font-size:.8rem;color:var(--gold2)}
+.era{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;
+  background:radial-gradient(900px 600px at 85% 0%,#1b2650 0%,transparent 60%),radial-gradient(700px 500px at 0% 40%,#2a1f10 0%,transparent 55%),var(--bg)}
+.era.open{opacity:1;visibility:visible}
+.era-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;padding:.7rem clamp(1rem,4vw,3rem);padding-top:calc(.7rem + env(safe-area-inset-top));background:rgba(11,16,32,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.era-back{min-height:44px;padding:.4rem 1.2rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-weight:600;transition:.25s}
+.era-back:hover{background:var(--gold);color:#1a1405}
+.era-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
+.era-head{position:relative;margin:1.5rem 0 1rem;min-height:320px;border-radius:26px;overflow:hidden;display:flex;align-items:flex-end;border:1px solid var(--line);background:linear-gradient(135deg,#2a2210,#18213f)}
+.era-art{position:absolute;inset:0}
+.era-art img{position:absolute;inset:0}
+.era-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,16,32,.15),rgba(11,16,32,.92))}
+.era-title{position:relative;z-index:2;padding:2rem;max-width:720px}
+.era-title h2{padding-bottom:0}.era-title h2::after{display:none}
+.era-title p{opacity:.88;margin-top:.4rem}
+.era-sec h3{font:600 2rem/1.2 var(--serif);margin:2.4rem 0 1.2rem;color:var(--gold2)}
+body.era-lock{overflow:hidden}
+@media(max-width:520px){.era-inner{padding:0 1rem 3rem}.era-head{min-height:260px;border-radius:20px}.era-title{padding:1.3rem}}
+
+/* The gate */
+.gate{position:fixed;inset:0;z-index:500;visibility:hidden;pointer-events:none;overflow:hidden;perspective:1600px;--dur:.75s}
+.gate.on{visibility:visible;pointer-events:auto}
+.gate.opening{--dur:1.6s}
+.door{position:absolute;top:0;bottom:0;width:50.3%;overflow:hidden;transition:transform var(--dur) cubic-bezier(.7,0,.25,1);will-change:transform;
+  background:
+    radial-gradient(circle,#f0d77a 0 3px,rgba(138,109,28,.8) 4px,transparent 5px) 22px 22px/72px 72px,
+    linear-gradient(180deg,transparent 0 13%,rgba(212,175,55,.5) 13% 14.5%,transparent 14.5% 49%,rgba(212,175,55,.5) 49% 50.5%,transparent 50.5% 85%,rgba(212,175,55,.5) 85% 86.5%,transparent 86.5%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,transparent 2px 64px),
+    linear-gradient(90deg,#17110c,#2c2117 45%,#17110c);
+  box-shadow:inset 0 0 0 10px #0c0906,inset 0 0 0 12px rgba(212,175,55,.65),inset 0 0 140px rgba(0,0,0,.85)}
+.door.l{left:0;transform-origin:0 50%;border-right:2px solid var(--gold)}
+.door.r{right:0;transform-origin:100% 50%;border-left:2px solid var(--gold)}
+.door::after{content:"";position:absolute;top:50%;width:130px;height:130px;margin-top:-65px;border-radius:50%;border:3px solid var(--gold);
+  background:radial-gradient(circle,#f0d77a 0 9%,#9a7a20 10% 38%,#1a1410 39% 62%,rgba(212,175,55,.5) 63% 66%,#1a1410 67%);box-shadow:0 0 30px rgba(212,175,55,.4)}
+.door.l::after{right:-65px}.door.r::after{left:-65px}
+.gate.open .door.l{transform:rotateY(108deg)}
+.gate.open .door.r{transform:rotateY(-108deg)}
+.gate-glow{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,236,170,.95) 0,rgba(212,175,55,.5) 22%,transparent 62%)}
+.gate.opening .gate-glow{animation:flare 1.9s ease-out forwards}
+@keyframes flare{0%{opacity:0;transform:scale(.6)}35%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+.gate-title{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);text-align:center;width:min(90vw,600px);opacity:0;pointer-events:none;transition:opacity .45s}
+.gate.on:not(.open) .gate-title{opacity:1;transition-delay:.45s}
+.gate-title small{display:block;font:500 .85rem var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem}
+html[lang="gu"] .gate-title small{letter-spacing:.1em;text-transform:none}
+.gate-title b{display:block;font:700 clamp(1.8rem,6vw,3.4rem)/1.2 var(--serif);color:#fff3c8;text-shadow:0 0 30px rgba(212,175,55,.7),0 3px 20px rgba(0,0,0,.9)}
+@media(prefers-reduced-motion:reduce){.gate{display:none}}
 </style>
 </head>
 <body>
@@ -445,9 +497,8 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
   <nav class="links" id="links">
     <a href="#home">Home</a>
     <a href="#journey">Journey</a>
-    <a href="#civilizations">Civilizations</a>
+    <a href="#eras">Eras</a>
     <a href="#timeline">Timeline</a>
-    <a href="#figures">Historical Figures</a>
     <a href="#discover">Discover</a>
   </nav>
   <button class="music-btn lang-btn" id="langBtn" aria-label="Language" aria-expanded="false" aria-controls="lPanel"><span id="langCode">EN</span></button>
@@ -463,19 +514,19 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
     <h1>History is not just the past. It's our story.</h1>
     <p>Journey through the civilizations, empires and extraordinary people that shaped our world.</p>
     <div class="btns">
-      <a href="#civilizations" class="btn gold">Explore History</a>
+      <a href="#eras" class="btn gold">Explore History</a>
       <a href="#journey" class="btn ghost">Discover Timeline</a>
     </div>
   </div>
-  <a href="#civilizations" class="scroll" aria-label="Scroll down"><span></span></a>
+  <a href="#eras" class="scroll" aria-label="Scroll down"><span></span></a>
   <div class="hero-meta"><span id="heroCap"></span><div id="heroDots"></div></div>
 </section>
 
 <main>
   <section class="stats sec" id="stats">
-    <div class="stat rv"><b data-n="16">0</b><span>Civilizations</span></div>
+    <div class="stat rv"><b data-n="26">0</b><span>Civilizations</span></div>
     <div class="stat rv" style="--d:90ms"><b data-n="28">0</b><span>Timeline milestones</span></div>
-    <div class="stat rv" style="--d:180ms"><b data-n="14">0</b><span>Historical figures</span></div>
+    <div class="stat rv" style="--d:180ms"><b data-n="28">0</b><span>Historical figures</span></div>
     <div class="stat rv" style="--d:270ms"><b data-n="454" data-div="100" data-s=" bn">0</b><span>Years of Earth history</span></div>
   </section>
   <section id="journey" class="cine" aria-label="Cinematic timeline from the formation of Earth to the Moon landing">
@@ -504,10 +555,10 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
     </div>
   </section>
 
-  <section id="civilizations" class="sec">
-    <h2>Explore Civilizations</h2>
-    <p class="lead">Sixteen societies that built cities, wrote laws and left lasting marks on human knowledge.</p>
-    <div class="grid" id="civGrid"></div>
+  <section id="eras" class="sec">
+    <h2>Explore History by Era</h2>
+    <p class="lead">Five great ages of history. Choose an era to open its gate and meet its civilizations and people.</p>
+    <div class="grid era-grid" id="eraGrid"></div>
   </section>
 
   <section id="timeline" class="sec">
@@ -523,11 +574,6 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
     <div class="tl-ctl"><span>Drag, swipe, click a card or use the ← → keys</span><button class="btn ghost" id="tlPlay">▶ Auto tour</button></div>
   </section>
 
-  <section id="figures" class="sec">
-    <h2>Historical Figures</h2>
-    <p class="lead">Fourteen people whose decisions and ideas changed the course of history.</p>
-    <div class="grid" id="figGrid"></div>
-  </section>
 
   <section id="discover" class="sec">
     <h2>Did You Know?</h2>
@@ -546,9 +592,8 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
     </div>
     <nav>
       <a href="#journey">Journey</a>
-      <a href="#civilizations">Civilizations</a>
+      <a href="#eras">Eras</a>
       <a href="#timeline">Timeline</a>
-      <a href="#figures">Historical Figures</a>
       <a href="#discover">Discover</a>
     </nav>
   </div>
@@ -571,6 +616,23 @@ html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-s
   <div class="mp-head"><b>Language</b><button class="mp-x" id="lClose" aria-label="Close language panel">✕</button></div>
   <div class="mp-list" id="lList"></div>
 </section>
+
+<!-- An era opens as its own page behind the gate -->
+<div class="era" id="era" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Historical era">
+  <div class="era-top"><button class="era-back" id="eraBack">← <span id="eraBackT">All eras</span></button></div>
+  <div class="era-inner">
+    <header class="era-head" id="eraHead"></header>
+    <section class="era-sec"><h3 id="eraCivT">Civilizations</h3><div class="grid" id="civGrid"></div></section>
+    <section class="era-sec"><h3 id="eraFigT">Historical Figures</h3><div class="grid" id="figGrid"></div></section>
+  </div>
+</div>
+
+<!-- The gate that opens when you enter the Journey or an era -->
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="gate-glow"></div>
+  <div class="door l"></div><div class="door r"></div>
+  <div class="gate-title"><small id="gSub">Entering</small><b id="gName"></b></div>
+</div>
 
 <!-- Modal (filled by script.js) -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
@@ -975,13 +1037,156 @@ const locI = (o, type) => {   // a civilization or figure, in the current langua
 const locT = (m, i) => { const g = LANG !== 'en' && TR[LANG] && TR[LANG].tl[i]; return g ? Object.assign({}, m, {y: g[0], t: g[1], d: g[2], why: g[3]}) : m; };
 const factT = i => (LANG !== 'en' && TR[LANG] && TR[LANG].facts[i]) || facts[i];
 
+/* ---------- ERAS + MORE CIVILIZATIONS AND FIGURES ---------- */
+Object.assign(ART, {
+  labrys: '<path d="M100 40V168M100 70C70 40 50 60 60 86C75 102 100 92 100 92M100 70C130 40 150 60 140 86C125 102 100 92 100 92"/>',
+  temple: '<path d="M30 162H170M40 162V140H160V162M52 140V118H148V140M64 118V98H136V118M78 98V80H122V98M92 80V62H108V80M100 62V44"/>',
+  fort: '<path d="M24 162H176V96H156V116H138V96H118V116H100V96H82V116H62V96H44V116H24ZM92 162V138a8 8 0 0 1 16 0V162M60 74H80V96M120 74H140V96M100 52V96"/>'
+});
+Object.assign(KEY, {minoan:['labrys',205],kush:['egypt',25],maurya:['ashoka',40],gupta:['ashoka',55],chola:['temple',22],abbasid:['ottoman',160],viking:['ship',215],maratha:['fort',15],songhai:['mali',30],meiji:['alexander',350],
+  hammurabi:['cyrus',25],ramesses:['hatshepsut',30],hannibal:['joan',10],augustus:['caesar',350],aryabhata:['cosmos',245],charlemagne:['mansa',255],saladin:['suleiman',120],rajaraja:['temple',30],
+  shivaji:['fort',18],galileo:['cosmos',220],gandhi:['ashoka',30],patel:['torch',22],einstein:['cosmos',205],curie:['moon',160],
+  era0:['egypt',38],era1:['greece',215],era2:['byzantine',275],era3:['mughal',335],era4:['gear',350]});
+const PERIODS = [
+ {n:'The Ancient World', r:'c. 3500 – 500 BCE', b:'The first cities, the invention of writing and the great river-valley civilizations.', f:'era0', w:'Great_Pyramid_of_Giza'},
+ {n:'The Classical Age', r:'500 BCE – 500 CE', b:'Empires and thinkers of Greece, Rome, Persia, India and China shape the ancient world.', f:'era1', w:'Parthenon'},
+ {n:'The Medieval World', r:'500 – 1450 CE', b:'Caliphates, Mongol horsemen, Viking ships and rich trading empires link continents.', f:'era2', w:'Hagia_Sophia'},
+ {n:'The Early Modern Age', r:'1450 – 1800 CE', b:'Gunpowder empires, great voyages and the Renaissance open a new age of exploration.', f:'era3', w:'Taj_Mahal'},
+ {n:'The Modern World', r:'1800 CE – today', b:'Revolutions, independence movements and science reshape the modern world.', f:'era4', w:'Statue_of_Unity'}
+];
+const ERA_OF = {};
+[['Mesopotamia','Ancient Egypt','Indus Valley Civilization','Minoan Civilization','Kingdom of Kush','Hammurabi','Hatshepsut','Ramesses II','Cyrus the Great'],
+ ['Ancient Greece','Roman Empire','Persian Empire','Ancient China','Maurya Empire','Gupta Empire','Confucius','Alexander the Great','Julius Caesar','Cleopatra VII','Ashoka the Great','Qin Shi Huang','Hannibal','Augustus','Aryabhata'],
+ ['Byzantine Empire','Mongol Empire','Mali Empire','Khmer Empire','Mayan Civilization','Chola Empire','Abbasid Caliphate','Viking Age','Genghis Khan','Mansa Musa','Joan of Arc','Charlemagne','Saladin','Rajaraja Chola I'],
+ ['Ottoman Empire','Aztec Empire','Inca Empire','Mughal Empire','Maratha Empire','Songhai Empire','Leonardo da Vinci','Suleiman the Magnificent','Akbar','Shivaji','Galileo Galilei'],
+ ['Meiji Japan','Mahatma Gandhi','Sardar Vallabhbhai Patel','Albert Einstein','Marie Curie']
+].forEach((list, i) => list.forEach(n => ERA_OF[n] = i));
+civs.push(
+ {n:'Minoan Civilization', p:'c. 3000 – 1100 BCE', f:'minoan', w:'Knossos', s:'A Bronze Age sea-trading culture on the island of Crete.',
+  d:['The Minoans lived on Crete and traded across the eastern Mediterranean. Their large palace complexes, such as Knossos, had storerooms, workshops and vivid wall paintings.','Linear B, a later script found on Crete, records an early form of Greek, while Linear A is still undeciphered. Minoan power declined after about 1450 BCE, and the causes, including volcanic eruption and invasion, are still debated.']},
+ {n:'Kingdom of Kush', p:'c. 1070 BCE – 350 CE', f:'kush', w:'Meroë', s:'A powerful Nubian kingdom south of Egypt that once ruled it.',
+  d:['Kush grew along the Nile in what is now Sudan, with capitals at Napata and later Meroë. Its kings, known as the Twenty-fifth Dynasty, ruled Egypt from about 744 to 656 BCE.','Meroë became a centre of iron working and trade. Kushite rulers built many pyramids, and the Meroitic script is only partly understood.']},
+ {n:'Maurya Empire', p:'322 – 185 BCE', f:'maurya', w:'Sanchi', s:"India's first great empire, united under Chandragupta and Ashoka.",
+  d:['Chandragupta Maurya founded the empire around 322 BCE from its capital Pataliputra, with the help of his adviser Kautilya, traditionally linked to the Arthashastra, a text on statecraft.','Under his grandson Ashoka, it covered most of the subcontinent. After Ashoka died around 232 BCE the empire weakened and ended around 185 BCE.']},
+ {n:'Gupta Empire', p:'c. 320 – 550 CE', f:'gupta', w:'Nalanda', s:'A golden age of Indian science, mathematics and art.',
+  d:['Founded by Chandragupta I around 320 CE, the Gupta Empire ruled much of northern India from Pataliputra. Rulers such as Samudragupta and Chandragupta II expanded it and supported learning.','Scholars of the era advanced mathematics and astronomy, including the decimal place-value system and the use of zero as a number. Invasions and internal weakness ended the empire by about 550 CE.']},
+ {n:'Chola Empire', p:'c. 848 – 1279 CE', f:'chola', w:'Brihadisvara_Temple,_Thanjavur', s:'South Indian naval power and temple-builders.',
+  d:['The medieval Chola dynasty rose from Thanjavur around 848 CE. Under Rajaraja I and his son Rajendra I, it ruled much of southern India and Sri Lanka, and its navy reached Southeast Asia.','The Cholas built great Shiva temples, including the Brihadisvara Temple at Thanjavur, completed around 1010 CE, and were famed for bronze sculpture such as Nataraja images.']},
+ {n:'Abbasid Caliphate', p:'750 – 1258 CE', f:'abbasid', w:'House_of_Wisdom', s:'A caliphate whose capital Baghdad became a world centre of learning.',
+  d:["The Abbasids took power from the Umayyads in 750 CE and founded Baghdad in 762 as their capital. Under caliphs such as Harun al-Rashid and al-Ma'mun, it became one of the largest cities in the world.",'Scholars in Baghdad translated Greek, Persian and Indian texts into Arabic and advanced mathematics, medicine, astronomy and optics. The caliphate lost real power over time, and Baghdad fell to the Mongols in 1258.']},
+ {n:'Viking Age', p:'c. 793 – 1066 CE', f:'viking', w:'Oseberg_ship', s:'Norse seafarers, raiders, traders and settlers.',
+  d:['The Viking Age is usually dated from the raid on Lindisfarne in 793 CE. Norse people from Scandinavia sailed in fast longships as raiders, traders and settlers.','They reached Iceland, Greenland and, around 1000 CE, North America, and also travelled along Russian rivers to Constantinople. The age is often said to end in 1066, when the Norwegian king Harald Hardrada died at Stamford Bridge.']},
+ {n:'Maratha Empire', p:'1674 – 1818 CE', f:'maratha', w:'Raigad_Fort', s:'A Deccan power that challenged Mughal rule and grew across India.',
+  d:['Shivaji Bhonsle was crowned Chhatrapati at Raigad in 1674, founding an independent Maratha state in the Western Ghats region. His forts, light cavalry and navy helped resist the Mughals and other powers.','Under later Peshwas, Maratha influence spread across much of India in the 18th century. The empire was weakened by defeat at Panipat in 1761 and ended after the Third Anglo-Maratha War in 1818.']},
+ {n:'Songhai Empire', p:'c. 1464 – 1591 CE', f:'songhai', w:'Tomb_of_Askia', s:'The largest empire in West African history.',
+  d:['Songhai rose from the city of Gao and, under Sunni Ali (r. 1464–1492), took Timbuktu and Djenné. Askia Muhammad (r. 1493–1528) built an efficient administration and supported Islamic learning.','The empire grew rich from the trans-Saharan gold and salt trade. It fell in 1591 after a Moroccan army armed with firearms defeated it at the Battle of Tondibi.']},
+ {n:'Meiji Japan', p:'1868 – 1912 CE', f:'meiji', w:'Meiji_Restoration', s:"Japan's rapid transformation into a modern industrial state.",
+  d:['In 1868 the Meiji Restoration ended the rule of the Tokugawa shoguns and returned power to Emperor Meiji. The capital moved from Kyoto to Tokyo.','The government built railways, factories, schools and a modern army and navy, and adopted a constitution in 1889. Japan became an industrial power within a few decades, with lasting effects across Asia.']}
+);
+figures.push(
+ {n:'Hammurabi', t:'King of Babylon', e:'r. c. 1792 – 1750 BCE', f:'hammurabi', w:'Hammurabi', s:'Babylonian king remembered for his law code.',
+  d:['Hammurabi became king of Babylon and, through conquest and diplomacy, united much of Mesopotamia under Babylonian rule.','His law code, carved on a basalt stele now in the Louvre, set out about 280 laws on trade, property and family, with penalties that depended on a person\'s social status.']},
+ {n:'Ramesses II', t:'Pharaoh of Egypt', e:'c. 1303 – 1213 BCE', f:'ramesses', w:'Ramesses_II', s:"One of Egypt's longest-reigning and most celebrated pharaohs.",
+  d:['Ramesses II ruled for about 66 years (c. 1279–1213 BCE) and led Egypt against the Hittites at the Battle of Kadesh.','He built or expanded many monuments, including the temples at Abu Simbel and the Ramesseum, and later signed one of the earliest known peace treaties with the Hittites.']},
+ {n:'Hannibal', t:'Carthaginian general', e:'247 – c. 183 BCE', f:'hannibal', w:'Hannibal', s:'Led an army with war elephants over the Alps against Rome.',
+  d:['Hannibal commanded Carthaginian forces in the Second Punic War. In 218 BCE he led an army, including war elephants, from Spain across the Alps into Italy.','He won major victories, including Cannae in 216 BCE, but could not take Rome. Carthage was defeated at Zama in 202 BCE, and Hannibal died in exile around 183 BCE.']},
+ {n:'Augustus', t:'First Roman emperor', e:'63 BCE – 14 CE', f:'augustus', w:'Augustus_of_Prima_Porta', s:'Ended the civil wars and founded the Roman Empire.',
+  d:["Born Gaius Octavius, he was Julius Caesar's grand-nephew and adopted heir. After defeating Mark Antony and Cleopatra at Actium in 31 BCE, he became the sole ruler of Rome.",'In 27 BCE the Senate gave him the title Augustus. He reformed the army, taxes and provinces and ruled until 14 CE, beginning a long period of relative peace.']},
+ {n:'Aryabhata', t:'Mathematician and astronomer', e:'476 – c. 550 CE', f:'aryabhata', w:'Aryabhata', s:'Indian scholar of the Gupta era who wrote the Aryabhatiya.',
+  d:['Aryabhata was born in 476 CE and wrote the Aryabhatiya in 499 CE, a short Sanskrit work on mathematics and astronomy.','It gave an approximation of pi close to 3.1416, methods for square and cube roots, and the idea that the Earth rotates on its axis, which explains the apparent motion of the stars.']},
+ {n:'Charlemagne', t:'King of the Franks and Emperor', e:'748 – 814 CE', f:'charlemagne', w:'Charlemagne', s:'United much of Western Europe and was crowned emperor in 800.',
+  d:['Charlemagne became king of the Franks in 768 and expanded his realm across much of Western and Central Europe through long campaigns.','Pope Leo III crowned him emperor in Rome on Christmas Day, 800 CE. He supported scholars and schools, and the revival of learning at his court is called the Carolingian Renaissance.']},
+ {n:'Saladin', t:'Sultan of Egypt and Syria', e:'c. 1137 – 1193 CE', f:'saladin', w:'Saladin', s:'Founded the Ayyubid dynasty and recaptured Jerusalem in 1187.',
+  d:['Saladin (Salah ad-Din) was born in Tikrit and rose in the service of the Zengid rulers. He took control of Egypt in the 1170s and later united Egypt and Syria.','In 1187 he defeated the Crusaders at the Battle of Hattin and recaptured Jerusalem. He later agreed a truce with Richard the Lionheart and was respected even by opponents for his conduct.']},
+ {n:'Rajaraja Chola I', t:'Emperor of the Chola Empire', e:'c. 947 – 1014 CE', f:'rajaraja', w:'Rajaraja_I', s:'Built the Chola state into a major land and sea power.',
+  d:['Rajaraja I became king in 985 CE and expanded the Chola Empire across southern India and into northern Sri Lanka.','He built the Brihadisvara Temple at Thanjavur, completed around 1010 CE, and organised land surveys and a detailed local administration.']},
+ {n:'Shivaji', t:'Founder of the Maratha Empire', e:'1630 – 1680 CE', f:'shivaji', w:'Shivaji', s:'Founded an independent Maratha state and was crowned Chhatrapati in 1674.',
+  d:['Shivaji Bhonsle was born in 1630 at Shivneri Fort. He captured forts from the Adil Shahi and Mughal rulers and built a state in western India using fast, flexible warfare.','He was crowned Chhatrapati at Raigad in 1674. He set up a council of ministers, a navy and a revenue system, and is remembered across India, especially in Maharashtra.']},
+ {n:'Galileo Galilei', t:'Astronomer and physicist', e:'1564 – 1642 CE', f:'galileo', w:'Galileo_Galilei', s:'Used the telescope to reveal the heavens in a new way.',
+  d:["Galileo, born in Pisa, improved the telescope and in 1609–1610 observed the Moon's mountains, the phases of Venus and four large moons of Jupiter.",'His support for the Sun-centred model of Copernicus led to a trial by the Inquisition in 1633, and he spent his last years under house arrest. His methods helped found modern experimental science.']},
+ {n:'Mahatma Gandhi', t:"Leader of India's independence movement", e:'1869 – 1948 CE', f:'gandhi', w:'Mahatma_Gandhi', s:'Led non-violent resistance that helped end British rule in India.',
+  d:['Mohandas Karamchand Gandhi was born in Porbandar, Gujarat, in 1869. He trained as a lawyer in London and developed his method of non-violent resistance, satyagraha, in South Africa.','Returning to India in 1915, he led campaigns including the Salt March of 1930, which began at Sabarmati Ashram in Ahmedabad and ended at Dandi. India became independent in 1947, and Gandhi was assassinated in Delhi on 30 January 1948.']},
+ {n:'Sardar Vallabhbhai Patel', t:'Statesman and first Deputy Prime Minister of India', e:'1875 – 1950 CE', f:'patel', w:'Vallabhbhai_Patel', s:'The “Iron Man of India” who unified the princely states.',
+  d:['Born in Nadiad, Gujarat, Patel became a leading barrister and a key figure in the Indian National Congress. He led the 1928 Bardoli satyagraha, which earned him the title “Sardar”.',"After 1947 he served as India's first Deputy Prime Minister and Home Minister, and persuaded and pressed more than 500 princely states to join the Indian Union. The Statue of Unity in Gujarat is dedicated to him."]},
+ {n:'Albert Einstein', t:'Theoretical physicist', e:'1879 – 1955 CE', f:'einstein', w:'Albert_Einstein', s:'Developed the theory of relativity and changed modern physics.',
+  d:['Born in Ulm, Germany, Einstein published four groundbreaking papers in 1905, including work on the photoelectric effect, Brownian motion and special relativity, which included the famous equation E = mc².','In 1915 he completed general relativity, a new theory of gravity that was supported by observations of starlight during the 1919 solar eclipse. He was awarded the 1921 Nobel Prize in Physics for the photoelectric effect.']},
+ {n:'Marie Curie', t:'Physicist and chemist', e:'1867 – 1934 CE', f:'curie', w:'Marie_Curie', s:'The first person to win Nobel Prizes in two different sciences.',
+  d:['Born Maria Skłodowska in Warsaw, she moved to Paris to study. With her husband Pierre she studied radioactivity, a term she coined, and discovered the elements polonium and radium.','She won the Nobel Prize in Physics in 1903, shared with Pierre Curie and Henri Becquerel, and the Nobel Prize in Chemistry in 1911. During World War I she helped develop mobile X-ray units for field hospitals.']}
+);
+Object.assign(MORE, {
+ 'Minoan Civilization': "Arthur Evans began excavating Knossos in 1900. The legend of the Minotaur's labyrinth is often linked to the palace, though the link is speculative.",
+ 'Kingdom of Kush': "Sudan has more pyramids than Egypt, though the Kushite ones are smaller and steeper.",
+ 'Maurya Empire': "Megasthenes, a Greek envoy to Chandragupta's court, wrote an account of India called the Indica; only fragments survive.",
+ 'Gupta Empire': "Nalanda, which grew with Gupta support, became one of the world's earliest large centres of learning.",
+ 'Chola Empire': "The tower (vimana) of the Brihadisvara Temple rises about 66 metres and is built largely of granite.",
+ 'Abbasid Caliphate': "The mathematician al-Khwarizmi, who worked in Baghdad, gave us the word “algorithm” through the Latin form of his name.",
+ 'Viking Age': "Norse buildings at L'Anse aux Meadows in Newfoundland, dated to about 1000 CE, are the earliest confirmed European presence in North America.",
+ 'Maratha Empire': "Maratha forts such as Raigad, Sinhagad and Pratapgad, mostly on hilltops, were central to its defence.",
+ 'Songhai Empire': "Timbuktu's Sankore mosque-university was a centre of scholarship during Songhai rule.",
+ 'Meiji Japan': "Within about 30 years Japan built a railway network and a modern school system, and sent students abroad to study Western science and law.",
+ 'Hammurabi': "The stele of the Code of Hammurabi was found at Susa in 1901–02 and is now in the Louvre in Paris.",
+ 'Ramesses II': "The Abu Simbel temples were moved to higher ground in the 1960s to save them from the rising waters of Lake Nasser.",
+ 'Hannibal': "Hannibal's double-envelopment tactic at Cannae is still studied in military academies.",
+ 'Augustus': "The month of August is named after him.",
+ 'Aryabhata': "India's first satellite, launched in 1975, was named Aryabhata in his honour.",
+ 'Charlemagne': "He promoted a clear handwriting style, Carolingian minuscule, which later shaped the lower-case letters we use today.",
+ 'Saladin': "Europeans admired him as a model of chivalry, and the Ayyubid dynasty he founded ruled Egypt until 1250.",
+ 'Rajaraja Chola I': "The Brihadisvara Temple, a UNESCO World Heritage Site, is part of the “Great Living Chola Temples”.",
+ 'Shivaji': "He is credited with building a navy to guard the Konkan coast, and the sea fort of Sindhudurg was built under him around 1664–67.",
+ 'Galileo Galilei': "In 1992 the Catholic Church formally acknowledged that its handling of Galileo's case had been mistaken.",
+ 'Mahatma Gandhi': "His birthday, 2 October, is observed as Gandhi Jayanti in India and as the International Day of Non-Violence worldwide.",
+ 'Sardar Vallabhbhai Patel': "The Statue of Unity, unveiled in 2018, is about 182 metres tall and is among the tallest statues in the world.",
+ 'Albert Einstein': "He moved to the United States in 1933 and worked at the Institute for Advanced Study in Princeton until his death.",
+ 'Marie Curie': "She remains the only person to have won Nobel Prizes in two different scientific fields."
+});
+Object.assign(TR.gu.c, {
+ 'Minoan Civilization':['મિનોઅન સંસ્કૃતિ','આશરે ઇ.સ.પૂ. 3000 – 1100','ક્રીટ ટાપુ પરની કાંસ્ય યુગની દરિયાઈ વેપારી સંસ્કૃતિ.','આર્થર ઇવાન્સે 1900માં નોસોસનું ખોદકામ શરૂ કર્યું. મિનોટોરના ભુલભુલામણીની દંતકથાને ઘણી વાર આ મહેલ સાથે જોડવામાં આવે છે, જોકે આ જોડાણ અનુમાનિત છે.'],
+ 'Kingdom of Kush':['કુશનું રાજ્ય','આશરે ઇ.સ.પૂ. 1070 – ઇ.સ. 350','ઇજિપ્તની દક્ષિણે આવેલું શક્તિશાળી નુબિયન રાજ્ય, જેણે એક સમયે ઇજિપ્ત પર શાસન કર્યું.','સુદાનમાં ઇજિપ્ત કરતાં વધુ પિરામિડ છે, જોકે કુશના પિરામિડ નાના અને વધુ ઢાળવાળા છે.'],
+ 'Maurya Empire':['મૌર્ય સામ્રાજ્ય','ઇ.સ.પૂ. 322 – 185','ચંદ્રગુપ્ત અને અશોક હેઠળ એક થયેલું ભારતનું પ્રથમ મહાન સામ્રાજ્ય.','ચંદ્રગુપ્તના દરબારમાં ગ્રીક રાજદૂત મેગેસ્થેનિસે “ઇન્ડિકા” નામે ભારતનું વર્ણન લખ્યું; તેના માત્ર અંશો ટકી રહ્યા છે.'],
+ 'Gupta Empire':['ગુપ્ત સામ્રાજ્ય','આશરે ઇ.સ. 320 – 550','ભારતીય વિજ્ઞાન, ગણિત અને કલાનો સુવર્ણ યુગ.','ગુપ્તોના ટેકાથી વિકસેલું નાલંદા વિશ્વનાં સૌથી પ્રારંભિક મોટાં વિદ્યા-કેન્દ્રોમાંનું એક બન્યું.'],
+ 'Chola Empire':['ચોલ સામ્રાજ્ય','આશરે ઇ.સ. 848 – 1279','દક્ષિણ ભારતની નૌકા સત્તા અને મંદિર-નિર્માતાઓ.','બૃહદીશ્વર મંદિરનું શિખર (વિમાન) આશરે 66 મીટર ઊંચું છે અને મુખ્યત્વે ગ્રેનાઇટથી બનેલું છે.'],
+ 'Abbasid Caliphate':['અબ્બાસી ખિલાફત','ઇ.સ. 750 – 1258','એવી ખિલાફત, જેની રાજધાની બગદાદ જ્ઞાનનું વિશ્વ-કેન્દ્ર બની.','બગદાદમાં કામ કરતા ગણિતશાસ્ત્રી અલ-ખ્વારિઝ્મીના નામના લેટિન રૂપ પરથી “અલ્ગોરિધમ” શબ્દ આવ્યો.'],
+ 'Viking Age':['વાઇકિંગ યુગ','આશરે ઇ.સ. 793 – 1066','નોર્સ નાવિકો, લૂંટારા, વેપારીઓ અને વસાહતીઓ.','કેનેડાના ન્યૂફાઉન્ડલેન્ડમાં લ’આન્સ ઓ મીડોઝ ખાતે આશરે ઇ.સ. 1000ની નોર્સ ઇમારતો મળી છે; ઉત્તર અમેરિકામાં યુરોપિયન હાજરીનો તે સૌથી જૂનો પુષ્ટ પુરાવો છે.'],
+ 'Maratha Empire':['મરાઠા સામ્રાજ્ય','ઇ.સ. 1674 – 1818','મુઘલ શાસનને પડકારનાર અને સમગ્ર ભારતમાં વિસ્તરેલી ડેક્કનની સત્તા.','રાયગઢ, સિંહગઢ અને પ્રતાપગઢ જેવા મરાઠા કિલ્લા, મોટા ભાગે પહાડી ટોચ પર, તેના સંરક્ષણનું કેન્દ્ર હતા.'],
+ 'Songhai Empire':['સોંગહાઈ સામ્રાજ્ય','આશરે ઇ.સ. 1464 – 1591','પશ્ચિમ આફ્રિકાના ઇતિહાસનું સૌથી મોટું સામ્રાજ્ય.','તિમ્બક્ટુની સાંકોરે મસ્જિદ-વિશ્વવિદ્યાલય સોંગહાઈ શાસન દરમિયાન વિદ્વત્તાનું કેન્દ્ર હતી.'],
+ 'Meiji Japan':['મેઇજી જાપાન','ઇ.સ. 1868 – 1912','જાપાનનું ઝડપથી આધુનિક ઔદ્યોગિક રાજ્યમાં રૂપાંતર.','આશરે 30 વર્ષમાં જાપાને રેલવે નેટવર્ક અને આધુનિક શિક્ષણ-વ્યવસ્થા બનાવી, અને પશ્ચિમી વિજ્ઞાન અને કાયદાના અભ્યાસ માટે વિદ્યાર્થીઓને વિદેશ મોકલ્યા.']
+});
+Object.assign(TR.gu.f, {
+ 'Hammurabi':['હમ્મુરાબી','બેબિલોનનો રાજા','શાસન આશરે ઇ.સ.પૂ. 1792 – 1750','પોતાની કાયદા-સંહિતા માટે યાદ કરાતો બેબિલોનિયન રાજા.','હમ્મુરાબીની સંહિતાનો સ્તંભ 1901–02માં સુસા ખાતેથી મળ્યો હતો અને હવે પેરિસના લુવ્રમાં છે.'],
+ 'Ramesses II':['રામેસસ બીજા','ઇજિપ્તના ફારુન','આશરે ઇ.સ.પૂ. 1303 – 1213','ઇજિપ્તના સૌથી લાંબા શાસન કરનાર અને પ્રસિદ્ધ ફારુનોમાંના એક.','1960ના દાયકામાં નાસર સરોવરના વધતા પાણીથી બચાવવા અબુ સિમ્બેલનાં મંદિરોને ઊંચા સ્થળે ખસેડાયાં.'],
+ 'Hannibal':['હેનિબાલ','કાર્થેજનો સેનાપતિ','ઇ.સ.પૂ. 247 – આશરે 183','યુદ્ધ-હાથીઓ સાથેની સેના લઈ આલ્પ્સ પાર કરી રોમ સામે લડનાર.','કાન્નાઈ ખાતે હેનિબાલની ઘેરાબંધીની રણનીતિનો અભ્યાસ આજે પણ લશ્કરી અકાદમીઓમાં થાય છે.'],
+ 'Augustus':['ઓગસ્ટસ','પ્રથમ રોમન સમ્રાટ','ઇ.સ.પૂ. 63 – ઇ.સ. 14','ગૃહયુદ્ધો પૂરાં કરી રોમન સામ્રાજ્યની સ્થાપના કરનાર.','ઓગસ્ટ મહિનાનું નામ તેમના પરથી પડ્યું.'],
+ 'Aryabhata':['આર્યભટ્ટ','ગણિતશાસ્ત્રી અને ખગોળશાસ્ત્રી','ઇ.સ. 476 – આશરે 550','ગુપ્ત યુગના ભારતીય વિદ્વાન, જેમણે “આર્યભટીય” લખ્યું.','ભારતનો પ્રથમ ઉપગ્રહ, જે 1975માં છોડાયો, તેમના સન્માનમાં “આર્યભટ્ટ” નામે ઓળખાયો.'],
+ 'Charlemagne':['શાર્લમેન','ફ્રેન્કનો રાજા અને સમ્રાટ','ઇ.સ. 748 – 814','પશ્ચિમ યુરોપના મોટા ભાગને એક કરી ઇ.સ. 800માં સમ્રાટ તરીકે તાજપોશી પામ્યા.','તેમણે “કેરોલિંગિયન માઇનસ્ક્યુલ” નામની સ્પષ્ટ લેખનશૈલી પ્રોત્સાહિત કરી, જેણે આજના નાના અક્ષરોને આકાર આપ્યો.'],
+ 'Saladin':['સલાહુદ્દીન','ઇજિપ્ત અને સીરિયાના સુલતાન','આશરે ઇ.સ. 1137 – 1193','અય્યુબી વંશના સ્થાપક, જેમણે 1187માં જેરુસલેમ પાછું મેળવ્યું.','યુરોપિયનો તેમને શૌર્યના આદર્શ તરીકે માનતા, અને તેમણે સ્થાપેલા અય્યુબી વંશે ઇજિપ્ત પર 1250 સુધી શાસન કર્યું.'],
+ 'Rajaraja Chola I':['પ્રથમ રાજરાજ ચોલ','ચોલ સામ્રાજ્યના સમ્રાટ','આશરે ઇ.સ. 947 – 1014','ચોલ રાજ્યને મોટી ભૂમિ અને નૌકા સત્તા બનાવનાર.','યુનેસ્કો વિશ્વ વારસા સ્થળ બૃહદીશ્વર મંદિર “ગ્રેટ લિવિંગ ચોલ ટેમ્પલ્સ”નો ભાગ છે.'],
+ 'Shivaji':['છત્રપતિ શિવાજી','મરાઠા સામ્રાજ્યના સ્થાપક','ઇ.સ. 1630 – 1680','સ્વતંત્ર મરાઠા રાજ્યની સ્થાપના કરી અને 1674માં છત્રપતિ તરીકે રાજ્યાભિષેક પામ્યા.','કોંકણ કિનારાના રક્ષણ માટે તેમણે નૌકાદળ બનાવ્યું, અને સિંધુદુર્ગ દરિયાઈ કિલ્લો તેમના હેઠળ આશરે 1664–67માં બંધાયો.'],
+ 'Galileo Galilei':['ગેલિલિયો ગેલિલી','ખગોળશાસ્ત્રી અને ભૌતિકશાસ્ત્રી','ઇ.સ. 1564 – 1642','દૂરબીનથી આકાશને નવી દૃષ્ટિએ દર્શાવનાર.','1992માં કૅથલિક ચર્ચે સ્વીકાર્યું કે ગેલિલિયોના કેસને સંભાળવામાં તેની ભૂલ થઈ હતી.'],
+ 'Mahatma Gandhi':['મહાત્મા ગાંધી','ભારતના સ્વતંત્રતા આંદોલનના નેતા','ઇ.સ. 1869 – 1948','અહિંસક પ્રતિકાર દ્વારા ભારતમાં બ્રિટિશ શાસનનો અંત લાવવામાં મદદ કરનાર નેતા.','તેમનો જન્મદિન 2 ઑક્ટોબર ભારતમાં ગાંધી જયંતી તરીકે અને વિશ્વભરમાં આંતરરાષ્ટ્રીય અહિંસા દિવસ તરીકે ઊજવાય છે.'],
+ 'Sardar Vallabhbhai Patel':['સરદાર વલ્લભભાઈ પટેલ','ભારતના પ્રથમ નાયબ વડા પ્રધાન અને રાજપુરુષ','ઇ.સ. 1875 – 1950','“ભારતના લોહપુરુષ”, જેમણે દેશી રજવાડાંઓને એક કર્યાં.','2018માં અનાવરણ થયેલી સ્ટેચ્યુ ઑફ યુનિટી આશરે 182 મીટર ઊંચી છે અને વિશ્વની સૌથી ઊંચી પ્રતિમાઓમાંની એક છે.'],
+ 'Albert Einstein':['આલ્બર્ટ આઇન્સ્ટાઇન','સૈદ્ધાંતિક ભૌતિકશાસ્ત્રી','ઇ.સ. 1879 – 1955','સાપેક્ષતાનો સિદ્ધાંત આપી આધુનિક ભૌતિકશાસ્ત્ર બદલનાર.','તેઓ 1933માં અમેરિકા ગયા અને મૃત્યુ સુધી પ્રિન્સ્ટનની ઇન્સ્ટિટ્યૂટ ફૉર ઍડ્વાન્સ્ડ સ્ટડીમાં કામ કર્યું.'],
+ 'Marie Curie':['મેરી ક્યુરી','ભૌતિકશાસ્ત્રી અને રસાયણશાસ્ત્રી','ઇ.સ. 1867 – 1934','બે જુદા વિજ્ઞાનોમાં નોબેલ પારિતોષિક જીતનાર પ્રથમ વ્યક્તિ.','તે આજે પણ બે જુદાં વૈજ્ઞાનિક ક્ષેત્રોમાં નોબેલ પારિતોષિક જીતનાર એકમાત્ર વ્યક્તિ છે.']
+});
+Object.assign(TR.gu.ui, {
+ 'Eras':'યુગો','Explore History by Era':'યુગો પ્રમાણે ઇતિહાસ શોધો',
+ 'Five great ages of history. Choose an era to open its gate and meet its civilizations and people.':'ઇતિહાસના પાંચ મહાન યુગો. કોઈ યુગ પસંદ કરી તેનો દરવાજો ખોલો અને તેની સંસ્કૃતિઓ તથા વ્યક્તિઓને મળો.',
+ 'All eras':'બધા યુગો','Entering':'પ્રવેશ','civilizations':'સંસ્કૃતિઓ','figures':'વ્યક્તિઓ',
+ 'The Ancient World':'પ્રાચીન વિશ્વ','The Classical Age':'શાસ્ત્રીય યુગ','The Medieval World':'મધ્યયુગીન વિશ્વ','The Early Modern Age':'પ્રારંભિક આધુનિક યુગ','The Modern World':'આધુનિક વિશ્વ',
+ 'c. 3500 – 500 BCE':'આશરે ઇ.સ.પૂ. 3500 – 500','500 BCE – 500 CE':'ઇ.સ.પૂ. 500 – ઇ.સ. 500','500 – 1450 CE':'ઇ.સ. 500 – 1450','1450 – 1800 CE':'ઇ.સ. 1450 – 1800','1800 CE – today':'ઇ.સ. 1800 – આજ સુધી',
+ 'The first cities, the invention of writing and the great river-valley civilizations.':'પ્રથમ શહેરો, લેખનની શોધ અને મહાન નદી-ખીણ સંસ્કૃતિઓ.',
+ 'Empires and thinkers of Greece, Rome, Persia, India and China shape the ancient world.':'ગ્રીસ, રોમ, પર્શિયા, ભારત અને ચીનનાં સામ્રાજ્યો અને ચિંતકો પ્રાચીન વિશ્વને ઘડે છે.',
+ 'Caliphates, Mongol horsemen, Viking ships and rich trading empires link continents.':'ખલીફાતો, મોંગોલ ઘોડેસવારો, વાઇકિંગ જહાજો અને સમૃદ્ધ વેપારી સામ્રાજ્યો ખંડોને જોડે છે.',
+ 'Gunpowder empires, great voyages and the Renaissance open a new age of exploration.':'ગનપાઉડર સામ્રાજ્યો, મહાન સફરો અને પુનરુજ્જીવન શોધખોળના નવા યુગની શરૂઆત કરે છે.',
+ 'Revolutions, independence movements and science reshape the modern world.':'ક્રાંતિઓ, સ્વતંત્રતા ચળવળો અને વિજ્ઞાન આધુનિક વિશ્વને નવો આકાર આપે છે.'
+});
+
 /* ---------- RENDER ---------- */
 const $ = id => document.getElementById(id);
 
 // Civilization and figure cards share one template
 const card = (o, i, type) => `
   <article class="card glass rv" style="--d:${(i % 4) * 90}ms">
-    <div class="thumb">${img(o.f, o.n)}</div>
+    <div class="thumb">${img(o.f, o.n, o.w)}</div>
     <div class="card-body">
       <h3>${o.n}</h3>
       <span class="meta">${type === 'civ' ? o.p : o.t + ', ' + o.e}</span>
@@ -989,8 +1194,6 @@ const card = (o, i, type) => `
       <button class="btn" data-type="${type}" data-i="${i}">${tx(type === 'civ' ? 'Explore' : 'Read biography')}</button>
     </div>
   </article>`;
-$('civGrid').innerHTML = civs.map((c, i) => card(locI(c, 'civ'), i, 'civ')).join('');
-$('figGrid').innerHTML = figures.map((c, i) => card(locI(c, 'fig'), i, 'fig')).join('');
 
 /* ---------- MODAL ---------- */
 const modal = $('modal');
@@ -1120,7 +1323,7 @@ window.addEventListener('resize', () => { if (modal.classList.contains('open')) 
 const fmt = (la, lo) => `${Math.abs(la).toFixed(1)}°${la >= 0 ? 'N' : 'S'}, ${Math.abs(lo).toFixed(1)}°${lo >= 0 ? 'E' : 'W'}`;
 function openModal(o, type) {
   const x = EXTRA[o.n], l = locI(o, type);
-  $('mImg').innerHTML = img(o.f, l.n);
+  $('mImg').innerHTML = img(o.f, l.n, o.w);
   loadPhotos($('mImg'));
   $('mBody').innerHTML = `<span class="meta">${type === 'civ' ? l.p : l.t + ', ' + l.e}</span><h3>${l.n}</h3>` +
     (x ? `<div class="where">${x.at} · ${fmt(x.lat, x.lon)}</div>` : '') +
@@ -1150,8 +1353,6 @@ $('close').onclick = closeModal;
 modal.addEventListener('click', e => { if (e.target === modal || e.target === gc) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ---------- PHOTOS FOR GRIDS ---------- */
-loadPhotos($('civGrid')); loadPhotos($('figGrid'));
 
 /* ---------- 3D TIMELINE ---------- */
 const scene = $('tlScene'), stage = $('tlStage'), floor = $('floor'), rail = $('rail');
@@ -1763,8 +1964,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { setPanel(f
 // To add a language: add its entry here and a translation block in TR (same shape as TR.gu). [code, name shown in the list, short code on the button]
 const LANGS = [['en', 'English', 'EN'], ['gu', 'ગુજરાતી', 'ગુ']];
 const lBtn = $('langBtn'), lPanel = $('lPanel'), lList = $('lList');
-const ST = ['#links a', '.foot nav a', '.hero h1', '.hero p', '.btns a', '.stat span', '.cine-head h2', '.cine-head p', '#civilizations h2', '#civilizations .lead',
-  '#timeline h2', '#timeline .lead', '.tl-ctl span', '#figures h2', '#figures .lead', '#discover h2', '#factBtn', '.foot > div > p', '.copy', '.mp-head b', '.mp-vol span', '.mp-note', '#fsHint'];
+const ST = ['#links a', '.foot nav a', '.hero h1', '.hero p', '.btns a', '.stat span', '.cine-head h2', '.cine-head p', '#eras h2', '#eras .lead', '#eraBackT', '#eraCivT', '#eraFigT',
+  '#timeline h2', '#timeline .lead', '.tl-ctl span', '#discover h2', '#factBtn', '.foot > div > p', '.copy', '.mp-head b', '.mp-vol span', '.mp-note', '#fsHint'];
 const AL = [['burger', 'Open menu'], ['top', 'Back to top'], ['musicBtn', 'Soundtrack'], ['langBtn', 'Language'], ['close', 'Close'], ['mpClose', 'Close soundtrack panel'],
   ['lClose', 'Close language panel'], ['tlPrev', 'Previous milestone'], ['tlNext', 'Next milestone'], ['cPrev', 'Previous milestone'], ['cNext', 'Next milestone']];
 function buildLangUI() {
@@ -1781,11 +1982,7 @@ function applyLang() {
     if (b.textContent !== '0') { const n = +b.dataset.n, dv = +b.dataset.div || 1; b.textContent = (dv > 1 ? (n / dv).toFixed(2) : n.toLocaleString()) + (b.dataset.s || ''); }
   });
   AL.forEach(([id, k]) => $(id).setAttribute('aria-label', tx(k)));
-  ['civGrid', 'figGrid'].forEach(id => {
-    const civ = id === 'civGrid', list = civ ? civs : figures;
-    $(id).innerHTML = list.map((c, i) => card(locI(c, civ ? 'civ' : 'fig'), i, civ ? 'civ' : 'fig')).join('');
-    loadPhotos($(id)); $(id).querySelectorAll('.rv').forEach(el => io.observe(el));
-  });
+  renderEras(); if (eraOpen !== null) renderEraPage(eraOpen);
   buildTl(); layout();
   $('tlPlay').textContent = tx(tour ? '❚❚ Pause' : '▶ Auto tour');
   if (lastFact >= 0) $('factText').textContent = factT(lastFact);
@@ -1812,7 +2009,6 @@ burger.addEventListener('click', () => { if (links.classList.contains('open')) s
 document.addEventListener('pointerdown', e => { if (lPanel.classList.contains('open') && !e.target.closest('#lPanel, #langBtn')) setLPanel(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') setLPanel(false); });
 buildLangUI();
-if (LANG !== 'en') applyLang();
 
 /* ---------- Soundtrack autoplay ----------
    Browsers only allow sound after a first tap, click or key press, so the music starts on that very first touch.
@@ -1830,12 +2026,96 @@ if (musicPref !== 'off') {
     if (e.target && e.target.closest && e.target.closest('#musicBtn, #mPanel, #cMusic')) return;   // they are choosing for themselves
     disarm();
     if (userChose || Music.playing) return;
-    Music.play(0);
+    Music.play(0).catch(() => {});   // (browsers without Web Audio simply stay silent)
     setTimeout(() => { if (!Music.running && !userChose) arm(); }, 500);   // the browser said no (e.g. a scroll, not a tap): try again on the next gesture
   }
   let pol = 'disallowed'; try { pol = navigator.getAutoplayPolicy ? navigator.getAutoplayPolicy('audiocontext') : 'disallowed'; } catch (e) {}
-  if (pol === 'allowed') Music.play(0); else arm();
+  if (pol === 'allowed') Music.play(0).catch(() => {}); else arm();
 }
+
+/* ============ UPDATE 5: eras and the opening gate ============ */
+Object.assign(EXTRA, {
+ 'Minoan Civilization':{lat:35.30,lon:25.16,at:'Knossos, Crete, Greece',tiles:[['Major centres','Knossos, Phaistos, Malia'],['Known for','Palace complexes, bull-leaping frescoes, Linear A and B scripts'],['Legacy','An early link between Egyptian, Near Eastern and Greek cultures']]},
+ 'Kingdom of Kush':{lat:16.94,lon:33.75,at:'Meroë, Sudan',tiles:[['Major centres','Napata, Meroë'],['Known for','Nubian pyramids, iron working, the Twenty-fifth Dynasty of Egypt'],['Legacy','Showed Nubia as a major power in its own right']]},
+ 'Maurya Empire':{lat:25.6,lon:85.1,at:'Pataliputra (modern Patna), India',tiles:[['Major centres','Pataliputra, Taxila, Ujjain'],['Known for',"Ashoka's edicts, a large centralised administration"],['Legacy','An early example of governing a vast, diverse realm']]},
+ 'Gupta Empire':{lat:25.14,lon:85.44,at:'Nalanda, Bihar, India',tiles:[['Major centres','Pataliputra, Ujjain, Prayaga'],['Known for','Mathematics, astronomy, Sanskrit literature, temple art'],['Legacy','Ideas in mathematics and astronomy spread to the Islamic world and beyond']]},
+ 'Chola Empire':{lat:10.78,lon:79.13,at:'Thanjavur, Tamil Nadu, India',tiles:[['Major centres','Thanjavur, Gangaikonda Cholapuram'],['Known for','Naval expeditions, the Brihadisvara Temple, bronze sculpture'],['Legacy','Spread Tamil and Hindu culture across South and Southeast Asia']]},
+ 'Abbasid Caliphate':{lat:33.31,lon:44.37,at:'Baghdad, Iraq',tiles:[['Major centres','Baghdad, Samarra, Basra'],['Known for','The House of Wisdom, the Arabic translation movement'],['Legacy','Preserved and extended ancient knowledge that later reached Europe']]},
+ 'Viking Age':{lat:51.62,lon:-55.53,at:"L'Anse aux Meadows, Newfoundland, Canada",tiles:[['Major centres','Hedeby, Dublin, York, Novgorod'],['Known for','Longships, exploration, trade routes'],['Legacy','Norse settlements and place names remain from Iceland to Normandy']]},
+ 'Maratha Empire':{lat:18.23,lon:73.44,at:'Raigad Fort, Maharashtra, India',tiles:[['Major centres','Raigad, Pune, Satara'],['Known for','Hill forts, flexible tactics, a naval fleet'],['Legacy','A regional identity and military tradition still celebrated in Maharashtra']]},
+ 'Songhai Empire':{lat:16.27,lon:-0.04,at:'Gao, Mali',tiles:[['Major centres','Gao, Timbuktu, Djenné'],['Known for','Gold and salt trade, Islamic scholarship, a river-based army'],['Legacy',"Its manuscripts form part of Timbuktu's written heritage"]]},
+ 'Meiji Japan':{lat:35.68,lon:139.77,at:'Tokyo, Japan',tiles:[['Major centres','Tokyo, Yokohama, Osaka'],['Known for','The Meiji Restoration, industrialisation, a new constitution'],['Legacy','Japan emerged as the first major non-Western industrial power']]},
+ 'Hammurabi':{lat:32.54,lon:44.42,at:'Babylon, Iraq',tiles:[['Seat of power','Babylon'],['Known for','The Code of Hammurabi'],['Legacy','An early example of laws published for everyone to see']]},
+ 'Ramesses II':{lat:22.34,lon:31.63,at:'Abu Simbel, Egypt',tiles:[['Seat of power','Pi-Ramesses and Thebes'],['Known for','The Battle of Kadesh; Abu Simbel'],['Legacy','Often called “Ramesses the Great”']]},
+ 'Hannibal':{lat:36.85,lon:10.32,at:'Carthage, near Tunis, Tunisia',tiles:[['Born','Carthage, 247 BCE'],['Known for','Crossing the Alps; the victory at Cannae'],['Legacy',"Remembered as one of history's great military commanders"]]},
+ 'Augustus':{lat:41.89,lon:12.49,at:'Rome, Italy',tiles:[['Born','Rome, 63 BCE'],['Known for','Founding the Roman Empire; the Pax Romana'],['Legacy','His system of government lasted for centuries']]},
+ 'Aryabhata':{lat:25.6,lon:85.1,at:'Kusumapura (near Pataliputra), India',tiles:[['Born','Probably in present-day Bihar, 476 CE'],['Known for',"The Aryabhatiya; an estimate of pi; the Earth's rotation"],['Legacy','Influenced later Indian and Islamic astronomy']]},
+ 'Charlemagne':{lat:50.77,lon:6.08,at:'Aachen, Germany',tiles:[['Seat of power','Aachen'],['Known for','Reuniting much of Western Europe; the 800 coronation'],['Legacy','Often called a “father of Europe”']]},
+ 'Saladin':{lat:30.05,lon:31.26,at:'Cairo, Egypt',tiles:[['Born','Tikrit, c. 1137'],['Known for','Victory at Hattin; retaking Jerusalem in 1187'],['Legacy','Founder of the Ayyubid dynasty']]},
+ 'Rajaraja Chola I':{lat:10.78,lon:79.13,at:'Thanjavur, Tamil Nadu, India',tiles:[['Seat of power','Thanjavur'],['Known for','The Brihadisvara Temple; Chola naval power'],['Legacy',"Laid the foundations for his son Rajendra I's overseas expeditions"]]},
+ 'Shivaji':{lat:18.23,lon:73.44,at:'Raigad Fort, Maharashtra, India',tiles:[['Born','Shivneri Fort, 1630'],['Known for','Hill forts, naval power, the 1674 coronation'],['Legacy','A lasting symbol of Maratha pride and statecraft']]},
+ 'Galileo Galilei':{lat:43.72,lon:10.4,at:'Pisa, Italy',tiles:[['Born','Pisa, 1564'],['Known for','Telescope discoveries; the moons of Jupiter'],['Legacy','Called the “father of modern science” by many']]},
+ 'Mahatma Gandhi':{lat:21.64,lon:69.6,at:'Porbandar, Gujarat, India',tiles:[['Born','Porbandar, Gujarat, 1869'],['Known for','Satyagraha; the Salt March of 1930'],['Legacy','Inspired civil rights movements around the world']]},
+ 'Sardar Vallabhbhai Patel':{lat:21.84,lon:73.72,at:'Statue of Unity, Gujarat, India',tiles:[['Born','Nadiad, Gujarat, 1875'],['Known for','Integrating the princely states; the Bardoli satyagraha'],['Legacy','Remembered each year on 31 October as National Unity Day']]},
+ 'Albert Einstein':{lat:48.4,lon:9.99,at:'Ulm, Germany',tiles:[['Born','Ulm, Germany, 1879'],['Known for','Relativity; E = mc²; the photoelectric effect'],['Legacy','Shaped modern physics, from GPS to cosmology']]},
+ 'Marie Curie':{lat:52.23,lon:21.01,at:'Warsaw, Poland',tiles:[['Born','Warsaw, 1867'],['Known for','Radioactivity; discovering polonium and radium'],['Legacy','Her work opened the way to modern nuclear medicine']]}
+});
+
+/* ---------- Era hub: five cards; the people and civilizations appear only after pressing Explore ---------- */
+let eraOpen = null;
+function renderEras() {
+  $('eraGrid').innerHTML = PERIODS.map((p, i) => {
+    const nc = civs.filter(c => ERA_OF[c.n] === i).length, nf = figures.filter(c => ERA_OF[c.n] === i).length;
+    return `<article class="card era-card glass rv" style="--d:${i * 90}ms"><div class="thumb">${img(p.f, tx(p.n), p.w)}</div>
+      <div class="card-body"><span class="meta">${tx(p.r)}</span><h3>${tx(p.n)}</h3><p>${tx(p.b)}</p>
+      <span class="ec-count">${nc} ${tx('civilizations')} · ${nf} ${tx('figures')}</span>
+      <button class="btn" data-era="${i}">${tx('Explore')}</button></div></article>`; }).join('');
+  loadPhotos($('eraGrid')); $('eraGrid').querySelectorAll('.rv').forEach(el => io.observe(el));
+}
+function renderEraPage(i) {
+  const p = PERIODS[i];
+  $('eraHead').innerHTML = `<div class="era-art">${img(p.f, tx(p.n), p.w)}</div><div class="era-title"><span class="meta">${tx(p.r)}</span><h2>${tx(p.n)}</h2><p>${tx(p.b)}</p></div>`;
+  loadPhotos($('eraHead'));
+  [['civGrid', civs, 'civ'], ['figGrid', figures, 'fig']].forEach(([id, list, type]) => {
+    $(id).innerHTML = list.map((o, k) => ERA_OF[o.n] === i ? card(locI(o, type), k, type) : '').join('');
+    loadPhotos($(id)); $(id).querySelectorAll('.rv').forEach(el => io.observe(el));
+  });
+}
+function openEra(i) {
+  gate(tx(PERIODS[i].n), () => {
+    eraOpen = i; renderEraPage(i); $('era').scrollTop = 0;
+    $('era').classList.add('open'); $('era').setAttribute('aria-hidden', 'false'); document.body.classList.add('era-lock');
+  });
+}
+function closeEra() {
+  eraOpen = null; $('era').classList.remove('open'); $('era').setAttribute('aria-hidden', 'true'); document.body.classList.remove('era-lock');
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-era]'); if (b) openEra(+b.dataset.era); });
+$('eraBack').onclick = closeEra;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.classList.contains('open') && eraOpen !== null) closeEra(); }, true);
+
+/* ---------- The gate: doors swing shut, the page changes behind them, then they swing open ---------- */
+let gateBusy = false;
+function gate(name, action) {
+  const g = $('gate');
+  if (gateBusy || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { action(); return; }
+  gateBusy = true;
+  $('gSub').textContent = tx('Entering'); $('gName').textContent = name;
+  g.className = 'gate on open';        // doors start open, so the page is still visible
+  void g.offsetWidth;
+  g.classList.remove('open');          // 1. the doors close
+  setTimeout(action, 850);             // 2. the new page appears while the doors are shut
+  setTimeout(() => g.classList.add('opening', 'open'), 1850);   // 3. the doors open with a flash of light
+  setTimeout(() => { g.className = 'gate'; gateBusy = false; }, 3500);
+}
+document.addEventListener('click', e => {   // entering the cinematic timeline also goes through the gate
+  const a = e.target.closest('a[href="#journey"]'); if (!a) return;
+  e.preventDefault(); closeMenu();
+  gate(tx('Journey Through Time'), () => window.scrollTo({top: $('journey').offsetTop, behavior: 'instant'}));
+});
+
+renderEras();
+if (LANG !== 'en') applyLang();
 </script>
 </body>
 </html>
