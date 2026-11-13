@@ -1,0 +1,72 @@
+/* ===== Update 4: Gujarati type, language panel, extra info, taller timeline cards ===== */
+:root{--serif:'Cormorant Garamond','Noto Serif Gujarati',Georgia,serif;--sans:'Inter','Noto Sans Gujarati',system-ui,sans-serif}
+html[lang="gu"] body{line-height:1.8}
+html[lang="gu"] .hero h1{line-height:1.25;letter-spacing:0}
+html[lang="gu"] h2{line-height:1.3}
+html[lang="gu"] .card h3,html[lang="gu"] .tc-body h3,html[lang="gu"] .c-body h3,html[lang="gu"] .modal-body h3,html[lang="gu"] .c-year,html[lang="gu"] .stat b{line-height:1.35}
+html[lang="gu"] .tile b,html[lang="gu"] .quick b,html[lang="gu"] .why b{letter-spacing:0;text-transform:none}
+.links{margin:0 auto}
+.lang-btn{margin-left:.4rem;font:600 .82rem var(--sans);color:var(--gold2)}
+#lPanel{width:min(300px,92vw)}
+.quick{margin:.4rem 0 .9rem;padding:.8rem 1rem;border-left:3px solid var(--gold);border-radius:0 12px 12px 0;background:rgba(212,175,55,.08);font-size:.93rem;color:var(--text)}
+.quick b{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
+.tl-scene{height:650px}
+.tcard{height:580px;margin:-290px 0 0 calc(min(340px,74vw)/-2)}
+.tcard .thumb{height:170px}
+.tc-body{overflow:hidden}
+.why{margin-top:.7rem;padding-left:.8rem;border-left:2px solid var(--gold);font-size:.82rem;line-height:1.5;color:var(--text)}
+.why b{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:980px){.lang-btn{order:2;margin-left:auto}.music-btn:not(.lang-btn){margin-left:.4rem}}
+@media(max-width:700px){.tl-scene{height:620px}}
+
+/* ===== Update 5: eras + gate ===== */
+.era-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.era-card .thumb{height:250px;border-radius:50% 50% 0 0 / 38% 38% 0 0}
+.era-card .card-body{text-align:center;align-items:center}
+.era-card .btn{align-self:center}
+.ec-count{font-size:.8rem;color:var(--gold2)}
+.era{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;
+  background:radial-gradient(900px 600px at 85% 0%,#1b2650 0%,transparent 60%),radial-gradient(700px 500px at 0% 40%,#2a1f10 0%,transparent 55%),var(--bg)}
+.era.open{opacity:1;visibility:visible}
+.era-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;padding:.7rem clamp(1rem,4vw,3rem);padding-top:calc(.7rem + env(safe-area-inset-top));background:rgba(11,16,32,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.era-back{min-height:44px;padding:.4rem 1.2rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-weight:600;transition:.25s}
+.era-back:hover{background:var(--gold);color:#1a1405}
+.era-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
+.era-head{position:relative;margin:1.5rem 0 1rem;min-height:320px;border-radius:26px;overflow:hidden;display:flex;align-items:flex-end;border:1px solid var(--line);background:linear-gradient(135deg,#2a2210,#18213f)}
+.era-art{position:absolute;inset:0}
+.era-art img{position:absolute;inset:0}
+.era-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,16,32,.15),rgba(11,16,32,.92))}
+.era-title{position:relative;z-index:2;padding:2rem;max-width:720px}
+.era-title h2{padding-bottom:0}.era-title h2::after{display:none}
+.era-title p{opacity:.88;margin-top:.4rem}
+.era-sec h3{font:600 2rem/1.2 var(--serif);margin:2.4rem 0 1.2rem;color:var(--gold2)}
+body.era-lock{overflow:hidden}
+@media(max-width:520px){.era-inner{padding:0 1rem 3rem}.era-head{min-height:260px;border-radius:20px}.era-title{padding:1.3rem}}
+
+/* The gate */
+.gate{position:fixed;inset:0;z-index:500;visibility:hidden;pointer-events:none;overflow:hidden;perspective:1600px;--dur:.75s}
+.gate.on{visibility:visible;pointer-events:auto}
+.gate.opening{--dur:1.6s}
+.door{position:absolute;top:0;bottom:0;width:50.3%;overflow:hidden;transition:transform var(--dur) cubic-bezier(.7,0,.25,1);will-change:transform;
+  background:
+    radial-gradient(circle,#f0d77a 0 3px,rgba(138,109,28,.8) 4px,transparent 5px) 22px 22px/72px 72px,
+    linear-gradient(180deg,transparent 0 13%,rgba(212,175,55,.5) 13% 14.5%,transparent 14.5% 49%,rgba(212,175,55,.5) 49% 50.5%,transparent 50.5% 85%,rgba(212,175,55,.5) 85% 86.5%,transparent 86.5%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,transparent 2px 64px),
+    linear-gradient(90deg,#17110c,#2c2117 45%,#17110c);
+  box-shadow:inset 0 0 0 10px #0c0906,inset 0 0 0 12px rgba(212,175,55,.65),inset 0 0 140px rgba(0,0,0,.85)}
+.door.l{left:0;transform-origin:0 50%;border-right:2px solid var(--gold)}
+.door.r{right:0;transform-origin:100% 50%;border-left:2px solid var(--gold)}
+.door::after{content:"";position:absolute;top:50%;width:130px;height:130px;margin-top:-65px;border-radius:50%;border:3px solid var(--gold);
+  background:radial-gradient(circle,#f0d77a 0 9%,#9a7a20 10% 38%,#1a1410 39% 62%,rgba(212,175,55,.5) 63% 66%,#1a1410 67%);box-shadow:0 0 30px rgba(212,175,55,.4)}
+.door.l::after{right:-65px}.door.r::after{left:-65px}
+.gate.open .door.l{transform:rotateY(108deg)}
+.gate.open .door.r{transform:rotateY(-108deg)}
+.gate-glow{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(255,236,170,.95) 0,rgba(212,175,55,.5) 22%,transparent 62%)}
+.gate.opening .gate-glow{animation:flare 1.9s ease-out forwards}
+@keyframes flare{0%{opacity:0;transform:scale(.6)}35%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+.gate-title{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);text-align:center;width:min(90vw,600px);opacity:0;pointer-events:none;transition:opacity .45s}
+.gate.on:not(.open) .gate-title{opacity:1;transition-delay:.45s}
+.gate-title small{display:block;font:500 .85rem var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem}
+html[lang="gu"] .gate-title small{letter-spacing:.1em;text-transform:none}
+.gate-title b{display:block;font:700 clamp(1.8rem,6vw,3.4rem)/1.2 var(--serif);color:#fff3c8;text-shadow:0 0 30px rgba(212,175,55,.7),0 3px 20px rgba(0,0,0,.9)}
+@media(prefers-reduced-motion:reduce){.gate{display:none}}
