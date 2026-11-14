@@ -122,6 +122,7 @@ const fmt = (la, lo) => `${Math.abs(la).toFixed(1)}°${la >= 0 ? 'N' : 'S'}, ${M
 function openModal(o, type) {
   const x = EXTRA[o.n], l = locI(o, type);
   $('mImg').innerHTML = img(o.f, l.n, o.w);
+  $('mImg').classList.toggle('fig', type === 'fig'); $('mImg').style.setProperty('--fp', type === 'fig' ? facePos(o) : '50% 50%');
   loadPhotos($('mImg'));
   $('mBody').innerHTML = `<span class="meta">${type === 'civ' ? l.p : l.t + ', ' + l.e}</span><h3>${l.n}</h3>` +
     (x ? `<div class="where">${x.at} · ${fmt(x.lat, x.lon)}</div>` : '') +

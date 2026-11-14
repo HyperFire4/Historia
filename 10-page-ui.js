@@ -25,7 +25,9 @@ links.addEventListener('click', e => {
 const navLinks = [...links.querySelectorAll('a')];
 const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
 const toTop = $('top'), heroIn = document.querySelector('.hero-inner');
-function onScroll() {
+let scTick = 0;   // do the scroll work once per frame, not once per scroll event
+function onScroll() { if (!scTick) scTick = requestAnimationFrame(() => { scTick = 0; doScroll(); }); }
+function doScroll() {
   const y = window.scrollY + window.innerHeight * 0.35;
   let cur = 0;
   sections.forEach((s, i) => { if (s.offsetTop <= y) cur = i; });
@@ -84,7 +86,7 @@ function showSlide(i) {
       shownSlide = i; $('heroCap').textContent = tx(SL[i][1]);
       [...hdots.children].forEach((d, j) => d.classList.toggle('on', j === i));
     };
-    im.src = u.huge;
+    im.src = (window.innerWidth > 1200 && !(navigator.connection && navigator.connection.saveData)) ? u.huge : u.big;   // phones get the lighter photo
   });
 }
 function startSlides() { clearInterval(slideTimer); slideTimer = setInterval(() => { idx = (idx + 1) % SL.length; showSlide(idx); }, 15000); }

@@ -23,13 +23,17 @@ const Music = (() => {
   let ctx, master, conv, noiseBuf, sessD = null, sessW = null, timer = 0, playing = false, cur = 0, barN = 0, nextT = 0, vol = .6, aud = null;
   const listeners = [], changed = () => listeners.forEach(f => f());
   const level = () => Math.pow(vol, 1.6) * .9;
+  // Phones and small tablets get a lighter version of the same music: fewer oscillators, a shorter mono reverb and
+  // a bigger audio buffer. This stops the crackle that happens when the phone cannot keep up.
+  const LITE = (() => { try { return matchMedia('(pointer: coarse)').matches || innerWidth < 820 || (navigator.hardwareConcurrency || 8) <= 4; } catch (e) { return false; } })();
 
   function init() {
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const AC = window.AudioContext || window.webkitAudioContext;
+    try { ctx = new AC({latencyHint: 'playback'}); } catch (e) { ctx = new AC(); }
     const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 5; comp.attack.value = .01; comp.release.value = .3;
     master = ctx.createGain(); master.gain.value = level(); master.connect(comp); comp.connect(ctx.destination);
-    const len = ctx.sampleRate * 3, ir = ctx.createBuffer(2, len, ctx.sampleRate);   // hall reverb from decaying noise
-    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    const len = ctx.sampleRate * (LITE ? 1.8 : 3), ir = ctx.createBuffer(LITE ? 1 : 2, len, ctx.sampleRate);   // hall reverb from decaying noise
+    for (let c = 0; c < ir.numberOfChannels; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
     conv = ctx.createConvolver(); conv.buffer = ir;
     const wet = ctx.createGain(); wet.gain.value = .9; conv.connect(wet); wet.connect(master);
     noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
@@ -51,23 +55,23 @@ const Music = (() => {
 
   // ----- instruments -----
   function tone(type, f, t, dur, o = {}) {
-    const {a = .05, r = .4, peak = .05, det = 0, lp = 2000, wet: wt = .3, vib = 0} = o;
+    const {a = .05, r = .4, peak: pk0 = .05, det = 0, lp = 2000, wet: wt = .3, vib = 0} = o, peak = LITE && det ? pk0 * 1.5 : pk0;   // one voice instead of two on phones, a little louder to match
     const g = ctx.createGain(), fl = ctx.createBiquadFilter(), end = t + dur + r + .05;
     fl.type = 'lowpass'; fl.Q.value = .6; fl.frequency.setValueAtTime(lp * .45, t); fl.frequency.linearRampToValueAtTime(lp, t + Math.min(dur, a + .25));
     g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setValueAtTime(peak, t + Math.max(a, dur)); g.gain.linearRampToValueAtTime(0, t + dur + r);
     fl.connect(g); send(g, wt);
-    (det ? [-det, det] : [0]).forEach(c => {
+    (det ? (LITE ? [det * .5] : [-det, det]) : [0]).forEach(c => {
       const os = ctx.createOscillator(); os.type = type; os.frequency.value = f; os.detune.value = c;
       if (vib) { const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = 5.2; lg.gain.value = f * .006; l.connect(lg); lg.connect(os.frequency); l.start(t); l.stop(end); }
       os.connect(fl); os.start(t); os.stop(end);
     });
   }
   function choir(f, t, d) {   // two vowel-like formant filters on detuned, vibrato saws
-    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.11, t + d * .3); g.gain.setValueAtTime(.11, t + d); g.gain.linearRampToValueAtTime(0, t + d + 1.2);
+    const CG = LITE ? .16 : .11, g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(CG, t + d * .3); g.gain.setValueAtTime(CG, t + d); g.gain.linearRampToValueAtTime(0, t + d + 1.2);
     send(g, .75);
     [[800, 3], [1250, 5]].forEach(([fr, Q]) => {
       const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = fr; bp.Q.value = Q; bp.connect(g);
-      [-9, 9].forEach(c => {
+      (LITE ? [0] : [-9, 9]).forEach(c => {
         const os = ctx.createOscillator(), l = ctx.createOscillator(), lg = ctx.createGain();
         os.type = 'sawtooth'; os.frequency.value = f; os.detune.value = c; l.frequency.value = 5; lg.gain.value = f * .008;
         l.connect(lg); lg.connect(os.frequency); os.connect(bp); os.start(t); os.stop(t + d + 1.3); l.start(t); l.stop(t + d + 1.3);
@@ -127,7 +131,7 @@ const Music = (() => {
   function tick() {
     if (!playing || !sessD) return;
     const T = TRACKS[cur];
-    while (nextT < ctx.currentTime + 1.5) { bar(T, barN, nextT); nextT += 240 / T.bpm; barN++; }
+    while (nextT < ctx.currentTime + (LITE ? 3 : 1.5)) { bar(T, barN, nextT); nextT += 240 / T.bpm; barN++; }
   }
 
   // ----- transport -----
@@ -144,7 +148,7 @@ const Music = (() => {
     killSession(); newSession();
     master.gain.setTargetAtTime(level(), ctx.currentTime, .1);
     barN = 0; nextT = ctx.currentTime + .15; playing = true;
-    tick(); timer = setInterval(tick, 300); changed();
+    tick(); timer = setInterval(tick, LITE ? 500 : 300); changed();
   }
   function stop() {
     if (!playing) return;

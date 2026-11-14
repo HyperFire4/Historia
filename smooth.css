@@ -1,0 +1,17 @@
+/* ============ UPDATE 7: faces stay in view, smoother scrolling and animation ============ */
+.thumb img,.modal-img img{object-position:var(--fp,50% 50%)}
+.modal-img.fig{height:260px}
+@media (max-width:700px){.modal-img.fig{height:210px}}
+.rv{transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+
+/* Phones and tablets: drop the effects that cost the most while scrolling */
+@media (max-width:900px),(pointer:coarse){
+  .card.glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(22,29,54,.9)}   /* a live blur behind every card is the biggest cause of choppy scrolling */
+  body::after{display:none}                                  /* full-screen film grain */
+  .btn.gold,.fact::before,.rings{animation:none}             /* endless shine, spinning glow and ring */
+  .particles span:nth-child(n+9){display:none}
+  .art svg{filter:none}
+  .tcard{transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s,border-color .4s}
+  .tcard.on{box-shadow:0 18px 36px rgba(0,0,0,.5)}
+  .card.done{transition:border-color .35s}
+}

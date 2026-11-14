@@ -12,6 +12,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | cinematic.css | cinematic timeline |
 | audio-mobile.css | soundtrack panel, full screen, phone layouts |
 | lang-eras.css | Gujarati fonts, language panel, era pages, the gate |
+| smooth.css | faces in photos, smoother scrolling and lighter effects on phones |
 | explore.css | search, world map and quiz pop-ups, quick buttons |
 
 ## JS (js/) — in load order
@@ -48,3 +49,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 - Search / world map / quiz: 17-explore.js + explore.css (quiz questions are the QUIZ list near the middle of 17-explore.js)
 - Photo loading speed: 01-art.js (loadPhotos)
 - Globe pop-up: 08-globe-modal.js, hero-globe.css
+
+## Note: in the live repo all files sit in one flat folder, so index.html refers to them without css/ or js/.
+- Faces cut off in one photo: set FACE_POS in 06-cards.js (e.g. FACE_POS['photo key'] = '50% 5%')
+- Phone audio crackle: LITE settings at the top of 13-music.js
