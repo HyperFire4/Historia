@@ -39,12 +39,19 @@ const wiki = t => wcache[t] || (wcache[t] = fetch('https://en.wikipedia.org/api/
   .then(j => { const o = j.originalimage, th = j.thumbnail; if (!th) return null;
     return { big: (o && o.width <= 960) ? o.source : th.source.replace(/\/\d+px-/, '/960px-'), huge: (o && o.width <= 1920) ? o.source : th.source.replace(/\/\d+px-/, '/1920px-'), small: th.source }; })
   .catch(() => null));
-function loadPhotos(root) {
-  root.querySelectorAll('img[data-wiki]').forEach(el => wiki(el.dataset.wiki).then(u => {
+// Photos are only requested when they are about to scroll into view (saves data and speeds up the first load).
+function fetchPhoto(el) {
+  wiki(el.dataset.wiki).then(u => {
     if (!u) return;
     el.onerror = () => { el.onerror = () => el.remove(); el.src = u.small; };
     el.onload = () => el.classList.add('ok');
-    el.src = u.big;
-  }));
+    el.decoding = 'async'; el.src = u.big;
+  });
+}
+const photoIO = 'IntersectionObserver' in window ? new IntersectionObserver((es, o) => es.forEach(en => {
+  if (en.isIntersecting) { o.unobserve(en.target); fetchPhoto(en.target); }
+}), {rootMargin: '300px'}) : null;
+function loadPhotos(root) {
+  root.querySelectorAll('img[data-wiki]').forEach(el => { if (el.dataset.q) return; el.dataset.q = '1'; photoIO ? photoIO.observe(el) : fetchPhoto(el); });
 }
 

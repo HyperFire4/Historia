@@ -1,0 +1,27 @@
+/* ============ UPDATE 6: search, world map, quiz, quick buttons ============ */
+html.xp-away *{animation-play-state:paused!important}
+.xp-dock{position:fixed;left:max(1rem,env(safe-area-inset-left));bottom:max(1.2rem,env(safe-area-inset-bottom));z-index:80;display:flex;flex-direction:column;gap:.55rem}
+.xp-fab{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(212,175,55,.4);background:rgba(11,16,32,.78);color:var(--gold,#d4af37);cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.xp-fab:hover,.xp-fab:focus-visible{background:rgba(212,175,55,.18);outline:2px solid var(--gold,#d4af37);outline-offset:2px}
+.xp{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:.8rem;background:rgba(4,6,14,.82)}
+.xp-box{width:min(740px,100%);max-height:calc(100dvh - 1.6rem);overflow:auto;overscroll-behavior:contain;padding:1.1rem;border-radius:18px;border:1px solid rgba(212,175,55,.35);background:rgba(11,16,32,.92);color:var(--text,#ece6d6)}
+.xp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}
+.xp-head h2{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:600;color:var(--gold,#d4af37)}
+.xp-x{width:44px;height:44px;border:0;background:none;color:inherit;font-size:1.3rem;cursor:pointer}
+.xp-in{width:100%;box-sizing:border-box;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(212,175,55,.35);background:rgba(255,255,255,.06);color:inherit;font:inherit;font-size:1rem}
+.xp-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0}
+.xp-chip{padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(212,175,55,.4);background:none;color:inherit;font:inherit;font-size:.85rem;cursor:pointer}
+.xp-chip[aria-pressed=true]{background:var(--gold,#d4af37);border-color:var(--gold,#d4af37);color:#14110a}
+.xp-list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.xp-row{width:100%;text-align:left;padding:.65rem .8rem;border-radius:12px;border:1px solid transparent;background:rgba(255,255,255,.05);color:inherit;font:inherit;cursor:pointer}
+.xp-row:hover,.xp-row:focus-visible{border-color:var(--gold,#d4af37)}
+.xp-row small,.xp-sub{display:block;margin-top:.15rem;color:#b9b19a;font-size:.82rem}
+.xp-map{display:block;width:100%;aspect-ratio:1;max-height:56dvh;touch-action:none;cursor:grab}
+.xp-info{min-height:4.6rem;margin-top:.5rem;padding-top:.6rem;border-top:1px solid rgba(212,175,55,.25)}
+.xp-q{margin:.4rem 0 1rem;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;line-height:1.35}
+.xp-opts{display:grid;gap:.5rem}
+.xp-opt{padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(212,175,55,.35);background:rgba(255,255,255,.05);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.xp-opt.ok{background:rgba(80,170,110,.3);border-color:#6fcf97}
+.xp-opt.no{background:rgba(200,80,80,.3);border-color:#eb5757}
+.xp-go{margin-top:1rem;padding:.7rem 1.2rem;border:0;border-radius:12px;background:var(--gold,#d4af37);color:#14110a;font:inherit;font-weight:600;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.xp-map{cursor:default}}

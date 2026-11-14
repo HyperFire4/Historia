@@ -12,6 +12,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | cinematic.css | cinematic timeline |
 | audio-mobile.css | soundtrack panel, full screen, phone layouts |
 | lang-eras.css | Gujarati fonts, language panel, era pages, the gate |
+| explore.css | search, world map and quiz pop-ups, quick buttons |
 
 ## JS (js/) — in load order
 | File | What it holds |
@@ -32,6 +33,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | 14-lang-ui.js | language switcher |
 | 15-autoplay.js | soundtrack autoplay |
 | 16-eras.js | era pages + gate animation + startup |
+| 17-explore.js | search, world map, quiz, M key, saved volume |
 
 ## Which files for which change
 - Add/edit civilizations or figures: 02-data.js (or 05-eras-data.js for era lists)
@@ -43,4 +45,6 @@ Scripts share one global scope, so a change in one file can use names from earli
 - Page text/sections/buttons: index.html
 - Mobile fixes: audio-mobile.css (+ the matching CSS file)
 - Era pages / gate: 16-eras.js, 05-eras-data.js, lang-eras.css
+- Search / world map / quiz: 17-explore.js + explore.css (quiz questions are the QUIZ list near the middle of 17-explore.js)
+- Photo loading speed: 01-art.js (loadPhotos)
 - Globe pop-up: 08-globe-modal.js, hero-globe.css
