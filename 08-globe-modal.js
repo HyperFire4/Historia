@@ -151,5 +151,4 @@ document.addEventListener('click', e => {
 $('close').onclick = closeModal;
 modal.addEventListener('click', e => { if (e.target === modal || e.target === gc) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-
+Object.assign(EXTRA, EXTRA_MORE);   // places for the civilizations and people added in 05b-more-data.js

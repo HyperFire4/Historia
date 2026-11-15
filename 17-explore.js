@@ -116,6 +116,13 @@ const QUIZ = [
  [3, 'Who founded the Mughal Empire in 1526?', ['Babur', 'Akbar', 'Suleiman', 'Shivaji'], 'Babur won the First Battle of Panipat; his grandson Akbar expanded the empire.'],
  [4, 'Which leader began the Salt March in 1930?', ['Mahatma Gandhi', 'Sardar Vallabhbhai Patel', 'Albert Einstein', 'Marie Curie'], 'Gandhi walked from Sabarmati to Dandi to protest the salt tax.'],
  [4, 'Marie Curie discovered polonium and which other element?', ['Radium', 'Uranium', 'Helium', 'Plutonium'], 'She named polonium after Poland, her homeland.'],
+ [0, 'Which people’s 22-letter alphabet, written without vowels, became an ancestor of the Greek and Latin alphabets?', ['The Phoenicians', 'The Minoans', 'The Assyrians', 'The Olmec'], 'The Greeks adapted the Phoenician letters and added vowels.'],
+ [1, 'Whose horse archers defeated a Roman army at Carrhae in 53 BCE?', ['The Parthians', 'The Carthaginians', 'Aksum', 'The Maurya Empire'], 'Parthian mounted archers dominated the battle; the empire lasted until 224 CE.'],
+ [2, 'Under which Chinese dynasty did Bi Sheng invent movable-type printing around 1040?', ['Song', 'Han', 'Qin', 'Ming'], 'Bi Sheng made movable type from baked clay during the Song dynasty.'],
+ [2, 'The word “algorithm” comes from the name of which scholar?', ['Al-Khwarizmi', 'Ibn Battuta', 'Ibn Sina', 'Saladin'], 'He worked at the House of Wisdom in Baghdad in the 9th century.'],
+ [3, 'Whose book, published in 1543, proposed that the Earth moves around the Sun?', ['Nicolaus Copernicus', 'Isaac Newton', 'Galileo Galilei', 'Leonardo da Vinci'], 'Copernicus’s book appeared in the year he died.'],
+ [4, 'Who became the first non-European to win the Nobel Prize in Literature, in 1913?', ['Rabindranath Tagore', 'Mahatma Gandhi', 'Swami Vivekananda', 'Sardar Vallabhbhai Patel'], 'Tagore won for his poetry collection Gitanjali.'],
+ [4, 'Which mathematician wrote to G. H. Hardy in 1913 and was invited to Cambridge?', ['Srinivasa Ramanujan', 'Aryabhata', 'Albert Einstein', 'Marie Curie'], 'Ramanujan was elected a Fellow of the Royal Society in 1918.'],
  [4, 'The Meiji Restoration began the modernisation of which country?', ['Japan', 'China', 'India', 'Russia'], 'It made Japan the first major non-Western industrial power.']
 ];
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };

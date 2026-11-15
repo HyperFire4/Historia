@@ -12,6 +12,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | cinematic.css | cinematic timeline |
 | audio-mobile.css | soundtrack panel, full screen, phone layouts |
 | lang-eras.css | Gujarati fonts, language panel, era pages, the gate |
+| design.css | living background, section dividers, the gate's look |
 | smooth.css | faces in photos, smoother scrolling and lighter effects on phones |
 | explore.css | search, world map and quiz pop-ups, quick buttons |
 
@@ -23,6 +24,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | 03-translations.js | Gujarati (and future language) text |
 | 04-lang-core.js | LANG + tx/locI/locT/factT helpers |
 | 05-eras-data.js | era periods + civs/figures per era |
+| 05b-more-data.js | extra civilizations and people (edit the addC / addF lines to add more) |
 | 06-cards.js | card template |
 | 07-globe-data.js | world map data (huge, never upload) |
 | 08-globe-modal.js | globe drawing + Explore pop-up |
@@ -34,6 +36,7 @@ Scripts share one global scope, so a change in one file can use names from earli
 | 14-lang-ui.js | language switcher |
 | 15-autoplay.js | soundtrack autoplay |
 | 16-eras.js | era pages + gate animation + startup |
+| 18-design.js | background colour follows the section you are in |
 | 17-explore.js | search, world map, quiz, M key, saved volume |
 
 ## Which files for which change
@@ -53,3 +56,4 @@ Scripts share one global scope, so a change in one file can use names from earli
 ## Note: in the live repo all files sit in one flat folder, so index.html refers to them without css/ or js/.
 - Faces cut off in one photo: set FACE_POS in 06-cards.js (e.g. FACE_POS['photo key'] = '50% 5%')
 - Phone audio crackle: LITE settings at the top of 13-music.js
+- The gate (doors): look in design.css, timing and colours in the gate() function of 16-eras.js

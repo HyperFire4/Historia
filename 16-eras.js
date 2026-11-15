@@ -59,19 +59,35 @@ document.addEventListener('click', e => { const b = e.target.closest('[data-era]
 $('eraBack').onclick = closeEra;
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.classList.contains('open') && eraOpen !== null) closeEra(); }, true);
 
-/* ---------- The gate: doors swing shut, the page changes behind them, then they swing open ---------- */
+/* ---------- The gate: doors swing shut and land with a thud, the page changes behind them, then light pours through as they open ---------- */
 let gateBusy = false;
+const GATE_COL = ['#d4af37', '#7fb5ff', '#6fcf97', '#e88a6a', '#c792ea'];   // each era's gate glows in its own colour
+function gateDecor(g) {   // light rays and falling dust, added once
+  if (g.dataset.d) return; g.dataset.d = 1;
+  const rays = document.createElement('div'); rays.className = 'gate-rays'; g.insertBefore(rays, g.firstChild);
+  const dust = document.createElement('div'); dust.className = 'gate-dust';
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('i');
+    p.style.cssText = `left:${(6 + Math.random() * 88).toFixed(1)}%;--dx:${((Math.random() - .5) * 60).toFixed(0)}px;--dl:${(Math.random() * .25).toFixed(2)}s;--sz:${(2 + Math.random() * 3).toFixed(1)}px`;
+    dust.appendChild(p);
+  }
+  g.insertBefore(dust, g.querySelector('.gate-title'));
+}
 function gate(name, action) {
   const g = $('gate');
   if (gateBusy || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { action(); return; }
   gateBusy = true;
   $('gSub').textContent = tx('Entering'); $('gName').textContent = name;
+  const ei = PERIODS.findIndex(p => tx(p.n) === name); g.style.setProperty('--ga', ei >= 0 ? GATE_COL[ei] : GATE_COL[0]);
+  gateDecor(g);
   g.className = 'gate on open';        // doors start open, so the page is still visible
   void g.offsetWidth;
-  g.classList.remove('open');          // 1. the doors close
-  setTimeout(action, 850);             // 2. the new page appears while the doors are shut
-  setTimeout(() => g.classList.add('opening', 'open'), 1850);   // 3. the doors open with a flash of light
-  setTimeout(() => { g.className = 'gate'; gateBusy = false; }, 3500);
+  g.classList.remove('open');          // 1. the doors swing shut
+  setTimeout(() => g.classList.add('thud'), 900);    //    and land with a thud, dust falling
+  setTimeout(action, 1000);            // 2. the new page appears while the doors are shut
+  setTimeout(() => g.classList.remove('thud'), 2000);
+  setTimeout(() => g.classList.add('opening', 'open'), 2050);   // 3. the doors open and light pours through
+  setTimeout(() => { g.className = 'gate'; gateBusy = false; }, 4100);
 }
 document.addEventListener('click', e => {   // entering the cinematic timeline also goes through the gate
   const a = e.target.closest('a[href="#journey"]'); if (!a) return;
