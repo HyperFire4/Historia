@@ -63,7 +63,14 @@ leaders:[
 ["Dwight D. Eisenhower","Supreme Allied Commander","Commanded the Allied invasion of Western Europe in 1944."],
 ["Adolf Hitler","Chancellor of Germany","Led Nazi Germany and its war of conquest and genocide until his suicide in 1945."]],
 after:["The United Nations was founded in October 1945.","The Nuremberg trials prosecuted Nazi leaders in 1945–46.","Europe was divided and the Cold War began between the United States and the Soviet Union.","The Marshall Plan helped rebuild Western Europe.","Decolonisation accelerated, and India and Pakistan became independent in 1947."],
-india:"The British Indian Army grew to over 2.5 million volunteers, the largest all-volunteer force in history, and fought in North Africa, Italy and Burma. At home, the 1943 Bengal famine killed an estimated 2–3 million people."}
+india:"The British Indian Army grew to over 2.5 million volunteers, the largest all-volunteer force in history, and fought in North Africa, Italy and Burma. At home, the 1943 Bengal famine killed an estimated 2–3 million people."},
+  "World War I":"https://commons.wikimedia.org/wiki/Special:FilePath/Men_of_the_Royal_Warwickshire_Regiment.jpg?width=1100",
+  "World War II":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-617-2571-04,_Stalingrad,_Soldaten_beim_H%C3%A4userkampf.jpg?width=1100",
+  "Battle of Verdun begins":"https://commons.wikimedia.org/wiki/Special:FilePath/French_soldiers_of_the_87th_Regiment_shelter_in_their_trenches_at_Hill_304_at_Verdun.jpg?width=1100",
+  "Verdun":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R29963,_Bei_Verdun,_explodierende_Granate.jpg?width=1100",
+  "Verdun#2":"https://commons.wikimedia.org/wiki/Special:FilePath/The_Battle_of_Verdun,_February_december_1916_Q69716.jpg?width=1100",
+  "Armistice":"https://commons.wikimedia.org/wiki/Special:FilePath/Armisticetrain.jpg?width=1100",
+  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100"
 };
 
 /* Optional real photos: put the image file in the same folder and add its name here.
@@ -86,5 +93,12 @@ window.WAR_IMG={
   "Stalingrad":"https://commons.wikimedia.org/wiki/Special:FilePath/Streetfight_Stralingrad01.jpg?width=1100",
   "D-Day":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100",
   "D-Day#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Smoking_LCVP_off_Omaha_Beach_6_June_1944.jpg?width=1100",
-  "Hiroshima and Nagasaki":"https://commons.wikimedia.org/wiki/Special:FilePath/Atomic_cloud_over_Hiroshima.jpg?width=1100"
+  "Hiroshima and Nagasaki":"https://commons.wikimedia.org/wiki/Special:FilePath/Atomic_cloud_over_Hiroshima.jpg?width=1100",
+  "World War I":"https://commons.wikimedia.org/wiki/Special:FilePath/Men_of_the_Royal_Warwickshire_Regiment.jpg?width=1100",
+  "World War II":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-617-2571-04,_Stalingrad,_Soldaten_beim_H%C3%A4userkampf.jpg?width=1100",
+  "Battle of Verdun begins":"https://commons.wikimedia.org/wiki/Special:FilePath/French_soldiers_of_the_87th_Regiment_shelter_in_their_trenches_at_Hill_304_at_Verdun.jpg?width=1100",
+  "Verdun":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R29963,_Bei_Verdun,_explodierende_Granate.jpg?width=1100",
+  "Verdun#2":"https://commons.wikimedia.org/wiki/Special:FilePath/The_Battle_of_Verdun,_February_december_1916_Q69716.jpg?width=1100",
+  "Armistice":"https://commons.wikimedia.org/wiki/Special:FilePath/Armisticetrain.jpg?width=1100",
+  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100"
 };
