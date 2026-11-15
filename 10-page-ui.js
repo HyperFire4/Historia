@@ -36,7 +36,7 @@ function doScroll() {
   const sy = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight;
   $('prog').style.transform = `scaleX(${dh > 0 ? sy / dh : 0})`;
   $('nav').classList.toggle('sm', sy > 40);
-  if (sy < window.innerHeight * 1.2) { heroIn.style.transform = `translateY(${sy * .3}px)`; heroIn.style.opacity = Math.max(0, 1 - sy / (window.innerHeight * .8)); }
+  // (the hero text's drift and fade is now done in CSS, see smooth.css, so it follows the scroll without lag)
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
@@ -120,4 +120,3 @@ document.querySelectorAll('.stat').forEach(e => sio.observe(e));
     if (c && !c.contains(e.relatedTarget)) ['--rx', '--ry', '--ty'].forEach(v => c.style.removeProperty(v));
   });
 });
-
