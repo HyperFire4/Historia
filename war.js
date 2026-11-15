@@ -123,8 +123,6 @@ addEventListener("scroll",function(){
     tick=false;
     var h=document.documentElement,vh=innerHeight;
     $("#prog").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+"%";
-    if(reduce)return;
-    slides.forEach(function(s){var r=s.getBoundingClientRect();if(r.bottom>0&&r.top<vh)s.style.setProperty("--p",((r.top+r.height/2)/vh-.5).toFixed(3))});
   });
 },{passive:true});
 
