@@ -7,8 +7,7 @@ body{font:400 15px/1.75 var(--f);background:var(--ab);color:#efeee9;overflow-x:h
 a{color:inherit}
 :focus-visible{outline:2px solid var(--hl);outline-offset:3px}
 .prog{position:fixed;inset:0 auto auto 0;height:3px;width:0;background:var(--hl);z-index:80}
-.grain{position:fixed;inset:-50%;z-index:45;pointer-events:none;background:var(--n);opacity:.13;mix-blend-mode:overlay;animation:gr .9s steps(6) infinite}
-@keyframes gr{0%{transform:translate(0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}}
+.grain{position:fixed;inset:-50%;z-index:45;pointer-events:none;background:var(--n);opacity:.1;mix-blend-mode:overlay}
 #flash{position:fixed;inset:0;z-index:70;background:#000;opacity:0;pointer-events:none}
 #flash.go{animation:fl .7s ease}
 @keyframes fl{40%,60%{opacity:1}}
@@ -61,7 +60,7 @@ a{color:inherit}
 .ph{clip-path:var(--clip);overflow:hidden;box-shadow:inset 0 0 130px rgba(0,0,0,.65);background:#222}
 .ph::before{content:"";position:absolute;inset:0;z-index:2;background:radial-gradient(rgba(0,0,0,.4) 1px,transparent 1.7px) 0 0/4px 4px;mix-blend-mode:multiply;opacity:.55}
 .ph::after{content:"";position:absolute;inset:0;z-index:3;background:var(--tint);mix-blend-mode:multiply;opacity:.5}
-.pi{position:absolute;inset:-8%;background-size:cover;background-position:center;filter:grayscale(1) contrast(1.2);transform:translateY(calc(var(--p,0)*-38px)) scale(1.04)}
+.pi{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(1) contrast(1.2)}
 .pi img{width:100%;height:100%;object-fit:cover}
 .c .ph,.c .dph{filter:sepia(.5)}
 
