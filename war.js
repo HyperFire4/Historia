@@ -1,109 +1,131 @@
 (function(){
 "use strict";
-var D={
-ww1:{name:"World War I",years:"1914–1918",
-lead:"A crisis in the Balkans became the first global industrial war. It ended four empires and redrew the map of Europe and the Middle East.",
-why:"Rival alliances, an arms race, imperial competition and rising nationalism meant one assassination, Archduke Franz Ferdinand’s at Sarajevo, set off a chain of war declarations within weeks.",
-sides:[["Allied Powers (Entente)","Britain and its empire, France, Russia (until 1917–18), Italy (from 1915), Japan, the United States (from 1917), Serbia, Belgium and others."],["Central Powers","Germany, Austria-Hungary, the Ottoman Empire and Bulgaria."]],
-stats:[["28 Jul 1914","War begins"],["11 Nov 1918","Armistice"],["≈9–10 million","Military deaths*"],["≈6–10 million","Civilian deaths*"]],
-tl:[
-["28 Jun 1914","Assassination at Sarajevo","Gavrilo Princip, a Bosnian Serb nationalist, shoots Archduke Franz Ferdinand of Austria-Hungary and his wife Sophie."],
-["28 Jul 1914","Austria-Hungary declares war on Serbia","Alliances pull in Russia, Germany and France within days."],
-["4 Aug 1914","Germany invades Belgium","Britain declares war the same day, citing Belgian neutrality."],
-["5–12 Sep 1914","First Battle of the Marne","The Allies stop the German advance on Paris. Both sides then dig in and the Western Front hardens into trench warfare."],
-["22 Apr 1915","Gas at Ypres","Germany releases chlorine gas on a large scale in Belgium, the first major use of poison gas on the Western Front."],
-["25 Apr 1915","Gallipoli landings","Allied forces land on the Ottoman peninsula. The campaign ends in evacuation in January 1916."],
-["21 Feb 1916","Battle of Verdun begins","Germany attacks French fortresses. The battle lasts about ten months."],
-["1 Jul 1916","Battle of the Somme begins","The British Army suffers about 57,000 casualties on the first day alone."],
-["6 Apr 1917","United States enters the war","Unrestricted German submarine warfare and the Zimmermann Telegram push Washington to declare war."],
-["3 Mar 1918","Treaty of Brest-Litovsk","Revolutionary Russia makes peace with the Central Powers and leaves the war."],
-["8 Aug 1918","Battle of Amiens","Allied forces break through. German commander Erich Ludendorff later called it the black day of the German army."],
-["11 Nov 1918","Armistice","Fighting stops at 11 a.m. after Germany signs the agreement near Compiègne, France."],
-["28 Jun 1919","Treaty of Versailles","The peace settlement with Germany sets reparations and territorial losses."]],
-battles:[
-["Battle of the Marne","5–12 Sep 1914","French and British forces halt the German drive toward Paris, ending hopes of a quick victory.","Short war ends","Western Front"],
-["Gallipoli","Apr 1915 – Jan 1916","An Allied attempt to open the Dardanelles fails against stubborn Ottoman defence led in part by Mustafa Kemal.","Evacuated","Ottoman front"],
-["Verdun","Feb – Dec 1916","A long French defence of fortresses that became a symbol of national endurance.","≈700,000","casualties, both sides"],
-["The Somme","Jul – Nov 1916","A British and French offensive that gained a few miles at enormous cost.","Over 1 million","casualties, all sides"]],
-leaders:[
-["Wilhelm II","German Emperor","Ruled Germany from 1888 and abdicated in November 1918."],
-["Woodrow Wilson","US President","Brought America into the war and proposed the Fourteen Points and the League of Nations."],
-["David Lloyd George","British Prime Minister","Led Britain from December 1916 through to victory and the peace talks."],
-["Georges Clemenceau","French Prime Minister","Led France in the final year and pressed for a strict peace with Germany."],
-["Nicholas II","Tsar of Russia","Abdicated in March 1917 after military defeats and unrest at home."]],
-after:["The German, Austro-Hungarian, Russian and Ottoman empires all collapsed.","The Treaty of Versailles (1919) imposed reparations and territorial losses on Germany.","The League of Nations was founded in 1920 to prevent future wars.","New states appeared across Central and Eastern Europe, and Britain and France took League mandates in the Middle East.","Unresolved grievances and economic crisis helped set the stage for 1939."],
-india:"More than 1.3 million Indian troops served overseas, in France, Mesopotamia, East Africa and Gallipoli, and about 74,000 died. India Gate in New Delhi was built as a memorial to Indian soldiers who died in the war."},
+var D=window.WAR_DATA,IMG=window.WAR_IMG||{};
+var $=function(s){return document.querySelector(s)};
+var main=$("#main"),rail=$("#rail"),hud=$("#hud"),tabs=document.querySelectorAll(".tabs button");
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,cur="",slides=[],io;
+var esc=function(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")};
+function rng(s){s=Math.abs(Math.floor(s))||1;return function(){s=s*16807%2147483647;return(s-1)/2147483646}}
 
-ww2:{name:"World War II",years:"1939–1945",
-lead:"The deadliest conflict in history, fought across Europe, Africa, Asia and the Pacific, and the first to end with nuclear weapons.",
-why:"Anger over the 1919 settlement, the Great Depression and aggressive expansion by Germany, Italy and Japan, met first by appeasement, led to war when Germany invaded Poland.",
-sides:[["Allied Powers","Britain and its empire, the Soviet Union (from 1941), the United States (from 1941), China, France and others."],["Axis Powers","Germany, Italy and Japan, with allies including Hungary, Romania and Bulgaria."]],
-stats:[["1 Sep 1939","War begins"],["2 Sep 1945","Japan formally surrenders"],["≈70–85 million","Total deaths*"],["≈6 million","Jews murdered in the Holocaust"]],
-tl:[
-["1 Sep 1939","Germany invades Poland","Britain and France declare war on Germany on 3 September."],
-["26 May – 4 Jun 1940","Dunkirk evacuation","More than 330,000 Allied troops are taken off the French coast. France signs an armistice on 22 June."],
-["Jul – Oct 1940","Battle of Britain","The Royal Air Force defeats the German air campaign over Britain, so Germany does not invade."],
-["22 Jun 1941","Operation Barbarossa","Germany invades the Soviet Union, opening the largest land front of the war."],
-["7 Dec 1941","Attack on Pearl Harbor","Japan strikes the US Pacific Fleet in Hawaii. The United States declares war on Japan, and Germany declares war on the US on 11 December."],
-["4–7 Jun 1942","Battle of Midway","US naval forces sink four Japanese fleet carriers and turn the tide in the Pacific."],
-["8 Aug 1942","Quit India Movement","Congress calls for an end to British rule in India. Its leaders are arrested within hours."],
-["Aug 1942 – 2 Feb 1943","Battle of Stalingrad","The German Sixth Army surrenders, a turning point on the Eastern Front."],
-["6 Jun 1944","D-Day","Allied forces land in Normandy in the largest seaborne invasion in history."],
-["8 May 1945","Victory in Europe","Germany’s surrender takes effect after Hitler’s death on 30 April."],
-["6 and 9 Aug 1945","Hiroshima and Nagasaki","The United States drops atomic bombs on the two Japanese cities."],
-["2 Sep 1945","Japan formally surrenders","The ceremony aboard USS Missouri ends the war. Japan had announced its surrender on 15 August."]],
-battles:[
-["Battle of Britain","Jul – Oct 1940","The first major campaign fought entirely in the air, won by the RAF with radar and fighter control.","Invasion called off","Operation Sea Lion"],
-["Stalingrad","Aug 1942 – Feb 1943","Street fighting along the Volga ends in encirclement of the German Sixth Army.","≈2 million","casualties, all sides"],
-["Midway","4–7 Jun 1942","Codebreaking lets US carriers ambush the Japanese fleet.","4 carriers","Japan lost"],
-["Normandy","From 6 Jun 1944","Allied armies open a second front in Western Europe and begin the liberation of France.","≈156,000","troops landed on D-Day"]],
-leaders:[
-["Winston Churchill","British Prime Minister","Led Britain from May 1940 and refused to negotiate with Germany."],
-["Franklin D. Roosevelt","US President","Led the United States from the 1941 declaration of war until his death in April 1945."],
-["Joseph Stalin","Soviet leader","Led the USSR, which bore the heaviest losses of any Allied power."],
-["Dwight D. Eisenhower","Supreme Allied Commander","Commanded the Allied invasion of Western Europe in 1944."],
-["Adolf Hitler","Chancellor of Germany","Led Nazi Germany and its war of conquest and genocide until his suicide in 1945."]],
-after:["The United Nations was founded in October 1945.","The Nuremberg trials prosecuted Nazi leaders in 1945–46.","Europe was divided and the Cold War began between the United States and the Soviet Union.","The Marshall Plan helped rebuild Western Europe.","Decolonisation accelerated, and India and Pakistan became independent in 1947."],
-india:"The British Indian Army grew to over 2.5 million volunteers, the largest all-volunteer force in history, and fought in North Africa, Italy and Burma. At home, the 1943 Bengal famine killed an estimated 2–3 million people."}
-};
-var $=function(s,r){return(r||document).querySelector(s)};
-var main=$("#main"),tabs=document.querySelectorAll(".tabs button");
-var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-
-function render(k,scroll){
-  var d=D[k];if(!d)return;
-  document.body.dataset.war=k;
-  document.title=d.name+" — HISTORIA";
-  $("#years").textContent=d.years;
-  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#14130e":"#0d1219";
-  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
-  var h='<nav class="sub-nav" aria-label="On this page"><a href="#overview">Overview</a><a href="#timeline">Timeline</a><a href="#battles">Battles</a><a href="#leaders">Leaders</a><a href="#after">Aftermath</a></nav>';
-  h+='<section id="overview"><h2>'+d.name+'</h2><p class="lead">'+d.lead+'</p><div class="stats">'+d.stats.map(function(s){return'<div><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p>';
-  h+='<div class="two"><div class="box"><h3>How it began</h3><p>'+d.why+'</p></div><div class="box">'+d.sides.map(function(s){return'<h3>'+s[0]+'</h3><p>'+s[1]+'</p>'}).join('<br>')+'</div></div></section>';
-  h+='<section id="timeline"><h2>Timeline</h2><ol class="tl">'+d.tl.map(function(e,i){return'<li class="ev"><button aria-expanded="'+(i===0)+'" aria-controls="e'+i+'"><time>'+e[0]+'</time><h4>'+e[1]+'</h4></button><p id="e'+i+'"'+(i?' hidden':'')+'>'+e[2]+'</p></li>'}).join("")+'</ol></section>';
-  h+='<section id="battles"><h2>Key battles</h2><div class="battles">'+d.battles.map(function(b){return'<article class="bat"><h3>'+b[0]+'</h3><small>'+b[1]+'</small><p>'+b[2]+'</p><strong>'+b[3]+'</strong><em>'+b[4]+'</em></article>'}).join("")+'</div></section>';
-  h+='<section id="leaders"><h2>Leaders</h2><div class="leaders">'+d.leaders.map(function(l){return'<article class="ldr"><h3>'+l[0]+'</h3><small>'+l[1]+'</small><p>'+l[2]+'</p></article>'}).join("")+'</div></section>';
-  h+='<section id="after"><h2>Aftermath</h2><ul class="after">'+d.after.map(function(a){return'<li>'+a+'</li>'}).join("")+'</ul><div class="india"><h3>India and the war</h3><p>'+d.india+'</p></div></section>';
-  main.innerHTML=h;
-  if(!reduce){main.classList.remove("swap");void main.offsetWidth;main.classList.add("swap")}
-  if(scroll)window.scrollTo({top:$(".hero").offsetHeight-20,behavior:reduce?"auto":"smooth"});
+/* torn paper edge as a clip-path polygon (side = which edge is torn; m = mobile, torn at the bottom) */
+function edge(side,s,m){
+  var r=rng(s*977+13),p=[],n=24,i;
+  function d(){var v=3+r()*9;if(r()>.82)v+=r()*9;return v}
+  if(m){p.push("0 0","100% 0");for(i=n;i>=0;i--)p.push((i/n*100)+"% "+(100-d()*.8)+"%")}
+  else if(side==="l"){p.push("100% 0","100% 100%");for(i=n;i>=0;i--)p.push(d()+"% "+(i/n*100)+"%")}
+  else{p.push("0 0");for(i=0;i<=n;i++)p.push((100-d())+"% "+(i/n*100)+"%");p.push("0 100%")}
+  return"polygon("+p.join(",")+")";
 }
 
-main.addEventListener("click",function(e){
-  var b=e.target.closest(".ev button");if(!b)return;
-  var open=b.getAttribute("aria-expanded")==="true";
-  b.setAttribute("aria-expanded",!open);
-  document.getElementById(b.getAttribute("aria-controls")).hidden=open;
-});
+/* drawn archive-style scenes, used when no real photo is supplied */
+function row(r,y,sc,n,helm,op){
+  var o="",i,x,h;
+  for(i=0;i<n;i++){x=i*(420/n)+r()*14;h=sc*(.85+r()*.3);
+    o+='<g transform="translate('+x.toFixed(0)+' '+y+') scale('+h.toFixed(2)+')" fill="#0a0a0c" opacity="'+op+'"><path d="M-9 0L-8-30Q0-40 8-30L9 0Z"/><circle cy="-38" r="6"/>'+(helm?'<path d="M-9-39Q0-52 9-39Z"/>':"")+"</g>"}
+  return o;
+}
+function art(k,s){
+  var r=rng(s*31+7),o="",i;
+  o+='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dadada"/><stop offset=".65" stop-color="#777"/><stop offset="1" stop-color="#222"/></linearGradient><filter id="b"><feGaussianBlur stdDeviation="7"/></filter></defs><rect width="400" height="300" fill="url(#g)"/>';
+  o+='<circle cx="'+((70+r()*260)|0)+'" cy="'+((50+r()*50)|0)+'" r="'+((24+r()*20)|0)+'" fill="#fff" opacity=".6" filter="url(#b)"/>';
+  for(i=0;i<5;i++)o+='<ellipse cx="'+((r()*400)|0)+'" cy="'+((90+r()*120)|0)+'" rx="'+((40+r()*50)|0)+'" ry="'+((14+r()*18)|0)+'" fill="#111" opacity=".28" filter="url(#b)"/>';
+  if(k==="ship"){
+    o+='<rect y="190" width="400" height="110" fill="#1b1b1b"/><path d="M50 190H350L326 216H78Z" fill="#0b0b0b"/><rect x="150" y="160" width="90" height="30" fill="#0b0b0b"/><rect x="100" y="170" width="3" height="20" fill="#0b0b0b"/>';
+    for(i=0;i<3;i++)o+='<rect x="'+(165+i*28)+'" y="136" width="14" height="28" fill="#0b0b0b"/><ellipse cx="'+(172+i*38)+'" cy="118" rx="32" ry="12" fill="#222" opacity=".5" filter="url(#b)"/>';
+    for(i=0;i<9;i++)o+='<path d="M'+((r()*400)|0)+" "+(225+i*8)+"h"+((30+r()*50)|0)+'" stroke="#999" stroke-width="1.5" opacity=".5"/>';
+  }else if(k==="sky"){
+    for(i=0;i<3;i++){var x=60+i*130+r()*40|0;o+='<path d="M'+x+" 300L"+(x-14)+" 0L"+(x+24)+' 0Z" fill="#fff" opacity=".16"/>'}
+    for(i=0;i<6;i++)o+='<g transform="translate('+((r()*380)|0)+" "+((30+r()*110)|0)+") rotate("+((r()*40-20)|0)+") scale("+(.8+r()*.9).toFixed(2)+')" fill="#0b0b0b"><path d="M0-10L3-2L16 2V5L3 4L2 12L6 14V16H-6V14L-2 12L-3 4L-16 5V2L-3-2Z"/></g>';
+    for(i=0;i<18;i++){var h=20+r()*70|0;o+='<rect x="'+(i*23)+'" y="'+(300-h)+'" width="'+(14+r()*12|0)+'" height="'+h+'" fill="#0c0c0c"/>'}
+  }else{
+    var c=k==="troops";
+    o+=row(r,310,1.7,8,c,1)+row(r,255,1.05,13,c,.75)+row(r,205,.62,19,c,.5);
+  }
+  return"url('data:image/svg+xml,"+encodeURIComponent(o+"</svg>")+"')";
+}
+function kind(t){
+  return/Gallipoli|Midway|Pearl|Dunkirk|Jutland|Missouri/i.test(t)?"ship":
+  /Britain|Hiroshima/i.test(t)?"sky":
+  /Treaty|Armistice|Brest|Assassination|Quit India|Victory|surrender|Versailles/i.test(t)?"crowd":"troops";
+}
+function pi(title,k,s){
+  var img=IMG[title];
+  return'<div class="pi" style="background-image:'+art(k,s)+'">'+(img?'<img src="'+esc(img)+'" alt="'+esc(title)+'" loading="lazy" onerror="this.remove()">':"")+"</div>";
+}
+function photo(title,side,s,second){
+  var st="--clip:"+edge(side,s)+";--clipm:"+edge(side,s,1)+";--clip2:"+edge(side,s+5)+";--clipm2:"+edge(side,s+5,1)+";--dx:"+(side==="l"?"-1.6%":"1.6%")+";--rx:"+(side==="l"?"60px":"-60px");
+  var k=kind(title);if(second)k=k==="sky"?"troops":k==="ship"?"sky":"crowd";
+  var has=IMG[title];
+  return'<div class="pw'+(second?" two":"")+'" style="'+st+'"'+(has?"":' aria-hidden="true"')+'><i class="pb"></i><div class="ph">'+pi(title,k,s)+"</div></div>";
+}
+function split(d){var y=d.match(/\d{4}/g)||[""];return[y[0],y.length>1?d:d.replace(/\s*\d{4}/,"").trim()]}
+function sl(t,id,y,label,html,g){return'<section class="sl '+t+'" id="'+id+'" data-y="'+y+'" data-l="'+esc(label)+'"'+(g?' data-g="'+esc(g)+'"':"")+">"+html+"</section>"}
+function dated(e){var y=split(e[0]);return'<div class="yr">'+y[0]+'</div><div class="dt">'+y[1]+"</div><p>"+e[2]+'</p><div class="stars">* * *</div><h3>'+e[1]+"</h3>"}
 
-tabs.forEach(function(b){b.addEventListener("click",function(){
-  history.replaceState(null,"","#"+b.dataset.k);render(b.dataset.k,true);
-})});
+function evA(e,n){var y=split(e[0]);return sl("a","s"+n,y[0],e[1],'<div class="tx">'+dated(e)+"</div>"+photo(e[1],"l",n+3))}
+function evC(e,n){
+  var y=split(e[0]),k=kind(e[1]);
+  return sl("c","s"+n,y[0],e[1],'<div class="tx">'+dated(e)+'</div><div class="doc"><b class="stamp">'+y[0]+'</b><div class="dph">'+pi(e[1],k,n+9)+'</div><div class="dl"><b>'+e[1]+"</b><span>"+y[1]+"</span></div></div>",e[2]);
+}
+function mid(id,y,label,head,text,foot,n){
+  return sl("b",id,y,label,photo(label,"r",n)+'<div class="tx"><h3 class="top">'+head+'</h3><i class="rl"></i><p>'+text+'</p><div class="stars">* * *</div>'+foot+"</div>"+photo(label+"#2","l",n+4,1));
+}
+function evB(e,n){var y=split(e[0]);return mid("s"+n,y[0],e[1],e[1],e[2],'<h3 class="foot">'+e[0]+"</h3>",n)}
 
-addEventListener("hashchange",function(){var k=location.hash.slice(1);if(D[k])render(k)});
+function build(k){
+  var d=D[k],h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
+  h.push(sl("a cover","top",y0,d.name,'<div class="tx"><div class="yr">'+d.years+"</div><h1>"+d.name+'</h1><p class="lead">'+d.lead+'</p><div class="st">'+d.stats.map(function(s){return"<div><b>"+s[0]+"</b><span>"+s[1]+"</span></div>"}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p></div>'+photo(d.name,"l",7)));
+  h.push(mid("origins",y0,"How it began","How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
+  d.tl.forEach(function(e,j){n++;h.push([evA,evC,evB][j%3](e,n+j*2))});
+  d.battles.forEach(function(b,j){
+    var y=(b[1].match(/\d{4}/)||[yl])[0];
+    h.push(mid("bt"+j,y,b[0],b[0],b[2],'<div class="big">'+b[3]+"</div><small>"+b[4]+'</small><h3 class="foot">'+b[1]+"</h3>",40+j*3));
+  });
+  h.push(sl("c ld","leaders",yl,"Leaders",'<div class="tx"><h3 class="top">Leaders</h3><i class="rl"></i></div><div class="cards">'+d.leaders.map(function(l,j){return'<article class="idc" style="--r:'+(j%2?2:-2)+'deg"><div class="ih"><span>Service record</span><span>'+d.years+'</span></div><div class="por" role="img" aria-label="Portrait placeholder"></div><h3>'+l[0]+"</h3><small>"+l[1]+"</small><p>"+l[2]+"</p></article>"}).join("")+"</div>"));
+  h.push(sl("a end","after",yl,"Aftermath",'<div class="tx"><h3 class="top">Aftermath</h3><i class="rl"></i><ul class="al">'+d.after.map(function(a){return"<li>"+a+"</li>"}).join("")+'</ul></div><div class="doc india"><div class="dl"><b>India and the war</b></div><p>'+d.india+"</p></div>"));
+  return h.join("");
+}
+
+function act(el){
+  hud.innerHTML="<b>"+el.dataset.y+"</b><small>"+el.dataset.l+"</small>";
+  var i=slides.indexOf(el);
+  [].forEach.call(rail.children,function(b,j){b.classList.toggle("on",j===i)});
+}
+function render(k){
+  var d=D[k];if(!d)return;
+  cur=k;document.body.dataset.war=k;document.title=d.name+" — HISTORIA";
+  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":"#0e1220";
+  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
+  if(io)io.disconnect();
+  main.innerHTML=build(k);
+  slides=[].slice.call(main.children);
+  rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
+  io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
+  slides.forEach(function(s){reduce?s.classList.add("in"):io.observe(s)});
+  window.scrollTo({top:0,behavior:"instant"});
+  act(slides[0]);
+}
+function go(k){
+  if(k===cur||!D[k])return;
+  history.replaceState(null,"","#"+k);
+  if(reduce){render(k);return}
+  var f=$("#flash");f.classList.remove("go");void f.offsetWidth;f.classList.add("go");
+  setTimeout(function(){render(k)},330);
+}
+tabs.forEach(function(b){b.addEventListener("click",function(){go(b.dataset.k)})});
+rail.addEventListener("click",function(e){var b=e.target.closest("button");if(b)slides[b.dataset.i].scrollIntoView({behavior:reduce?"auto":"smooth"})});
+addEventListener("hashchange",function(){go(location.hash.slice(1))});
+
+var tick=false;
 addEventListener("scroll",function(){
-  var h=document.documentElement;
-  $("#prog").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+"%";
+  if(tick)return;tick=true;
+  requestAnimationFrame(function(){
+    tick=false;
+    var h=document.documentElement,vh=innerHeight;
+    $("#prog").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+"%";
+    if(reduce)return;
+    slides.forEach(function(s){var r=s.getBoundingClientRect();if(r.bottom>0&&r.top<vh)s.style.setProperty("--p",((r.top+r.height/2)/vh-.5).toFixed(3))});
+  });
 },{passive:true});
 
 var start=location.hash.slice(1);
