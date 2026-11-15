@@ -70,4 +70,9 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
    Key = the exact event / battle title. Without a photo, a drawn archive-style scene is used.
    Example:  "Battle of Midway":"midway.jpg"  */
 window.WAR_IMG={
+  "Battle of the Somme begins":"https://commons.wikimedia.org/wiki/Special:FilePath/Royal_Irish_Rifles_ration_party_Somme_July_1916.jpg?width=1100",
+  "The Somme":"https://commons.wikimedia.org/wiki/Special:FilePath/Cheshire_Regiment_trench_Somme_1916.jpg?width=1100",
+  "Battle of Midway":"https://commons.wikimedia.org/wiki/Special:FilePath/Japanese_aircraft_carrier_Hiryu_adrift_and_burning_on_5_June_1942_(NH_73065).jpg?width=1100",
+  "Midway":"https://commons.wikimedia.org/wiki/Special:FilePath/Japanese_aircraft_carrier_Hiryu_adrift_and_burning_on_5_June_1942_(NH_73065).jpg?width=1100",
+  "D-Day":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100"
 };
