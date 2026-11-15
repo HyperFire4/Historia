@@ -15,3 +15,10 @@
   .tcard.on{box-shadow:0 18px 36px rgba(0,0,0,.5)}
   .card.done{transition:border-color .35s}
 }
+
+/* The hero text drifts down and fades as you scroll. Driven by the scroll itself (not by script), so it never lags or jitters.
+   Browsers that cannot do this simply let the text scroll normally with the page. */
+@supports (animation-timeline: scroll()) {
+  .hero-inner{animation:heroOut linear both;animation-timeline:scroll(root);animation-range:0 80vh}
+  @keyframes heroOut{from{transform:translate3d(0,0,0);opacity:1}to{transform:translate3d(0,24vh,0);opacity:0}}
+}
