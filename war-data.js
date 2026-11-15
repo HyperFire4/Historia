@@ -70,7 +70,14 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
   "Verdun":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R29963,_Bei_Verdun,_explodierende_Granate.jpg?width=1100",
   "Verdun#2":"https://commons.wikimedia.org/wiki/Special:FilePath/The_Battle_of_Verdun,_February_december_1916_Q69716.jpg?width=1100",
   "Armistice":"https://commons.wikimedia.org/wiki/Special:FilePath/Armisticetrain.jpg?width=1100",
-  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100"
+  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100",
+  "Germany invades Poland":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-51909-0003,_Polen,_Schlagbaum,_deutsche_Soldaten.jpg?width=1100",
+  "Operation Barbarossa":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-265-0040A-22A,_Russland,_Panzer_IV_und_Panzer_II.jpg?width=1100",
+  "Japan formally surrenders":"https://commons.wikimedia.org/wiki/Special:FilePath/Douglas_MacArthur_signs_formal_surrender.jpg?width=1100",
+  "Japan formally surrenders#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Japan_-_USS_Missouri.jpg?width=1100",
+  "Assassination at Sarajevo":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
+  "Treaty of Versailles":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
+  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100"
 };
 
 /* Optional real photos: put the image file in the same folder and add its name here.
@@ -100,5 +107,12 @@ window.WAR_IMG={
   "Verdun":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R29963,_Bei_Verdun,_explodierende_Granate.jpg?width=1100",
   "Verdun#2":"https://commons.wikimedia.org/wiki/Special:FilePath/The_Battle_of_Verdun,_February_december_1916_Q69716.jpg?width=1100",
   "Armistice":"https://commons.wikimedia.org/wiki/Special:FilePath/Armisticetrain.jpg?width=1100",
-  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100"
+  "Dunkirk evacuation":"https://commons.wikimedia.org/wiki/Special:FilePath/Dunkirk_26-29_May_1940_NYP68075.jpg?width=1100",
+  "Germany invades Poland":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-51909-0003,_Polen,_Schlagbaum,_deutsche_Soldaten.jpg?width=1100",
+  "Operation Barbarossa":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-265-0040A-22A,_Russland,_Panzer_IV_und_Panzer_II.jpg?width=1100",
+  "Japan formally surrenders":"https://commons.wikimedia.org/wiki/Special:FilePath/Douglas_MacArthur_signs_formal_surrender.jpg?width=1100",
+  "Japan formally surrenders#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Japan_-_USS_Missouri.jpg?width=1100",
+  "Assassination at Sarajevo":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
+  "Treaty of Versailles":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
+  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100"
 };
