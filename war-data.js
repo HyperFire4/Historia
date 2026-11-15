@@ -70,9 +70,21 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
    Key = the exact event / battle title. Without a photo, a drawn archive-style scene is used.
    Example:  "Battle of Midway":"midway.jpg"  */
 window.WAR_IMG={
+  "Gallipoli landings":"https://commons.wikimedia.org/wiki/Special:FilePath/Troops_row_to_the_beach,_25_April_1915_(3462270214).jpg?width=1100",
+  "Gallipoli landings#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Anzac_Cove1.jpg?width=1100",
+  "Gallipoli":"https://commons.wikimedia.org/wiki/Special:FilePath/Sikh_Troops_at_Gallipoli.jpg?width=1100",
+  "Gallipoli#2":"https://commons.wikimedia.org/wiki/Special:FilePath/The_landing_at_Anzac,_25_April_1915_(3461450491).jpg?width=1100",
   "Battle of the Somme begins":"https://commons.wikimedia.org/wiki/Special:FilePath/Royal_Irish_Rifles_ration_party_Somme_July_1916.jpg?width=1100",
   "The Somme":"https://commons.wikimedia.org/wiki/Special:FilePath/Cheshire_Regiment_trench_Somme_1916.jpg?width=1100",
+  "The Somme#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Lancashire_Fusiliers_trench_Beaumont_Hamel_1916.jpg?width=1100",
+  "Attack on Pearl Harbor":"https://commons.wikimedia.org/wiki/Special:FilePath/Attack_on_Pearl_Harbor_Japanese_planes_view.jpg?width=1100",
   "Battle of Midway":"https://commons.wikimedia.org/wiki/Special:FilePath/Japanese_aircraft_carrier_Hiryu_adrift_and_burning_on_5_June_1942_(NH_73065).jpg?width=1100",
+  "Battle of Midway#2":"https://commons.wikimedia.org/wiki/Special:FilePath/USS_Yorktown_(CV-5)_sinking,_7_June_1942.jpg?width=1100",
   "Midway":"https://commons.wikimedia.org/wiki/Special:FilePath/Japanese_aircraft_carrier_Hiryu_adrift_and_burning_on_5_June_1942_(NH_73065).jpg?width=1100",
-  "D-Day":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100"
+  "Midway#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Sinking_of_japanese_cruiser_Mikuma_6_june_1942.jpg?width=1100",
+  "Battle of Stalingrad":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-B22291,_Russland,_Kampf_um_Stalingrad.jpg?width=1100",
+  "Stalingrad":"https://commons.wikimedia.org/wiki/Special:FilePath/Streetfight_Stralingrad01.jpg?width=1100",
+  "D-Day":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100",
+  "D-Day#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Smoking_LCVP_off_Omaha_Beach_6_June_1944.jpg?width=1100",
+  "Hiroshima and Nagasaki":"https://commons.wikimedia.org/wiki/Special:FilePath/Atomic_cloud_over_Hiroshima.jpg?width=1100"
 };
