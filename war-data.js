@@ -162,3 +162,183 @@ window.WAR_IMG={
   "Origins of World War II":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-51909-0003,_Polen,_Schlagbaum,_deutsche_Soldaten.jpg?width=1100",
   "Origins of World War II#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-121-0010-20,_Polen,_Kolonne_motorisierter_deutscher_Truppen.jpg?width=1100"
 };
+
+/* Leaders: [name, role, text, Wikipedia article title for the portrait] */
+window.WAR_DATA.ww1.leaders=[
+ [
+  "Wilhelm II",
+  "German Emperor",
+  "Ruled Germany from 1888 and abdicated in November 1918.",
+  "Wilhelm II, German Emperor"
+ ],
+ [
+  "Franz Joseph I",
+  "Emperor of Austria-Hungary",
+  "Ruled from 1848. His government’s ultimatum to Serbia and declaration of war set the conflict in motion, and he died in November 1916.",
+  "Franz Joseph I of Austria"
+ ],
+ [
+  "Nicholas II",
+  "Tsar of Russia",
+  "Abdicated in March 1917 after military defeats and unrest at home.",
+  "Nicholas II of Russia"
+ ],
+ [
+  "Vladimir Lenin",
+  "Bolshevik leader",
+  "Led the Bolsheviks to power in November 1917 and took Russia out of the war through the Treaty of Brest-Litovsk.",
+  "Vladimir Lenin"
+ ],
+ [
+  "Woodrow Wilson",
+  "US President",
+  "Brought America into the war and proposed the Fourteen Points and the League of Nations.",
+  "Woodrow Wilson"
+ ],
+ [
+  "David Lloyd George",
+  "British Prime Minister",
+  "Led Britain from December 1916 through to victory and the peace talks.",
+  "David Lloyd George"
+ ],
+ [
+  "Georges Clemenceau",
+  "French Prime Minister",
+  "Led France in the final year and pressed for a strict peace with Germany.",
+  "Georges Clemenceau"
+ ],
+ [
+  "Joseph Joffre",
+  "French commander-in-chief",
+  "Commanded the French armies at the Marne in 1914 and was replaced as commander in December 1916.",
+  "Joseph Joffre"
+ ],
+ [
+  "Ferdinand Foch",
+  "Supreme Allied Commander",
+  "Appointed in 1918 to coordinate the Allied armies. The armistice was signed in his railway carriage.",
+  "Ferdinand Foch"
+ ],
+ [
+  "Douglas Haig",
+  "British commander",
+  "Commanded the British Expeditionary Force on the Western Front from December 1915, including the Somme and Passchendaele.",
+  "Douglas Haig, 1st Earl Haig"
+ ],
+ [
+  "Paul von Hindenburg",
+  "German field marshal",
+  "Won the Battle of Tannenberg in 1914 and, with Ludendorff, directed Germany’s war effort from 1916.",
+  "Paul von Hindenburg"
+ ],
+ [
+  "Erich Ludendorff",
+  "German general",
+  "Hindenburg’s chief strategist, who planned the Spring Offensive of 1918.",
+  "Erich Ludendorff"
+ ],
+ [
+  "John J. Pershing",
+  "American Expeditionary Forces",
+  "Led US troops in France from 1917 and insisted they fight as an independent American army.",
+  "John J. Pershing"
+ ],
+ [
+  "Mustafa Kemal",
+  "Ottoman officer",
+  "Led the Ottoman defence at Gallipoli and later founded the Republic of Turkey.",
+  "Mustafa Kemal Atatürk"
+ ]
+];
+window.WAR_DATA.ww2.leaders=[
+ [
+  "Winston Churchill",
+  "British Prime Minister",
+  "Led Britain from May 1940 and refused to negotiate with Germany.",
+  "Winston Churchill"
+ ],
+ [
+  "Franklin D. Roosevelt",
+  "US President",
+  "Led the United States from the 1941 declaration of war until his death in April 1945.",
+  "Franklin D. Roosevelt"
+ ],
+ [
+  "Joseph Stalin",
+  "Soviet leader",
+  "Led the USSR, which bore the heaviest losses of any Allied power.",
+  "Joseph Stalin"
+ ],
+ [
+  "Harry S. Truman",
+  "US President",
+  "Became president in April 1945 and authorised the atomic bombings of Hiroshima and Nagasaki.",
+  "Harry S. Truman"
+ ],
+ [
+  "Charles de Gaulle",
+  "Leader of the Free French",
+  "Rallied French resistance from London after the fall of France in 1940 and led the provisional government after liberation.",
+  "Charles de Gaulle"
+ ],
+ [
+  "Chiang Kai-shek",
+  "Leader of China",
+  "Led China’s Nationalist government through the long war against Japan.",
+  "Chiang Kai-shek"
+ ],
+ [
+  "Dwight D. Eisenhower",
+  "Supreme Allied Commander",
+  "Commanded the Allied invasion of Western Europe in 1944.",
+  "Dwight D. Eisenhower"
+ ],
+ [
+  "Georgy Zhukov",
+  "Soviet marshal",
+  "Led Soviet forces in the defence of Moscow, at Stalingrad and in the capture of Berlin.",
+  "Georgy Zhukov"
+ ],
+ [
+  "Bernard Montgomery",
+  "British field marshal",
+  "Won the Second Battle of El Alamein in 1942 and commanded Allied ground forces in Normandy.",
+  "Bernard Montgomery"
+ ],
+ [
+  "Douglas MacArthur",
+  "US general",
+  "Commanded Allied forces in the Southwest Pacific and accepted Japan’s surrender in 1945.",
+  "Douglas MacArthur"
+ ],
+ [
+  "Adolf Hitler",
+  "Chancellor of Germany",
+  "Led Nazi Germany and its war of conquest and genocide until his suicide in 1945.",
+  "Adolf Hitler"
+ ],
+ [
+  "Benito Mussolini",
+  "Italian dictator",
+  "Took Italy into the war in June 1940, was deposed in July 1943 and was killed in April 1945.",
+  "Benito Mussolini"
+ ],
+ [
+  "Hirohito",
+  "Emperor of Japan",
+  "His radio broadcast on 15 August 1945 announced Japan’s surrender.",
+  "Hirohito"
+ ],
+ [
+  "Erwin Rommel",
+  "German field marshal",
+  "Led German and Italian forces in North Africa and later commanded coastal defences in France.",
+  "Erwin Rommel"
+ ],
+ [
+  "Subhas Chandra Bose",
+  "Indian nationalist leader",
+  "Broke with Gandhi, sought Axis support against British rule and formed the Indian National Army in 1943.",
+  "Subhas Chandra Bose"
+ ]
+];
