@@ -77,7 +77,12 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
   "Japan formally surrenders#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Japan_-_USS_Missouri.jpg?width=1100",
   "Assassination at Sarajevo":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
   "Treaty of Versailles":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
-  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100"
+  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100",
+  "Germany invades Belgium":"https://commons.wikimedia.org/wiki/Special:FilePath/German_advance_through_Belgium,_August_1914_-_version_2.png?width=1100",
+  "United States enters the war":"https://commons.wikimedia.org/wiki/Special:FilePath/President_Woodrow_Wilson_asking_Congress_to_declare_war_on_Germany,_2_April_1917.jpg?width=1100",
+  "Battle of Amiens":"https://commons.wikimedia.org/wiki/Special:FilePath/8th_August_1918_(Will_Longstaff).jpg?width=1100",
+  "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
+  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100"
 };
 
 /* Optional real photos: put the image file in the same folder and add its name here.
@@ -114,5 +119,10 @@ window.WAR_IMG={
   "Japan formally surrenders#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Japan_-_USS_Missouri.jpg?width=1100",
   "Assassination at Sarajevo":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
   "Treaty of Versailles":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
-  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100"
+  "Victory in Europe":"https://commons.wikimedia.org/wiki/Special:FilePath/Winston_Churchill_waves_to_crowds_in_Whitehall_in_London_as_they_celebrate_VE_Day,_8_May_1945._H41849.jpg?width=1100",
+  "Germany invades Belgium":"https://commons.wikimedia.org/wiki/Special:FilePath/German_advance_through_Belgium,_August_1914_-_version_2.png?width=1100",
+  "United States enters the war":"https://commons.wikimedia.org/wiki/Special:FilePath/President_Woodrow_Wilson_asking_Congress_to_declare_war_on_Germany,_2_April_1917.jpg?width=1100",
+  "Battle of Amiens":"https://commons.wikimedia.org/wiki/Special:FilePath/8th_August_1918_(Will_Longstaff).jpg?width=1100",
+  "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
+  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100"
 };
