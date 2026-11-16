@@ -84,7 +84,23 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
   "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
   "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100",
   "Treaty of Brest-Litovsk":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R92623,_Brest-Litowsk,_Waffenstillstandsabkommen.jpg?width=1100",
-  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100"
+  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100",
+  "Austria-Hungary declares war on Serbia":"https://commons.wikimedia.org/wiki/Special:FilePath/To_my_people,_Franz_Joseph,_1914,_Czech_translation.jpg?width=1100",
+  "First Battle of the Marne":"https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_la_Marne,_positions_au_9_septembre.png?width=1100",
+  "First Battle of the Marne#2":"https://commons.wikimedia.org/wiki/Special:FilePath/French_conmemorative_medal_first_battle_of_the_marne.jpg?width=1100",
+  "Battle of the Marne":"https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_la_Marne,_positions_au_9_septembre.png?width=1100",
+  "Battle of the Marne#2":"https://commons.wikimedia.org/wiki/Special:FilePath/French-Soldiers-War-Germans-Meaux-Battle-Marne.jpg?width=1100",
+  "Gas at Ypres":"https://commons.wikimedia.org/wiki/Special:FilePath/Sargent,_John_Singer_(RA)_-_Gassed_-_Google_Art_Project.jpg?width=1100",
+  "Normandy":"https://commons.wikimedia.org/wiki/Special:FilePath/Smoking_LCVP_off_Omaha_Beach_6_June_1944.jpg?width=1100",
+  "Normandy#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100",
+  "Origins of World War I":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
+  "Origins of World War I#2":"https://commons.wikimedia.org/wiki/Special:FilePath/To_my_people,_Franz_Joseph,_1914,_Czech_translation.jpg?width=1100",
+  "Germany invades Belgium#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Men_of_the_Royal_Warwickshire_Regiment.jpg?width=1100",
+  "United States enters the war#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
+  "Armistice#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Waffenstillstand_gr.jpg?width=1100",
+  "Stalingrad#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-B22173,_Russland,_Kampf_um_Stalingrad,_Infanterist.jpg?width=1100",
+  "Origins of World War II":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-51909-0003,_Polen,_Schlagbaum,_deutsche_Soldaten.jpg?width=1100",
+  "Origins of World War II#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-121-0010-20,_Polen,_Kolonne_motorisierter_deutscher_Truppen.jpg?width=1100"
 };
 
 /* Optional real photos: put the image file in the same folder and add its name here.
@@ -128,5 +144,21 @@ window.WAR_IMG={
   "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
   "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100",
   "Treaty of Brest-Litovsk":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R92623,_Brest-Litowsk,_Waffenstillstandsabkommen.jpg?width=1100",
-  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100"
+  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100",
+  "Austria-Hungary declares war on Serbia":"https://commons.wikimedia.org/wiki/Special:FilePath/To_my_people,_Franz_Joseph,_1914,_Czech_translation.jpg?width=1100",
+  "First Battle of the Marne":"https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_la_Marne,_positions_au_9_septembre.png?width=1100",
+  "First Battle of the Marne#2":"https://commons.wikimedia.org/wiki/Special:FilePath/French_conmemorative_medal_first_battle_of_the_marne.jpg?width=1100",
+  "Battle of the Marne":"https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_la_Marne,_positions_au_9_septembre.png?width=1100",
+  "Battle of the Marne#2":"https://commons.wikimedia.org/wiki/Special:FilePath/French-Soldiers-War-Germans-Meaux-Battle-Marne.jpg?width=1100",
+  "Gas at Ypres":"https://commons.wikimedia.org/wiki/Special:FilePath/Sargent,_John_Singer_(RA)_-_Gassed_-_Google_Art_Project.jpg?width=1100",
+  "Normandy":"https://commons.wikimedia.org/wiki/Special:FilePath/Smoking_LCVP_off_Omaha_Beach_6_June_1944.jpg?width=1100",
+  "Normandy#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Into_the_Jaws_of_Death_23-0455M_edit.jpg?width=1100",
+  "Origins of World War I":"https://commons.wikimedia.org/wiki/Special:FilePath/Archduke_Franz_Ferdinand_in_Sarajevo,_June_1914_Q91848.jpg?width=1100",
+  "Origins of World War I#2":"https://commons.wikimedia.org/wiki/Special:FilePath/To_my_people,_Franz_Joseph,_1914,_Czech_translation.jpg?width=1100",
+  "Germany invades Belgium#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Men_of_the_Royal_Warwickshire_Regiment.jpg?width=1100",
+  "United States enters the war#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Versailles_Signing,_Hall_of_Mirrors.jpg?width=1100",
+  "Armistice#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Waffenstillstand_gr.jpg?width=1100",
+  "Stalingrad#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-B22173,_Russland,_Kampf_um_Stalingrad,_Infanterist.jpg?width=1100",
+  "Origins of World War II":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-51909-0003,_Polen,_Schlagbaum,_deutsche_Soldaten.jpg?width=1100",
+  "Origins of World War II#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_101I-121-0010-20,_Polen,_Kolonne_motorisierter_deutscher_Truppen.jpg?width=1100"
 };
