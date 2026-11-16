@@ -81,11 +81,19 @@ function build(k){
     var y=(b[1].match(/\d{4}/)||[yl])[0];
     h.push(mid("bt"+j,y,b[0],b[0],b[2],'<div class="big">'+b[3]+"</div><small>"+b[4]+'</small><h3 class="foot">'+b[1]+"</h3>",40+j*3));
   });
-  h.push(sl("c ld","leaders",yl,"Leaders",'<div class="tx"><h3 class="top">Leaders</h3><i class="rl"></i></div><div class="cards">'+d.leaders.map(function(l,j){return'<article class="idc" style="--r:'+(j%2?2:-2)+'deg"><div class="ih"><span>Service record</span><span>'+d.years+'</span></div><div class="por" role="img" aria-label="Portrait placeholder"></div><h3>'+l[0]+"</h3><small>"+l[1]+"</small><p>"+l[2]+"</p></article>"}).join("")+"</div>"));
+  h.push(sl("c ld","leaders",yl,"Leaders",'<div class="tx"><h3 class="top">Leaders</h3><i class="rl"></i><p class="hint">Scroll sideways to meet them all →</p></div><div class="cards">'+d.leaders.map(function(l,j){return'<article class="idc" style="--r:'+(j%2?2:-2)+'deg"><div class="ih"><span>Service record</span><span>'+d.years+'</span></div><div class="por" data-w="'+esc(l[3]||"")+'" role="img" aria-label="Portrait of '+esc(l[0])+'"></div><h3>'+l[0]+"</h3><small>"+l[1]+"</small><p>"+l[2]+"</p></article>"}).join("")+"</div>"));
   h.push(sl("a end","after",yl,"Aftermath",'<div class="tx"><h3 class="top">Aftermath</h3><i class="rl"></i><ul class="al">'+d.after.map(function(a){return"<li>"+a+"</li>"}).join("")+'</ul></div><div class="doc india"><div class="dl"><b>India and the war</b></div><p>'+d.india+"</p></div>"));
   return h.join("");
 }
 
+var pc={};
+function portrait(el){
+  var t=el.dataset.w;if(!t)return;
+  (pc[t]=pc[t]||fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(t.replace(/ /g,"_"))).then(function(r){return r.ok?r.json():null}).catch(function(){return null})).then(function(o){
+    var s=o&&o.thumbnail&&o.thumbnail.source;if(!s)return;
+    var im=new Image();im.onload=function(){el.style.setProperty("--im","url('"+s+"')");el.classList.add("pic")};im.src=s;
+  });
+}
 function act(el){
   hud.innerHTML="<b>"+el.dataset.y+"</b><small>"+el.dataset.l+"</small>";
   var i=slides.indexOf(el);
@@ -102,6 +110,7 @@ function render(k){
   rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
   io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
   slides.forEach(function(s){reduce?s.classList.add("in"):io.observe(s)});
+  [].forEach.call(main.querySelectorAll(".por"),portrait);
   window.scrollTo({top:0,behavior:"instant"});
   act(slides[0]);
 }
