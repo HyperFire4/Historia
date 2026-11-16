@@ -75,7 +75,7 @@ function evB(e,n){var y=split(e[0]);return mid("s"+n,y[0],e[1],e[1],e[2],'<h3 cl
 function build(k){
   var d=D[k],h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
   h.push(sl("a cover","top",y0,d.name,'<div class="tx"><div class="yr">'+d.years+"</div><h1>"+d.name+'</h1><p class="lead">'+d.lead+'</p><div class="st">'+d.stats.map(function(s){return"<div><b>"+s[0]+"</b><span>"+s[1]+"</span></div>"}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p></div>'+photo(d.name,"l",7)));
-  h.push(mid("origins",y0,"How it began","How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
+  h.push(mid("origins",y0,"Origins of "+d.name,"How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
   d.tl.forEach(function(e,j){n++;h.push([evA,evC,evB][j%3](e,n+j*2))});
   d.battles.forEach(function(b,j){
     var y=(b[1].match(/\d{4}/)||[yl])[0];
