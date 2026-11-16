@@ -82,7 +82,9 @@ india:"The British Indian Army grew to over 2.5 million volunteers, the largest 
   "United States enters the war":"https://commons.wikimedia.org/wiki/Special:FilePath/President_Woodrow_Wilson_asking_Congress_to_declare_war_on_Germany,_2_April_1917.jpg?width=1100",
   "Battle of Amiens":"https://commons.wikimedia.org/wiki/Special:FilePath/8th_August_1918_(Will_Longstaff).jpg?width=1100",
   "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
-  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100"
+  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100",
+  "Treaty of Brest-Litovsk":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R92623,_Brest-Litowsk,_Waffenstillstandsabkommen.jpg?width=1100",
+  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100"
 };
 
 /* Optional real photos: put the image file in the same folder and add its name here.
@@ -124,5 +126,7 @@ window.WAR_IMG={
   "United States enters the war":"https://commons.wikimedia.org/wiki/Special:FilePath/President_Woodrow_Wilson_asking_Congress_to_declare_war_on_Germany,_2_April_1917.jpg?width=1100",
   "Battle of Amiens":"https://commons.wikimedia.org/wiki/Special:FilePath/8th_August_1918_(Will_Longstaff).jpg?width=1100",
   "Battle of Britain":"https://commons.wikimedia.org/wiki/Special:FilePath/St_Paul's_Survives.jpg?width=1100",
-  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100"
+  "Battle of Britain#2":"https://commons.wikimedia.org/wiki/Special:FilePath/Spitfire_and_He_111_during_Battle_of_Britain_1940.jpg?width=1100",
+  "Treaty of Brest-Litovsk":"https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_183-R92623,_Brest-Litowsk,_Waffenstillstandsabkommen.jpg?width=1100",
+  "Quit India Movement":"https://commons.wikimedia.org/wiki/Special:FilePath/Gandhi_and_Nehru_1942.jpg?width=1100"
 };
