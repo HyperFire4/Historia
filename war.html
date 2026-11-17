@@ -10,8 +10,40 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="war.css">
+<link rel="stylesheet" href="war-fx.css">
 </head>
-<body data-war="ww1">
+<body class="gated" data-war="ww1">
+<div id="gate" role="dialog" aria-label="Opening the war archive">
+  <div class="gwrap">
+    <div class="glight"></div>
+    <div class="gdust" id="gdust"></div>
+    <div class="door gl"><div class="gt"><small>Restricted access</small><b>WAR</b><small>1914 &mdash; 1945</small></div></div>
+    <div class="door gr"><div class="gt"><small>Authorised personnel only</small><b>ARCHIVE</b><small>Historia &middot; Section W</small></div></div>
+    <i class="gbar t"></i><i class="gbar b"></i>
+    <div class="gwheel">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="94" fill="#1a1c1a" stroke="#0a0a0a" stroke-width="6"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#6d7068" stroke-width="12"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#2a2c29" stroke-width="2"/>
+        <path d="M100 24V176M34 62L166 138M34 138L166 62" stroke="#7d8079" stroke-width="11" stroke-linecap="round"/>
+        <path d="M100 24V176M34 62L166 138M34 138L166 62" stroke="#1c1d1b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="100" cy="100" r="26" fill="#3b3d39" stroke="#0e0e0e" stroke-width="4"/>
+        <circle class="lamp" cx="100" cy="100" r="9"/>
+      </svg>
+      <div class="gst"><span class="s1">Sealed</span><span class="s2">Access granted</span></div>
+    </div>
+  </div>
+  <button class="gskip" type="button">Skip &#9656;</button>
+</div>
+<div class="fxl fog f1" aria-hidden="true"></div>
+<div class="fxl fog f2" aria-hidden="true"></div>
+<div class="fxl rain" aria-hidden="true"></div>
+<div class="fxl beams" aria-hidden="true"><i></i><i></i></div>
+<canvas id="fx" class="fxl" aria-hidden="true"></canvas>
+<div class="fxl sky" id="sky" aria-hidden="true"></div>
+<div class="fxl flk" id="flk" aria-hidden="true"></div>
+<div class="fxl scratch" aria-hidden="true"></div>
+<div class="fxl vig" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <div id="flash" aria-hidden="true"></div>
 <div class="prog" id="prog"></div>
@@ -28,6 +60,7 @@
     <a href="index.html#timeline">Timeline</a>
     <a href="war.html" aria-current="page">War</a>
   </nav>
+  <button class="fxbtn" id="fxbtn" type="button" aria-pressed="true" title="Toggle battlefield effects" aria-label="Toggle battlefield effects">FX</button>
 </header>
 
 <main id="main"></main>
@@ -40,6 +73,7 @@
 </footer>
 
 <script defer src="war-data.js"></script>
+<script defer src="war-fx.js"></script>
 <script defer src="war.js"></script>
 </body>
 </html>
