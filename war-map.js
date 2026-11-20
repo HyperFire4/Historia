@@ -65,12 +65,12 @@ function mount(k){
   ["14","20"].forEach(function(b){
     var g=el("g",{"class":"gb"+(b==="14"?"":" off")},S.geo),list=[];
     (GEO[b==="14"?"1914":"1920"]||[]).forEach(function(f){
-      var p=el("path",{d:f.d,"class":"c ne"},g);
+      var p=el("path",{d:f.d,"class":"cn s-ne"},g);
       list.push({el:p,g:b==="14"?name2grp[f.n]:null,c:b==="20"?(name2cls[f.n]||"ne"):null});
     });
     S.sets[b]={g:g,list:list};
   });
-  S.sets["20"].list.forEach(function(o){o.el.setAttribute("class","c "+o.c)});
+  S.sets["20"].list.forEach(function(o){o.el.setAttribute("class","cn s-"+o.c)});
   /* overlay layers (screen space, so lines/labels keep a constant size while the camera zooms) */
   var L={};["area","lab","front","arrow","unit","mark"].forEach(function(n){L[n]=el("g",{"class":"L-"+n},svg)});
   S.items={area:{},front:{},arrow:{},unit:{},mark:{}};
@@ -78,25 +78,25 @@ function mount(k){
   function reg(type,id,it){it.type=type;it.on=false;S.items[type][id]=it;return it}
   var id,o,g2;
   for(id in d.areas){o=d.areas[id];
-    reg("area",id,{w:world(o.p),el:el("polygon",{"class":"ar "+o.s},L.area),
+    reg("area",id,{w:world(o.p),el:el("polygon",{"class":"ar s-"+o.s},L.area),
       upd:function(it,f){it.el.setAttribute("points",it.w.map(f).join(" "))}})}
   for(id in d.fronts){
     g2=el("g",{"class":"fr"},L.front);
     reg("front",id,{w:world(d.fronts[id]),el:g2,a:el("path",{"class":"cs",pathLength:100},g2),b:el("path",{"class":"ln",pathLength:100},g2),
       upd:function(it,f){var s="M"+it.w.map(f).join("L");it.a.setAttribute("d",s);it.b.setAttribute("d",s)}})}
   for(id in d.arrows){o=d.arrows[id];
-    g2=el("g",{"class":"aw "+o.s},L.arrow);
+    g2=el("g",{"class":"aw s-"+o.s},L.arrow);
     reg("arrow",id,{w:world(o.p),el:g2,a:el("path",{"class":"sh",pathLength:100},g2),b:el("path",{"class":"ln",pathLength:100},g2),
       h:el("polygon",{"class":"hd"},g2),t:o.t?el("text",{"class":"at"},g2):null,txt:o.t,
       upd:arrowUpd})
     if(o.t)S.items.arrow[id].t.textContent=o.t}
   for(id in d.units){o=d.units[id];
-    g2=el("g",{"class":"un "+o.s},L.unit);
+    g2=el("g",{"class":"un s-"+o.s},L.unit);
     el("rect",{x:-13,y:-8,width:26,height:16,rx:2},g2);el("path",{d:"M-13-8L13 8M-13 8L13-8"},g2);
     el("text",{y:25},g2).textContent=o.t;
     reg("unit",id,{w:px(o.p[0],o.p[1]),el:g2,upd:function(it,f){var q=f(it.w);it.el.setAttribute("transform","translate("+q+")")}})}
   for(id in d.marks){o=d.marks[id];
-    g2=el("g",{"class":"mk "+o.k},L.mark);
+    g2=el("g",{"class":"mk k-"+o.k},L.mark);
     el("circle",{"class":"pl",r:6},g2);el("circle",{"class":"dot",r:4.5},g2);
     el("text",{x:10,y:4},g2).textContent=o.t;
     reg("mark",id,{w:px(o.p[0],o.p[1]),el:g2,upd:function(it,f){var q=f(it.w);it.el.setAttribute("transform","translate("+q+")")}})}
@@ -185,7 +185,7 @@ function apply(i,instant){
   S.step=i;S.base=s.b;
   /* who is on which side */
   var sts=S.sts[i];
-  S.sets["14"].list.forEach(function(o){o.el.setAttribute("class","c "+(sts[o.g]||"ne"))});
+  S.sets["14"].list.forEach(function(o){o.el.setAttribute("class","cn s-"+(sts[o.g]||"ne"))});
   S.sets["14"].g.classList.toggle("off",s.b!=="14");
   S.sets["20"].g.classList.toggle("off",s.b!=="20");
   /* overlays */
@@ -211,7 +211,7 @@ function apply(i,instant){
 }
 function legend(s,sts){
   var h="";
-  function sw(c,t){h+='<span><i class="sw '+c+'"></i>'+t+"</span>"}
+  function sw(c,t){h+='<span><i class="sw s-'+c+'"></i>'+t+"</span>"}
   if(s.lg==="peace"){sw("al","Victorious Allies");sw("cp","Defeated Central Powers");sw("new","New states");sw("mand","Mandates");sw("ru","Russia / Soviet state")}
   else{
     sw("al","Allied Powers");sw("cp","Central Powers");sw("ne","Neutral");

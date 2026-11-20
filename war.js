@@ -3,7 +3,7 @@
 var D=window.WAR_DATA,IMG=window.WAR_IMG||{};
 var $=function(s){return document.querySelector(s)};
 var main=$("#main"),rail=$("#rail"),hud=$("#hud"),tabs=document.querySelectorAll(".tabs button");
-var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,cur="",slides=[],idx=0,busy=false,io;
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,cur="",slides=[],idx=0,busy=false,io,io2;
 var esc=function(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")};
 function rng(s){s=Math.abs(Math.floor(s))||1;return function(){s=s*16807%2147483647;return(s-1)/2147483646}}
 
@@ -76,6 +76,7 @@ function build(k){
   var d=D[k],h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
   h.push(sl("a cover","top",y0,d.name,'<div class="tx"><div class="yr">'+d.years+"</div><h1>"+d.name+'</h1><p class="lead">'+d.lead+'</p><div class="st">'+d.stats.map(function(s){return"<div><b>"+s[0]+"</b><span>"+s[1]+"</span></div>"}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p></div>'+photo(d.name,"l",7)+'<div class="clf" aria-hidden="true">Declassified<small>Archive file '+y0+'</small></div><div class="cue" aria-hidden="true"><span></span>Scroll</div>'));
   h.push(mid("origins",y0,"Origins of "+d.name,"How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
+  if(window.WARMAP&&WARMAP.has(k))h.push(WARMAP.html(k));
   d.tl.forEach(function(e,j){n++;h.push([evA,evC,evB][j%3](e,n+j*2))});
   d.battles.forEach(function(b,j){
     var y=(b[1].match(/\d{4}/)||[yl])[0];
@@ -83,6 +84,7 @@ function build(k){
   });
   h.push(sl("c ld","leaders",yl,"Leaders",'<div class="tx"><h3 class="top">Leaders</h3><i class="rl"></i><p class="hint">Drag or scroll sideways to meet them all →</p><div class="cnav"><button type="button" data-d="-1" aria-label="Previous leader">‹</button><button type="button" data-d="1" aria-label="Next leader">›</button></div></div><div class="cards">'+d.leaders.map(function(l,j){return'<article class="idc" style="--r:'+(j%2?2:-2)+'deg"><div class="ih"><span>Service record</span><span>'+d.years+'</span></div><div class="por" data-w="'+esc(l[3]||"")+'" role="img" aria-label="Portrait of '+esc(l[0])+'"></div><h3>'+l[0]+"</h3><small>"+l[1]+"</small><p>"+l[2]+"</p></article>"}).join("")+"</div>"));
   h.push(sl("a end","after",yl,"Aftermath",'<div class="tx"><h3 class="top">Aftermath</h3><i class="rl"></i><ul class="al">'+d.after.map(function(a){return"<li>"+a+"</li>"}).join("")+'</ul></div><div class="doc india"><div class="dl"><b>India and the war</b></div><p>'+d.india+"</p></div>"));
+  if(window.WARSTORY&&WARSTORY.has(k))h.push(WARSTORY.html(k));
   return h.join("");
 }
 
@@ -104,12 +106,20 @@ function render(k){
   cur=k;document.body.dataset.war=k;document.title=d.name+" — HISTORIA";
   document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":"#0e1220";
   tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
-  if(io)io.disconnect();
+  if(io)io.disconnect();if(io2)io2.disconnect();
+  if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();
   main.innerHTML=build(k);
   slides=[].slice.call(main.children);
   rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
   io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
-  slides.forEach(function(s){reduce?s.classList.add("in"):io.observe(s)});
+  /* normal slides reveal at 40% visibility; tall sections (map, story) manage themselves */
+  io2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&!en.target.classList.contains("mapwrap"))act(en.target)})},{threshold:.02});
+  slides.forEach(function(s){
+    if(s.classList.contains("sl")){reduce?s.classList.add("in"):io.observe(s)}
+    else{s.classList.add("in");io2.observe(s)}
+  });
+  if(window.WARMAP&&WARMAP.has(k))WARMAP.mount(k);
+  if(window.WARSTORY&&WARSTORY.has(k))WARSTORY.mount(k);
   [].forEach.call(main.querySelectorAll(".por"),portrait);
   window.scrollTo({top:0,behavior:"instant"});
   act(slides[0]);
@@ -157,11 +167,15 @@ main.addEventListener("click",function(e){
 addEventListener("keydown",function(e){
   if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||document.body.classList.contains("gated"))return;
   var d={ArrowDown:1,PageDown:1,ArrowUp:-1,PageUp:-1}[e.key];if(!d)return;
+  var cs=slides[idx];
+  if(cs&&cs.classList.contains("story"))return;                 /* reading: normal scrolling */
+  if(window.WARMAP&&WARMAP.key(d)){e.preventDefault();return}   /* map: step through time */
   e.preventDefault();
   var t=Math.max(0,Math.min(slides.length-1,idx+d));
   if(slides[t])slides[t].scrollIntoView({behavior:reduce?"auto":"smooth"});
 });
 
+window.WAR={act:act};
 var start=D[location.hash.slice(1)]?location.hash.slice(1):"ww1";
 document.body.dataset.war=start;
 if(window.WARGATE){WARGATE.run(function(){render(start)})}
