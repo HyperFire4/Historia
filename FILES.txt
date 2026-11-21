@@ -1,0 +1,13 @@
+HISTORIA – War section: upload ALL of these files, side by side in the repo root (flat folder).
+Missing any of the story files is the usual reason the full-story section does not show.
+
+war.html            page (links every file below)
+war.css             original styles
+war-fx.css / .js    gate animation + battlefield effects
+war-data.js         war facts (unchanged)
+war.js              page logic
+war-geo.js          simplified borders (map)
+war-map-data.js     map steps, fronts, armies (edit text here)
+war-map.js / .css   animated map (canvas, full screen, tour)
+war-story-data.js   the full-story article (edit text here)
+war-story.js / .css full-story reader

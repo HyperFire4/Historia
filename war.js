@@ -98,7 +98,7 @@ function portrait(el){
 }
 function act(el){
   hud.innerHTML="<b>"+el.dataset.y+"</b><small>"+el.dataset.l+"</small>";
-  var i=slides.indexOf(el);idx=i;slides.forEach(function(s){s.classList.toggle("cur",s===el)});
+  var i=slides.indexOf(el);idx=i;document.body.classList.toggle("instory",el.classList.contains("story"));slides.forEach(function(s){s.classList.toggle("cur",s===el)});
   [].forEach.call(rail.children,function(b,j){b.classList.toggle("on",j===i)});
 }
 function render(k){
@@ -114,10 +114,14 @@ function render(k){
   io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
   /* normal slides reveal at 40% visibility; tall sections (map, story) manage themselves */
   io2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&!en.target.classList.contains("mapwrap"))act(en.target)})},{threshold:.02});
-  slides.forEach(function(s){
-    if(s.classList.contains("sl")){reduce?s.classList.add("in"):io.observe(s)}
-    else{s.classList.add("in");io2.observe(s)}
-  });
+  function reveal(){
+    slides.forEach(function(s){
+      if(s.classList.contains("sl")){reduce?s.classList.add("in"):io.observe(s)}
+      else{s.classList.add("in");io2.observe(s)}
+    });
+  }
+  /* while the gate is closed the page is built behind it; reveal animations wait for the doors to open */
+  if(window.WARGATE&&WARGATE.opened)WARGATE.opened(reveal);else reveal();
   if(window.WARMAP&&WARMAP.has(k))WARMAP.mount(k);
   if(window.WARSTORY&&WARSTORY.has(k))WARSTORY.mount(k);
   [].forEach.call(main.querySelectorAll(".por"),portrait);
@@ -176,6 +180,7 @@ addEventListener("keydown",function(e){
 });
 
 window.WAR={act:act};
+["WARMAP","WARSTORY"].forEach(function(n){if(!window[n])console.warn("HISTORIA: "+n+" is not loaded. Check that war-"+(n==="WARMAP"?"map":"story")+".js (and its data file) are uploaded next to war.html.")});
 var start=D[location.hash.slice(1)]?location.hash.slice(1):"ww1";
 document.body.dataset.war=start;
 if(window.WARGATE){WARGATE.run(function(){render(start)})}

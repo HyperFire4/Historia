@@ -1,6 +1,6 @@
 /* ===== HISTORIA · War story (simple-wiki style reader) ===== */
 .story{position:relative;padding:clamp(70px,10vw,120px) clamp(16px,4vw,56px) 80px;color:#1b1a17;
-  background:radial-gradient(60% 40% at 15% 5%,rgba(120,90,40,.25),transparent),var(--n),var(--bb)}
+  background:radial-gradient(60% 40% at 15% 5%,rgba(255,244,214,.45),transparent),var(--bb)}
 .sthead{max-width:1180px;margin:0 auto 34px;padding-bottom:22px;border-bottom:3px double rgba(27,26,23,.45)}
 .sthead span{font:700 11px var(--f);letter-spacing:.3em;text-transform:uppercase;color:var(--rd)}
 .sthead h2{margin:8px 0 6px;font:700 clamp(28px,5vw,52px)/1.1 var(--f);letter-spacing:.06em;text-transform:uppercase}

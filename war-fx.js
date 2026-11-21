@@ -5,16 +5,22 @@ var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 function r(a,b){return a+Math.random()*(b-a)}
 
 /* ================= GATE ================= */
-var gate=$("#gate");
-window.WARGATE={run:function(done){
+var gate=$("#gate"),openQ=[],isOpen=false,gateOn=false;
+function openGate(){if(isOpen)return;isOpen=true;openQ.splice(0).forEach(function(f){f()})}
+window.WARGATE={
+  /* run fn when the doors open (immediately if there is no gate) */
+  opened:function(fn){if(isOpen||!gateOn)fn();else openQ.push(fn)},
+  run:function(done){
   var nav=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];
   /* play when arriving from a link / typed URL; skip on reload and back/forward */
   var ok=!reduce&&gate&&(!nav||nav.type==="navigate");
-  if(!ok){if(gate)gate.remove();document.body.classList.remove("gated");done();return}
+  if(!ok){if(gate)gate.remove();document.body.classList.remove("gated");isOpen=true;done();return}
+  gateOn=true;
   var dust=$("#gdust"),h="",i,s,fin=0,rd=0,t1,t2,sk=gate.querySelector(".gskip");
   for(i=0;i<28;i++){s=r(2,5);
     h+='<i style="left:'+r(36,64).toFixed(1)+'%;width:'+s.toFixed(1)+'px;height:'+s.toFixed(1)+'px;--x:'+r(-12,12).toFixed(0)+'vw;--d:'+r(1.6,3).toFixed(1)+'s;--l:'+(1.85+Math.random()*.8).toFixed(2)+'s"></i>'}
   dust.innerHTML=h;
+  var t3;
   function render(){if(!rd){rd=1;done()}}
   function end(){
     if(fin)return;fin=1;
@@ -22,11 +28,12 @@ window.WARGATE={run:function(done){
     document.removeEventListener("keydown",key);
     setTimeout(function(){gate.remove()},650);
   }
-  function skip(){clearTimeout(t1);clearTimeout(t2);render();end()}
+  function skip(){clearTimeout(t1);clearTimeout(t2);clearTimeout(t3);render();openGate();end()}
   function key(e){if(e.key==="Escape")skip()}
   document.body.classList.add("gated");
   gate.classList.add("run");
-  t1=setTimeout(render,1750);   /* page renders behind the doors as they start to part */
+  t1=setTimeout(render,250);    /* the heavy page build happens now, hidden behind the closed doors */
+  t3=setTimeout(openGate,1750); /* reveal animations start as the doors part */
   t2=setTimeout(end,3700);
   sk.addEventListener("click",skip);
   document.addEventListener("keydown",key);
@@ -70,6 +77,8 @@ function draw(p){
 function frame(t){
   raf=0;
   if(!on||document.hidden)return;
+  if(document.body.classList.contains("inmap")||document.body.classList.contains("mfs-lock")){   /* the map is the heavy part: pause the weather */
+    setTimeout(function(){if(!raf&&on&&!document.hidden){last=performance.now();raf=requestAnimationFrame(frame)}},500);return}
   var dt=Math.min(3,(t-last)/16.67||1),i,p,a,g,life,al,x0,k;
   last=t;cx.clearRect(0,0,W,H);
 
@@ -117,7 +126,7 @@ function apply(){
 
 /* distant artillery flash + ground rumble (the sound arrives a beat later) */
 function boom(){
-  if(on&&!document.hidden){
+  if(on&&!document.hidden&&!document.body.classList.contains("inmap")){
     var f=$("#flk"),m=$("#main");
     f.style.setProperty("--fx",r(8,92).toFixed(0)+"%");
     f.classList.remove("pop");void f.offsetWidth;f.classList.add("pop");
@@ -130,14 +139,14 @@ function boom(){
 var PL="M0-10L3-2L16 2V5L3 4L2 12L6 14V16H-6V14L-2 12L-3 4L-16 5V2L-3-2Z";
 function craft(){
   if(mode==="ww1"&&Math.random()<.5)
-    return{w:300,d:70,h:'<svg viewBox="0 0 300 80" fill="#fff"><ellipse cx="150" cy="38" rx="140" ry="21"/><path d="M26 38L4 12L40 29ZM26 38L4 64L40 47Z"/><rect x="128" y="56" width="40" height="9" rx="3"/></svg>'};
+    return{w:300,d:70,h:'<svg viewBox="0 0 300 80" fill="currentColor"><ellipse cx="150" cy="38" rx="140" ry="21"/><path d="M26 38L4 12L40 29ZM26 38L4 64L40 47Z"/><rect x="128" y="56" width="40" height="9" rx="3"/></svg>'};
   var big=mode==="ww2",
       pts=big?[[84,44],[56,26],[56,62],[28,8],[28,80]]:[[74,44],[44,24],[44,64]];
-  return{w:big?240:190,d:big?34:42,h:'<svg viewBox="0 -12 120 112" fill="#fff">'+pts.map(function(q){
+  return{w:big?240:190,d:big?34:42,h:'<svg viewBox="0 -12 120 112" fill="currentColor">'+pts.map(function(q){
     return'<g transform="translate('+q[0]+' '+q[1]+') rotate(90) scale(1.15)"><path d="'+PL+'"/></g>'}).join("")+"</svg>"};
 }
 function fly(){
-  if(on&&!document.hidden){
+  if(on&&!document.hidden&&!document.body.classList.contains("inmap")){
     var c=craft(),e=document.createElement("div");
     e.className="fly";e.style.cssText="--t:"+r(6,32).toFixed(0)+"%;--w:"+c.w+"px;--d:"+c.d+"s";e.innerHTML=c.h;
     e.addEventListener("animationend",function(){e.remove()});
@@ -146,9 +155,30 @@ function fly(){
   setTimeout(fly,r(20000,38000));
 }
 
+/* if frames are slow (older phone, weak GPU) switch the effects off by themselves */
+function toast(msg){
+  var t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.appendChild(t);
+  requestAnimationFrame(function(){t.classList.add("show")});
+  setTimeout(function(){t.classList.remove("show");setTimeout(function(){t.remove()},500)},6000);
+}
+var probed=false;
+function probe(){
+  if(probed||!on||reduce)return;probed=true;
+  setTimeout(function(){
+    var d=[],lastT=0,n=0;
+    function f(t){
+      if(document.hidden||document.body.classList.contains("inmap")||document.body.classList.contains("gated")){probed=false;return}
+      if(lastT)d.push(t-lastT);lastT=t;
+      if(++n<70)requestAnimationFrame(f);
+      else{d.sort(function(a,b){return a-b});
+        if(d[d.length>>1]>34&&on){on=false;apply();toast("Effects switched off to keep things smooth. Tap FX to turn them back on.")}}
+    }
+    requestAnimationFrame(f);
+  },3500);
+}
 window.WARFX={set:function(k){
   mode=k;T=[];F=[];nT=60;nF=200;seed();
-  if(!started){started=1;setTimeout(boom,6000);setTimeout(fly,9000)}
+  if(!started){started=1;setTimeout(boom,6000);setTimeout(fly,9000);probe()}
   apply();
 }};
 if(cv){
