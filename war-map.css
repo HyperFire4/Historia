@@ -30,7 +30,7 @@
 .mleg span{display:flex;align-items:center;gap:9px}
 .sw{display:inline-block;width:18px;height:12px;border:1px solid rgba(255,255,255,.35)}
 .sw.s-al{background:var(--al)}.sw.s-cp{background:var(--cp)}.sw.s-ne{background:var(--ne)}.sw.s-ex{background:var(--ex)}
-.sw.s-new{background:var(--new)}.sw.s-mand{background:var(--mand)}.sw.s-ru{background:var(--ru)}
+.sw.s-oc{background:#803834}.sw.s-new{background:var(--new)}.sw.s-mand{background:var(--mand)}.sw.s-ru{background:var(--ru)}
 .sw.s-hatch{background:repeating-linear-gradient(45deg,rgba(176,74,58,.35) 0 3px,#f2c9a6 3px 4px)}
 .sw.s-front{height:0;border:0;border-top:3px solid #f4dc90;margin:5px 0}
 .sw.s-arrow{height:0;border:0;border-top:4px solid #8fd4ec;margin:4px 0}

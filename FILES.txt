@@ -6,8 +6,9 @@ war.css             original styles
 war-fx.css / .js    gate animation + battlefield effects
 war-data.js         war facts (unchanged)
 war.js              page logic
-war-geo.js          simplified borders (map)
-war-map-data.js     map steps, fronts, armies (edit text here)
+war-geo.js          simplified borders for the WWI map
+war-geo-ww2.js      simplified world borders for the WWII map
+war-map-data.js     map steps, fronts, armies for WWI and WWII (edit text here)
 war-map.js / .css   animated map (canvas, full screen, tour)
-war-story-data.js   the full-story article (edit text here)
+war-story-data.js   the full-story articles for WWI and WWII (edit text here)
 war-story.js / .css full-story reader

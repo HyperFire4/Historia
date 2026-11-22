@@ -4,20 +4,25 @@
 "use strict";
 var GEO=window.WAR_GEO,MAPS=window.WAR_MAPS||{};
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-var BB=[-14,22,64,68];                                   /* lon/lat box covered by war-geo.js */
+var BB=[-14,22,64,68],WRAP=null,WB=1,HB=1;               /* lon/lat box covered by the borders; WRAP lets the Pacific sit east of 180° */
 function merc(l){return Math.log(Math.tan(Math.PI/4+l*Math.PI/360))*180/Math.PI}
-function px(lon,lat){return[lon*10,-merc(lat)*10]}
-var X0=BB[0]*10,X1=BB[2]*10,Y0=px(0,BB[3])[1],Y1=px(0,BB[1])[1],WB=X1-X0,HB=Y1-Y0;
+function px(lon,lat){if(WRAP!==null&&lon<WRAP)lon+=360;return[lon*10,-merc(lat)*10]}
+function setBox(bb,wrap){BB=bb||[-14,22,64,68];WRAP=(wrap===undefined?null:wrap);WB=(BB[2]-BB[0])*10;HB=px(0,BB[1])[1]-px(0,BB[3])[1]}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-var COL={al:[79,134,163],cp:[176,74,58],ne:[108,106,88],ex:[106,95,122],"new":[216,176,74],mand:[63,154,138],ru:[138,90,60]};
+var COL={al:[79,134,163],cp:[176,74,58],ne:[108,106,88],ex:[106,95,122],oc:[128,56,52],"new":[216,176,74],mand:[63,154,138],ru:[138,90,60]};
 var SIDE={al:"#3f7694",cp:"#b04a3a"},ARW={al:"#8fd4ec",cp:"#f27a60"},MK={b:"#ffcf6b",e:"#ffffff",s:"#8fd4ec"};
 var SPEEDS=[["½×",7200],["1×",3600],["1.5×",2400],["2×",1700]];
 var FONT="Montserrat,system-ui,sans-serif",SERIF="'Cormorant Garamond',Georgia,serif";
 var S=null;
 
-function has(k){return!!(GEO&&MAPS[k])}
+function basesOf(d){return d.bases||{"14":"1914","20":"1920"}}
+function has(k){
+  var d=MAPS[k],b,ok=!!(GEO&&d);
+  if(ok){b=basesOf(d);for(var q in b)if(!GEO[b[q]])ok=false}
+  return ok;
+}
 function html(k){
   var d=MAPS[k];
   return'<section class="mapwrap" id="warmap" data-y="'+esc(d.steps[0].y)+'" data-l="War map" style="--k:'+d.steps.length+'">'+
@@ -42,32 +47,35 @@ function mount(k){
   var d=MAPS[k],wrap=document.getElementById("warmap");
   if(!d||!wrap)return;
   var mob=innerWidth<=860;
+  setBox(d.bbox,d.wrap);
   var cv=wrap.querySelector(".msvg");
   S={k:k,d:d,wrap:wrap,stage:wrap.querySelector(".mstage"),cv:cv,cx:cv.getContext("2d"),card:wrap.querySelector(".mcard"),
      leg:wrap.querySelector(".mleg"),track:wrap.querySelector(".mtrack"),playBtn:wrap.querySelector(".mplay"),
      spdBtn:wrap.querySelector(".mspd"),fsBtn:wrap.querySelector(".mfsb"),
      K:d.steps.length,step:-1,cam:{x:0,y:0,z:1},tw:null,W:0,H:0,s0:1,fx:.6,fy:.5,dpr:Math.min(devicePixelRatio||1,mob?1.5:2),
-     inview:false,fs:false,pfs:false,timer:0,speed:1,raf:0,last:0,top:0,sh:1,ro:null,fns:[],base:"14",
+     inview:false,fs:false,pfs:false,timer:0,speed:1,raf:0,last:0,top:0,sh:1,ro:null,fns:[],base:"",
      sets:{},items:[],labels:[],wheelAcc:0,wheelT:0};
   var st=JSON.parse(JSON.stringify(d.init)),sts=[],key,name2grp={},name2cls={},grp;
   d.steps.forEach(function(s){for(key in s.st)st[key]=s.st[key];sts.push(JSON.parse(JSON.stringify(st)))});
   S.sts=sts;
   for(grp in d.groups)d.groups[grp].forEach(function(nm){name2grp[nm]=grp});
   for(key in d.g20)d.g20[key].forEach(function(nm){name2cls[nm]=key});
+  var bases=basesOf(d),bkeys=Object.keys(bases),def=d.gdef||"ne";
+  S.b1=bkeys[0];S.b2=bkeys[1];S.base=S.b1;
 
   /* geography: one Path2D per country (cached), plus one combined path for the borders */
-  ["14","20"].forEach(function(b){
+  bkeys.forEach(function(b){
     var all=new Path2D(),list=[];
-    (GEO[b==="14"?"1914":"1920"]||[]).forEach(function(f){
+    (GEO[bases[b]]||[]).forEach(function(f){
       var p=new Path2D(f.d);all.addPath(p);
-      var g=b==="14"?name2grp[f.n]:null,c=b==="20"?(name2cls[f.n]||"ne"):"ne";
+      var g=b===S.b1?name2grp[f.n]:null,c=b===S.b2?(name2cls[f.n]||def):"ne";
       list.push({p:p,g:g,rgb:COL[c].slice(),t:COL[c]});
     });
-    S.sets[b]={all:all,list:list,a:b==="14"?1:0,ta:b==="14"?1:0};
+    S.sets[b]={all:all,list:list,a:b===S.b1?1:0,ta:b===S.b1?1:0};
   });
   /* hatch patterns for occupied land */
   S.pat={};
-  [["cp","176,74,58","#f2c9a6"],["al","79,134,163","#bfe6f5"]].forEach(function(h){
+  [["cp","176,74,58","#f2c9a6"],["al","79,134,163","#bfe6f5"],["ru","138,90,60","#f0c9a0"]].forEach(function(h){
     var c=document.createElement("canvas");c.width=c.height=8;var x=c.getContext("2d");
     x.fillStyle="rgba("+h[1]+",.34)";x.fillRect(0,0,8,8);
     x.strokeStyle=h[2];x.globalAlpha=.75;x.lineWidth=1.8;x.beginPath();x.moveTo(-1,9);x.lineTo(9,-1);x.moveTo(-1,1);x.lineTo(1,-1);x.moveTo(7,9);x.lineTo(9,7);x.stroke();
@@ -161,9 +169,9 @@ function apply(i,instant){
   var d=S.d,s=d.steps[i],id,key,sts=S.sts[i];
   S.step=i;S.base=s.b;
   /* who is on which side */
-  S.sets["14"].list.forEach(function(o){o.t=COL[sts[o.g]||"ne"];if(instant)o.rgb=o.t.slice()});
-  S.sets["14"].ta=s.b==="14"?1:0;S.sets["20"].ta=s.b==="20"?1:0;
-  if(instant){S.sets["14"].a=S.sets["14"].ta;S.sets["20"].a=S.sets["20"].ta}
+  S.sets[S.b1].list.forEach(function(o){o.t=COL[sts[o.g]||"ne"];if(instant)o.rgb=o.t.slice()});
+  S.sets[S.b1].ta=s.b===S.b1?1:0;S.sets[S.b2].ta=s.b===S.b2?1:0;
+  if(instant){S.sets[S.b1].a=S.sets[S.b1].ta;S.sets[S.b2].a=S.sets[S.b2].ta}
   /* overlays */
   var want={fr:"front",ar:"arrow",ao:"area",un:"unit",mk:"mark"};
   for(key in want){
@@ -191,14 +199,16 @@ function setItem(it,want,instant){
   }else if(it.ta!==0){it.ta=0;if(instant){it.a=0;it.p=0;it.tp=0}}
 }
 function legend(s,sts){
-  var h="";
+  var h="",L=S.d.lab||{};
   function sw(c,t){h+='<span><i class="sw s-'+c+'"></i>'+t+"</span>"}
-  if(s.lg==="peace"){sw("al","Victorious Allies");sw("cp","Defeated Central Powers");sw("new","New states");sw("mand","Mandates");sw("ru","Russia / Soviet state")}
-  else{
-    sw("al","Allied Powers");sw("cp","Central Powers");sw("ne","Neutral");
-    var q,ex=false;for(q in sts)if(sts[q]==="ex")ex=true;
-    if(ex)sw("ex","Defeated / left the war");
-    if(s.ao.length)sw("hatch","Occupied land");
+  if(s.lg==="peace"){
+    (S.d.peaceLeg||[["al","Victorious Allies"],["cp","Defeated Central Powers"],["new","New states"],["mand","Mandates"],["ru","Russia / Soviet state"]]).forEach(function(e){sw(e[0],e[1])});
+  }else{
+    sw("al",L.al||"Allied Powers");sw("cp",L.cp||"Central Powers");sw("ne",L.ne||"Neutral");
+    var q,ex=false,oc=false;for(q in sts){if(sts[q]==="ex")ex=true;if(sts[q]==="oc")oc=true}
+    if(oc)sw("oc",L.oc||"Occupied");
+    if(ex)sw("ex",L.ex||"Defeated / left the war");
+    if(s.ao.length)sw("hatch",L.hatch||"Occupied land");
     if(s.fr.length)sw("front","Front line");
     if(s.ar.length)sw("arrow","Offensive");
   }
@@ -283,8 +293,8 @@ function draw(now){
   cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,S.W,S.H);
   /* graticule */
   cx.lineWidth=1;cx.strokeStyle="rgba(255,255,255,.06)";cx.beginPath();
-  for(n=-10;n<=60;n+=10){var gx=n*10*s+tx;cx.moveTo(gx,0);cx.lineTo(gx,S.H)}
-  for(n=30;n<=70;n+=10){var gy=px(0,n)[1]*s+ty;cx.moveTo(0,gy);cx.lineTo(S.W,gy)}
+  for(n=Math.ceil(BB[0]/10)*10;n<=BB[2];n+=10){var gx=n*10*s+tx;cx.moveTo(gx,0);cx.lineTo(gx,S.H)}
+  for(n=Math.ceil(BB[1]/10)*10;n<=BB[3];n+=10){var gy=px(0,n)[1]*s+ty;cx.moveTo(0,gy);cx.lineTo(S.W,gy)}
   cx.stroke();
   /* geography */
   cx.setTransform(dpr*s,0,0,dpr*s,dpr*tx,dpr*ty);

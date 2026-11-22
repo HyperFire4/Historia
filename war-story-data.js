@@ -1,5 +1,5 @@
 /* HISTORIA – War articles in simple English. Edit the text here; war-story.js only draws it.
-   Paragraphs may use <b> and <i>. Add more wars by adding ww2:{...} in the same shape. */
+   Paragraphs may use <b> and <i>. Each war has its own block (ww1, ww2). */
 window.WAR_STORY={
 ww1:{
  "title": "World War I",
@@ -274,6 +274,265 @@ ww1:{
   [
    "Ultimatum",
    "A final demand, with a threat of action if it is refused."
+  ]
+ ],
+ "note": "Numbers are estimates and vary by source. Written in simple English for quick reading."
+},
+ww2:{
+ "title": "World War II",
+ "sub": "The whole story in plain English",
+ "years": "1939–45",
+ "info": [
+  [
+   "Dates",
+   "1 September 1939 – 2 September 1945"
+  ],
+  [
+   "Where",
+   "Europe, North Africa, the Middle East, Asia, the Pacific and the Atlantic"
+  ],
+  [
+   "Result",
+   "Allied victory; Germany, Italy and Japan defeated; the United Nations created"
+  ],
+  [
+   "Allied Powers",
+   "Britain and its empire (including India), the Soviet Union, the United States, China, France and many others"
+  ],
+  [
+   "Axis Powers",
+   "Germany, Italy, Japan, with Hungary, Romania, Bulgaria and Finland for part of the war"
+  ],
+  [
+   "Total deaths",
+   "about 70–85 million, most of them civilians"
+  ],
+  [
+   "The Holocaust",
+   "about 6 million Jews murdered"
+  ],
+  [
+   "Firsts",
+   "the first and only use of nuclear weapons in war"
+  ]
+ ],
+ "sections": [
+  {
+   "id": "intro",
+   "h": "",
+   "p": [
+    "<b>World War II</b> (1939–1945) was the deadliest war in history. It was fought across Europe, Africa, Asia, the Pacific and the Atlantic, and it involved more than 30 countries.",
+    "On one side were the <b>Allies</b>: Britain and its empire, the Soviet Union, the United States, China, France and many others. On the other were the <b>Axis powers</b>: Germany, Italy and Japan. Between 70 and 85 million people died, and most of them were civilians. Nazi Germany also murdered about six million Jews in the <b>Holocaust</b>.",
+    "The war ended in 1945 with the defeat of Germany in May and of Japan in August and September. It ended the old European empires' world leadership, created two superpowers, the United States and the Soviet Union, and led to the founding of the United Nations."
+   ]
+  },
+  {
+   "id": "why",
+   "h": "Why did the war start?",
+   "p": [
+    "World War II had roots in the end of World War I and in the troubled years between the wars."
+   ],
+   "sub": [
+    {
+     "h": "An unhappy peace and a great depression",
+     "p": [
+      "Many Germans hated the Treaty of Versailles (1919), which made Germany pay reparations and give up land. Then the <b>Great Depression</b> that began in 1929 put millions out of work. Angry and desperate people in several countries turned to leaders who promised strength and a return to glory."
+     ]
+    },
+    {
+     "h": "Dictators and expansion",
+     "p": [
+      "In Italy, Benito Mussolini and his Fascists had held power since 1922. In Germany, Adolf Hitler and the Nazi Party took power in January 1933. Hitler wanted to tear up the Versailles treaty, win ‘living space’ in the east and destroy those he called enemies, above all Jews. In Japan, military leaders wanted an empire in Asia. Japan invaded Manchuria in 1931 and began a full-scale war with China in 1937. In December 1937, Japanese troops killed tens of thousands of civilians in the Chinese city of Nanjing."
+     ]
+    },
+    {
+     "h": "Appeasement",
+     "p": [
+      "Britain and France, still scarred by World War I, tried to avoid another war by giving in to demands. This policy is called <b>appeasement</b>. Italy took Ethiopia in 1935. Germany marched into the Rhineland in 1936 and joined with Austria in March 1938. At the Munich Conference in September 1938, Britain and France agreed that Germany could take the Sudetenland, a part of Czechoslovakia, without asking the Czechs. In March 1939 Hitler broke his promise and took the rest of the Czech lands."
+     ]
+    },
+    {
+     "h": "The Nazi–Soviet Pact",
+     "p": [
+      "After that, Britain and France promised to defend Poland. On 23 August 1939 Germany and the Soviet Union shocked the world by signing a pact. They promised not to attack each other, and in secret they agreed to divide Poland and eastern Europe between them. Hitler could now attack Poland without fear of a war on two fronts."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "poland",
+   "h": "1939–40: Poland and the Phoney War",
+   "p": [
+    "On <b>1 September 1939</b> Germany invaded Poland. German tanks and aircraft moved so quickly that the style of fighting was called <b>Blitzkrieg</b>, German for ‘lightning war’. Britain and France declared war on 3 September, but they could do little to help. On 17 September the Soviet Union invaded Poland from the east. Warsaw surrendered on 27 September, and Poland was divided between Germany and the USSR.",
+    "In the west, little happened for months, a period called the <b>Phoney War</b>. The Soviet Union attacked Finland in November 1939. The Finns fought hard in the ‘Winter War’ but had to give up some land in March 1940."
+   ]
+  },
+  {
+   "id": "west",
+   "h": "1940: The fall of France",
+   "p": [
+    "In April 1940 Germany invaded Denmark and Norway. On <b>10 May</b> it attacked the Netherlands, Belgium and France. German tanks drove through the Ardennes forest, which the Allies had thought too hard to cross, and raced to the English Channel. Hundreds of thousands of British and French soldiers were trapped. From 26 May to 4 June, more than 330,000 of them were rescued from the beach at <b>Dunkirk</b> by navy ships and hundreds of small boats.",
+    "France asked for an armistice on 22 June. Germany occupied the north and the Atlantic coast. A new French government at Vichy, led by Marshal Pétain, ruled the south and worked with Germany. General Charles de Gaulle refused to give up and led the ‘Free French’ from London. Italy had joined Germany on 10 June."
+   ]
+  },
+  {
+   "id": "britain",
+   "h": "1940–41: Britain stands alone",
+   "p": [
+    "Winston Churchill had become British Prime Minister on 10 May 1940, and he refused to make peace. Hitler planned an invasion, but first the Luftwaffe, the German air force, had to win control of the sky. From July to October the Royal Air Force defeated it in the <b>Battle of Britain</b>, helped by radar. The invasion plan was cancelled. Germany then bombed British cities at night in the <b>Blitz</b> until May 1941, but Britain did not give in.",
+    "The war spread around the Mediterranean. Italy attacked British-ruled Egypt in September 1940 and invaded Greece in October, but both attacks failed. In February 1941 German general Erwin Rommel arrived in Libya with the Afrika Korps and pushed the British back. In April Germany invaded Yugoslavia and Greece, and in May its paratroopers captured the island of Crete. Meanwhile the United States, still neutral, began sending supplies to Britain under a programme called <b>Lend-Lease</b>."
+   ]
+  },
+  {
+   "id": "barbarossa",
+   "h": "1941: Germany attacks the Soviet Union",
+   "p": [
+    "On <b>22 June 1941</b> Hitler broke the pact and invaded the Soviet Union, in what was called Operation Barbarossa. More than three million German and allied soldiers attacked along a front of thousands of kilometres. The Red Army was taken by surprise and lost millions of men. By autumn the Germans had surrounded Leningrad, where a siege of about 900 days began, and reached the edge of Moscow.",
+    "But the Germans were not ready for the Russian mud and the winter cold, and their supply lines were stretched. On 5 December the Red Army counter-attacked outside Moscow and pushed the Germans back. The war in the east became the largest and bloodiest part of World War II. The Soviet Union suffered the greatest losses of any country, around 27 million dead."
+   ]
+  },
+  {
+   "id": "holocaust",
+   "h": "The Holocaust",
+   "p": [
+    "The Nazis believed in a racist ideology, and they treated Jews as enemies. After Hitler came to power they took away Jews' rights and attacked them, and after the war began they forced Jews into ghettos. When Germany invaded the Soviet Union, special killing squads shot huge numbers of Jewish men, women and children. In 1942 the Nazis put into action a plan to murder all the Jews of Europe, which they called the ‘Final Solution’. They built death camps such as Auschwitz-Birkenau, Treblinka and Sobibor.",
+    "About six million Jews were murdered. The Nazis also killed millions of others, including Roma people, disabled people, Polish and Soviet civilians and prisoners of war. This genocide is called the <b>Holocaust</b>. Many ordinary people, in Germany and in occupied countries, resisted or hid Jews at great risk to themselves."
+   ]
+  },
+  {
+   "id": "pearl",
+   "h": "1941–42: Japan strikes",
+   "p": [
+    "Japan was fighting a long war in China and wanted the oil and raw materials of south-east Asia. When the United States, Britain and the Netherlands stopped selling Japan oil in 1941, Japan decided on war. On <b>7 December 1941</b> Japanese aircraft attacked the US Pacific Fleet at <b>Pearl Harbor</b> in Hawaii, killing about 2,400 Americans. On the same day, Japan attacked British, Dutch and American territory across Asia. The United States declared war on Japan, and Germany and Italy declared war on the United States on 11 December. The conflict was now a true world war.",
+    "In just a few months Japan took Hong Kong, Malaya, the Philippines, the Dutch East Indies and Burma. In February 1942 more than 80,000 British, Indian and Australian soldiers surrendered at <b>Singapore</b>, the worst defeat in British military history."
+   ]
+  },
+  {
+   "id": "1942",
+   "h": "1942–43: The tide turns",
+   "p": [
+    "In 1942 the Allies stopped the Axis advance on three fronts. In the Pacific, American aircraft sank four Japanese aircraft carriers at the <b>Battle of Midway</b> in June, helped by codebreakers who had read Japan's secret messages. In August US Marines landed on Guadalcanal and began months of tough fighting. In North Africa the British Eighth Army beat Rommel at <b>El Alamein</b> in the autumn, and American and British forces landed in Morocco and Algeria in Operation Torch on 8 November.",
+    "The biggest turning point was <b>Stalingrad</b>, a city on the Volga river. After months of street fighting, the Red Army trapped the German Sixth Army in November 1942. It surrendered on 2 February 1943. In May 1943 the Axis forces in Tunisia surrendered. In July the Red Army won the <b>Battle of Kursk</b>, the largest tank battle in history, and began a long advance west. That same month the Allies invaded Sicily, and Mussolini was removed from power. Italy surrendered in September, but German troops occupied much of the country, and the fight for Italy went on until 1945.",
+    "Throughout the war the <b>Battle of the Atlantic</b> was fought. German U-boats tried to cut Britain's supply lines, while the Allies used convoys, aircraft and radar to protect ships. By mid-1943 the Allies were winning it."
+   ]
+  },
+  {
+   "id": "1944",
+   "h": "1944: The Allies close in",
+   "p": [
+    "On <b>6 June 1944</b>, D-Day, about 156,000 Allied soldiers landed on the beaches of Normandy in France, the largest seaborne invasion in history. After weeks of hard fighting the Allies broke out, and Paris was freed on 25 August. In the east, the Red Army's Operation Bagration began on 22 June and destroyed the German Army Group Centre in Belarus. Romania and Bulgaria changed sides, and Finland made peace. In December Germany launched a last big attack in the Ardennes, the <b>Battle of the Bulge</b>, but it failed.",
+    "In the Pacific, American forces captured one island after another in a strategy called ‘island hopping’, and the Battles of the Philippine Sea and Leyte Gulf destroyed most of Japan's navy. In Burma, British and Indian troops stopped a Japanese invasion of India at Imphal and Kohima. From bases in the Mariana Islands, American bombers could now reach Japan itself."
+   ]
+  },
+  {
+   "id": "1945",
+   "h": "1945: Victory",
+   "p": [
+    "In January 1945 Soviet forces pushed across Poland to the Oder river. The Western Allies crossed the Rhine in March. In February the leaders of Britain, the United States and the Soviet Union (Churchill, Roosevelt and Stalin) met at <b>Yalta</b> to plan the peace. Roosevelt died on 12 April, and Harry Truman became President. Soviet troops stormed Berlin in April, and American and Soviet troops met at the Elbe river on 25 April. Hitler killed himself on 30 April. Germany surrendered, and <b>VE Day</b> (Victory in Europe) was celebrated on 8 May.",
+    "The Pacific war went on. The Americans captured Iwo Jima in March and fought a terrible battle on Okinawa from April to June, which showed how hard an invasion of Japan would be. American bombers burned Japanese cities, and one raid on Tokyo in March killed about 100,000 people. On <b>6 August</b> the United States dropped an atomic bomb on Hiroshima, and on <b>9 August</b> a second on Nagasaki. Tens of thousands of people died at once, and many more died later. On 8 August the Soviet Union declared war on Japan and invaded Manchuria. Japan announced its surrender on 15 August (<b>VJ Day</b>), and signed the surrender on 2 September on the American battleship USS Missouri."
+   ]
+  },
+  {
+   "id": "india",
+   "h": "India and the war",
+   "p": [
+    "India was part of the British Empire, and Britain declared war for India without asking Indian leaders. Even so, about <b>2.5 million Indians volunteered</b> for the army, the largest volunteer army in history. They fought in North Africa, Italy, and above all in Burma, where Indian soldiers made up most of the British Fourteenth Army. About 87,000 Indian soldiers died. Many won the Victoria Cross, Britain's highest award for bravery.",
+    "Indian leaders were angry. In August 1942 the Congress Party launched the <b>Quit India Movement</b>, and its leaders were arrested. Subhas Chandra Bose, a nationalist who left India, built the Indian National Army from prisoners of war with Japanese help, about 40,000 men. In 1943 a terrible famine hit Bengal, and an estimated two to three million people died, made worse by wartime policies and shortages. The war left Britain weak and the independence movement strong, and India became independent in August 1947."
+   ]
+  },
+  {
+   "id": "home",
+   "h": "Civilians and the home front",
+   "p": [
+    "More civilians than soldiers died in World War II. Cities were bombed: London, Coventry, Warsaw, Rotterdam, Hamburg, Dresden, Tokyo and many more. Millions of civilians starved, were killed in massacres or were forced to work in camps. Occupied countries suffered terribly, and resistance groups, such as the French Resistance, Polish Home Army and Yugoslav Partisans, fought back in secret.",
+    "At home, governments rationed food, and factories made weapons around the clock. Millions of women took jobs in factories, farms and offices. In the United States, about 120,000 people of Japanese descent, most of them American citizens, were forced into camps. Much of the damage to the world's cities, farms and factories took years to repair."
+   ]
+  },
+  {
+   "id": "tech",
+   "h": "New weapons and ideas",
+   "p": [
+    "Science and technology changed the war. <b>Radar</b> let the British spot enemy aircraft from far away. Codebreakers at Bletchley Park in England broke German Enigma messages. Aircraft carriers replaced battleships as the main ships of navies. Large tanks, long-range bombers, rockets such as the German V-2 and the first jet aircraft all appeared. Medicine improved, and the drug penicillin was produced in large amounts.",
+    "The most powerful new weapon was the <b>atomic bomb</b>. It was built in the United States in the Manhattan Project, tested in July 1945 and used twice in August. Since then, nuclear weapons have changed world politics, because a war between countries that have them could destroy both."
+   ]
+  },
+  {
+   "id": "after",
+   "h": "After the war",
+   "p": [
+    "Much of Europe and Asia lay in ruins. Millions of people were refugees. The Allies set up war-crimes trials: at <b>Nuremberg</b> (1945–46) in Germany and in Tokyo (1946–48). Germany and Austria were divided into zones run by the four victors, and Japan was occupied by the United States until 1952. The <b>United Nations</b> was created in 1945, hoping to keep peace.",
+    "The wartime friendship between the Soviet Union and its Western allies soon fell apart. The Soviet Union kept control of the countries of Eastern Europe, and in 1946 Churchill said an ‘iron curtain’ had come down across Europe. The result was the <b>Cold War</b> between the United States and the Soviet Union. Germany was split into West and East in 1949. Weakened by the war, Britain, France and the Netherlands lost their colonies one by one, and India, Pakistan, Indonesia and many others became independent."
+   ]
+  },
+  {
+   "id": "legacy",
+   "h": "Why it still matters",
+   "p": [
+    "World War II shaped the world we live in. It created the United Nations, the European Union's roots, the Cold War and the age of decolonisation. It taught the world about the horror of genocide, and led to the 1948 Universal Declaration of Human Rights. It also left a deep wish, in many countries, to ‘never again’ allow such a war.",
+    "Today, memorials and museums keep alive the memory of the people who fought and the millions who died. Many places still hold ceremonies on days such as VE Day, VJ Day and Holocaust Remembrance Day."
+   ]
+  }
+ ],
+ "terms": [
+  [
+   "Allies",
+   "The group led by Britain, the Soviet Union and the United States, with China, France and many others."
+  ],
+  [
+   "Axis",
+   "Germany, Italy and Japan, and the countries allied with them."
+  ],
+  [
+   "Appeasement",
+   "Giving in to demands to avoid war."
+  ],
+  [
+   "Blitzkrieg",
+   "‘Lightning war’: fast attacks by tanks and aircraft."
+  ],
+  [
+   "Blitz",
+   "The German bombing of British cities in 1940–41."
+  ],
+  [
+   "Cold War",
+   "The tense rivalry between the US and the Soviet Union after 1945, without direct war between them."
+  ],
+  [
+   "Convoy",
+   "A group of ships that sail together with warship protection."
+  ],
+  [
+   "D-Day",
+   "6 June 1944, the Allied landing in Normandy."
+  ],
+  [
+   "Genocide",
+   "The deliberate killing of a whole people."
+  ],
+  [
+   "Holocaust",
+   "The murder of about six million Jews by Nazi Germany and its helpers."
+  ],
+  [
+   "Iron Curtain",
+   "The divide between Soviet-controlled Eastern Europe and the West."
+  ],
+  [
+   "Lend-Lease",
+   "The US programme that supplied weapons and goods to the Allies."
+  ],
+  [
+   "Occupation",
+   "Control of a country by foreign armed forces."
+  ],
+  [
+   "Resistance",
+   "Secret fighters against an occupying power."
+  ],
+  [
+   "VE Day / VJ Day",
+   "Victory in Europe (8 May 1945) and Victory over Japan (15 August 1945)."
   ]
  ],
  "note": "Numbers are estimates and vary by source. Written in simple English for quick reading."
