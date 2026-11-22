@@ -29,11 +29,11 @@ Object.assign(EXTRA, {
 /* ---------- Era hub: five cards; the people and civilizations appear only after pressing Explore ---------- */
 let eraOpen = null;
 function renderEras() {
-  $('eraGrid').innerHTML = PERIODS.map((p, i) => {
-    const nc = civs.filter(c => ERA_OF[c.n] === i).length, nf = figures.filter(c => ERA_OF[c.n] === i).length;
-    return `<article class="card era-card glass rv" style="--d:${i * 90}ms"><div class="thumb">${img(p.f, tx(p.n), p.w)}</div>
+  $('eraGrid').innerHTML = ERA_ORDER.map((i, pos) => {
+    const p = PERIODS[i], nc = civs.filter(c => ERA_OF[c.n] === i).length, nf = figures.filter(c => ERA_OF[c.n] === i).length;
+    return `<article class="card era-card glass rv" style="--d:${pos * 90}ms"><div class="thumb">${img(p.f, tx(p.n), p.w)}</div>
       <div class="card-body"><span class="meta">${tx(p.r)}</span><h3>${tx(p.n)}</h3><p>${tx(p.b)}</p>
-      <span class="ec-count">${nc} ${tx('civilizations')} · ${nf} ${tx('figures')}</span>
+      <span class="ec-count">${nc} ${tx('civilizations')}${nf ? ` · ${nf} ${tx('figures')}` : ''}</span>
       <button class="btn" data-era="${i}">${tx('Explore')}</button></div></article>`; }).join('');
   loadPhotos($('eraGrid')); $('eraGrid').querySelectorAll('.rv').forEach(el => io.observe(el));
 }
@@ -43,6 +43,7 @@ function renderEraPage(i) {
   loadPhotos($('eraHead'));
   [['civGrid', civs, 'civ'], ['figGrid', figures, 'fig']].forEach(([id, list, type]) => {
     $(id).innerHTML = list.map((o, k) => ERA_OF[o.n] === i ? card(locI(o, type), k, type) : '').join('');
+    $(id).parentElement.style.display = $(id).innerHTML.trim() ? '' : 'none';   // hide an empty section (e.g. no figures in the Prehistoric Era)
     loadPhotos($(id)); $(id).querySelectorAll('.rv').forEach(el => io.observe(el));
   });
 }
@@ -61,7 +62,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.cla
 
 /* ---------- The gate: doors swing shut and land with a thud, the page changes behind them, then light pours through as they open ---------- */
 let gateBusy = false;
-const GATE_COL = ['#d4af37', '#7fb5ff', '#6fcf97', '#e88a6a', '#c792ea'];   // each era's gate glows in its own colour
+const GATE_COL = ['#d4af37', '#7fb5ff', '#6fcf97', '#e88a6a', '#c792ea', '#c9a27a'];   // each era's gate glows in its own colour
 function gateDecor(g) {   // light rays and falling dust, added once
   if (g.dataset.d) return; g.dataset.d = 1;
   const rays = document.createElement('div'); rays.className = 'gate-rays'; g.insertBefore(rays, g.firstChild);

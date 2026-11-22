@@ -13,8 +13,11 @@ const PERIODS = [
  {n:'The Classical Age', r:'500 BCE – 500 CE', b:'Empires and thinkers of Greece, Rome, Persia, India and China shape the ancient world.', f:'era1', w:'Parthenon'},
  {n:'The Medieval World', r:'500 – 1450 CE', b:'Caliphates, Mongol horsemen, Viking ships and rich trading empires link continents.', f:'era2', w:'Hagia_Sophia'},
  {n:'The Early Modern Age', r:'1450 – 1800 CE', b:'Gunpowder empires, great voyages and the Renaissance open a new age of exploration.', f:'era3', w:'Taj_Mahal'},
- {n:'The Modern World', r:'1800 CE – today', b:'Revolutions, independence movements and science reshape the modern world.', f:'era4', w:'Statue_of_Unity'}
+ {n:'The Modern World', r:'1800 CE – today', b:'Revolutions, independence movements and science reshape the modern world.', f:'era4', w:'Statue_of_Unity'},
+ {n:'The Prehistoric Era', r:'c. 3 million years ago – c. 1000 BCE', b:'Stone Age, Bronze Age and Iron Age: tools, fire, cave art, farming and the first metals before written history. Dates vary by region.', f:'era5', w:'Stonehenge'}
 ];
+KEY.era5 = ['hand', 28];
+const ERA_ORDER = [5, 0, 1, 2, 3, 4];   // chronological order on the page; PERIODS keeps its original numbers
 const ERA_OF = {};
 [['Mesopotamia','Ancient Egypt','Indus Valley Civilization','Minoan Civilization','Kingdom of Kush','Hammurabi','Hatshepsut','Ramesses II','Cyrus the Great'],
  ['Ancient Greece','Roman Empire','Persian Empire','Ancient China','Maurya Empire','Gupta Empire','Confucius','Alexander the Great','Julius Caesar','Cleopatra VII','Ashoka the Great','Qin Shi Huang','Hannibal','Augustus','Aryabhata'],
@@ -129,8 +132,10 @@ Object.assign(TR.gu.f, {
  'Marie Curie':['મેરી ક્યુરી','ભૌતિકશાસ્ત્રી અને રસાયણશાસ્ત્રી','ઇ.સ. 1867 – 1934','બે જુદા વિજ્ઞાનોમાં નોબેલ પારિતોષિક જીતનાર પ્રથમ વ્યક્તિ.','તે આજે પણ બે જુદાં વૈજ્ઞાનિક ક્ષેત્રોમાં નોબેલ પારિતોષિક જીતનાર એકમાત્ર વ્યક્તિ છે.']
 });
 Object.assign(TR.gu.ui, {
+ 'The Prehistoric Era':'પ્રાગૈતિહાસિક યુગ','c. 3 million years ago – c. 1000 BCE':'આશરે 30 લાખ વર્ષ પહેલાં – ઇ.સ.પૂ. 1000',
+ 'Stone Age, Bronze Age and Iron Age: tools, fire, cave art, farming and the first metals before written history. Dates vary by region.':'પાષાણ યુગ, કાંસ્ય યુગ અને લોહ યુગ: લેખિત ઇતિહાસ પહેલાંનાં ઓજારો, અગ્નિ, ગુફાચિત્રો, ખેતી અને પ્રથમ ધાતુઓ. તારીખો પ્રદેશ પ્રમાણે જુદી હોય છે.',
  'Eras':'યુગો','Explore History by Era':'યુગો પ્રમાણે ઇતિહાસ શોધો',
- 'Five great ages of history. Choose an era to open its gate and meet its civilizations and people.':'ઇતિહાસના પાંચ મહાન યુગો. કોઈ યુગ પસંદ કરી તેનો દરવાજો ખોલો અને તેની સંસ્કૃતિઓ તથા વ્યક્તિઓને મળો.',
+ 'Six great ages of history. Choose an era to open its gate and meet its civilizations and people.':'ઇતિહાસના છ મહાન યુગો. કોઈ યુગ પસંદ કરી તેનો દરવાજો ખોલો અને તેની સંસ્કૃતિઓ તથા વ્યક્તિઓને મળો.',
  'All eras':'બધા યુગો','Entering':'પ્રવેશ','civilizations':'સંસ્કૃતિઓ','figures':'વ્યક્તિઓ',
  'The Ancient World':'પ્રાચીન વિશ્વ','The Classical Age':'શાસ્ત્રીય યુગ','The Medieval World':'મધ્યયુગીન વિશ્વ','The Early Modern Age':'પ્રારંભિક આધુનિક યુગ','The Modern World':'આધુનિક વિશ્વ',
  'c. 3500 – 500 BCE':'આશરે ઇ.સ.પૂ. 3500 – 500','500 BCE – 500 CE':'ઇ.સ.પૂ. 500 – ઇ.સ. 500','500 – 1450 CE':'ઇ.સ. 500 – 1450','1450 – 1800 CE':'ઇ.સ. 1450 – 1800','1800 CE – today':'ઇ.સ. 1800 – આજ સુધી',

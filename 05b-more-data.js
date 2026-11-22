@@ -175,6 +175,90 @@ addF(4, 'Nelson Mandela', 'Anti-apartheid leader and president', '1918 – 2013 
  'Released in 1990, he shared the 1993 Nobel Peace Prize with F. W. de Klerk and in 1994 became South Africa’s first president elected in fully democratic elections.',
  'His clan name, Madiba, is still used affectionately in South Africa.', -26.2, 28.04, 'Johannesburg, South Africa', 'Born', 'Mvezo, Eastern Cape, 1918', 'Fighting apartheid, 27 years in prison, the presidency', 'A global symbol of reconciliation and justice');
 
+/* ---- Update 9: Prehistoric Era (era 5), more modern civilizations. Photos load from the Wikipedia article in the 'photo' field. ---- */
+Object.assign(EMB, {pal:['hand',25], nean:['fossil',35], neo:['wheat',60], gobekli:['temple',35], mehr:['indus',30], bronzeage:['gear',28], ironage:['fort',210],
+  sasan:['arch',275], delhisul:['ashoka',150], qing:['china',215], britemp:['ship',350], usa:['torch',215], ussr:['star',355], repindia:['ashoka',25], prc:['china',350], euro:['star',220]});
+addC(5, 'Old Stone Age (Paleolithic)', 'c. 3 million – 11,700 years ago', 'pal', 'Paleolithic', 'Hunter-gatherers who made the first tools, tamed fire and painted caves.',
+ 'The Paleolithic is the longest chapter of human history. People lived in small mobile groups, hunting animals and gathering plants, and made tools by chipping stone. The earliest widely accepted stone tools, found in East Africa, are about 2.6 million years old.',
+ 'Over time people learned to control fire, build shelters, sew clothes with bone needles and make art. The age ended as the last Ice Age warmed, about 11,700 years ago.',
+ 'The word Paleolithic comes from Greek words meaning “old stone”.', -2.99, 35.35, 'Olduvai Gorge, Tanzania',
+ 'Olduvai Gorge, Blombos Cave, Lascaux', 'Stone tools, fire, cave art', 'The tools, fire and art of this age shaped everything that followed');
+addC(5, 'Neanderthals', 'c. 400,000 – 40,000 years ago', 'nean', 'Neanderthal', 'A close human relative that lived in Ice Age Europe and western Asia.',
+ 'Neanderthals lived in Europe and western Asia and were adapted to cold climates. They made stone tools, used fire, hunted large animals and, in some places, buried their dead.',
+ 'They disappeared about 40,000 years ago, around the time modern humans spread into Europe. Many people today outside Africa carry a small share of Neanderthal DNA.',
+ 'The first Neanderthal fossil to be named was found in Germany’s Neander Valley in 1856; “Neanderthal” means “Neander valley”.', 51.23, 6.95, 'Neander Valley, near Düsseldorf, Germany',
+ 'Neander Valley, Shanidar Cave, La Chapelle-aux-Saints', 'Stone tools, fire, burials', 'Their DNA lives on in many people today');
+addC(5, 'New Stone Age (Neolithic)', 'c. 10,000 – 3000 BCE (varies)', 'neo', 'Neolithic', 'The age when people took up farming and built the first villages.',
+ 'The Neolithic began in the Fertile Crescent around 10,000 BCE, when people began growing wheat and barley and herding sheep and goats. Farming let them stay in one place and live in villages.',
+ 'Neolithic people made pottery, polished stone tools and woven cloth. Farming arose independently in several regions, including China, Mesoamerica and the Andes, so the dates differ from place to place.',
+ 'The word Neolithic means “new stone”, after the polished stone tools of the period.', 36.5, 40.0, 'Fertile Crescent (Syria, Iraq, Türkiye)',
+ 'Jericho, Çatalhöyük, Mehrgarh', 'Farming, pottery, the first villages', 'Farming made towns, trade and later cities possible');
+addC(5, 'Göbekli Tepe', 'c. 9500 – 8000 BCE', 'gobekli', 'Göbekli_Tepe', 'A hilltop of carved stone pillars, older than farming villages.',
+ 'Göbekli Tepe, in south-eastern Türkiye, has circles of T-shaped limestone pillars up to about five metres tall, many carved with animals such as foxes, boars and snakes. Its earliest layers date to about 9500 BCE.',
+ 'It was built by people who, as far as we know, did not yet farm. Archaeologists still debate its purpose, though many think it was a ritual or gathering place. It was deliberately buried around 8000 BCE.',
+ 'It is more than 6,000 years older than Stonehenge and became a UNESCO World Heritage Site in 2018.', 37.22, 38.92, 'Near Şanlıurfa, south-eastern Türkiye',
+ 'Göbekli Tepe, Karahan Tepe', 'T-shaped pillars, animal carvings', 'It suggests that monumental building may have come before farming');
+addC(5, 'Mehrgarh', 'c. 7000 – 2500 BCE', 'mehr', 'Mehrgarh', 'An early farming settlement that came before the Indus cities.',
+ 'Mehrgarh, in Balochistan in modern Pakistan, is among the earliest known farming and herding sites in South Asia. Its earliest layers date to about 7000 BCE, with mud-brick houses and granaries.',
+ 'Its people grew wheat and barley, kept cattle, sheep and goats, and later made pottery and beads. Many archaeologists see it as an ancestor of the Indus Valley Civilization, which grew up nearby.',
+ 'Teeth from Mehrgarh with drilled holes are some of the earliest evidence of dentistry, about 9,000 years old.', 29.39, 67.6, 'Bolan region, Balochistan, Pakistan',
+ 'Mehrgarh, Nausharo', 'Early farming, mud-brick houses, pottery', 'A forerunner of the Indus Valley Civilization');
+addC(5, 'Bronze Age', 'c. 3300 – 1200 BCE (varies)', 'bronzeage', 'Nebra_sky_disk', 'The age of the first bronze tools, cities and writing.',
+ 'Bronze, an alloy of copper and tin, gave people harder tools and weapons than stone or copper. The Bronze Age began around 3300 BCE in the Near East, and its dates differ from region to region.',
+ 'It saw the first cities, writing and long-distance trade in Mesopotamia, Egypt, the Indus Valley and China. Around 1200 BCE many Eastern Mediterranean societies collapsed, a period called the Late Bronze Age collapse, for reasons still debated.',
+ 'The Nebra sky disc, found in Germany and dated to about 1600 BCE, is one of the oldest known depictions of the cosmos.', 51.29, 11.58, 'Nebra, Germany',
+ 'Ur, Mohenjo-daro, Knossos, Anyang', 'Bronze tools, early cities, writing', 'Trade networks and early states grew in this age');
+addC(5, 'Iron Age', 'c. 1200 – 500 BCE (varies)', 'ironage', 'Hallstatt_culture', 'The age when iron tools and weapons spread across the world.',
+ 'Iron ore is far more common than the tin needed for bronze, so iron tools and weapons spread widely after about 1200 BCE, starting in the Near East and Anatolia. The Iron Age begins at different times in different regions.',
+ 'Iron ploughs and axes helped clear land and grow more food. In Europe the Hallstatt and La Tène cultures flourished, and in South Asia the use of iron is often linked with the rise of early kingdoms.',
+ 'The Iron Pillar of Delhi, made around the 4th–5th century CE, is a famous example of rust-resistant ancient ironwork.', 47.56, 13.65, 'Hallstatt, Austria',
+ 'Hallstatt, La Tène, Anatolia', 'Iron tools and weapons, hillforts', 'Iron became the main metal of ancient and medieval states');
+addC(1, 'Sasanian Empire', '224 – 651 CE', 'sasan', 'Taq-i_Kisra', 'The last Persian empire before the Arab conquests.',
+ 'Ardashir I overthrew the Parthians in 224 CE and founded the Sasanian Empire, ruling from Ctesiphon near modern Baghdad. Zoroastrianism was the state religion.',
+ 'The Sasanians fought long wars with Rome and then Byzantium. Weakened by these wars, the empire fell to Arab armies in the 640s, and its last king, Yazdegerd III, died in 651 CE.',
+ 'The Arch of Ctesiphon, built by the Sasanians, is often described as the largest single-span brick vault ever built.', 33.09, 44.58, 'Ctesiphon, near Baghdad, Iraq',
+ 'Ctesiphon, Firuzabad, Bishapur', 'Zoroastrian state religion, rock reliefs, silverwork', 'Its art and court culture influenced early Islamic civilization');
+addC(2, 'Delhi Sultanate', '1206 – 1526 CE', 'delhisul', 'Qutb_Minar', 'Five dynasties that ruled much of northern India from Delhi.',
+ 'The Delhi Sultanate began in 1206 when Qutb ud-Din Aibak became its first sultan. Five dynasties ruled in turn: the Mamluk, Khalji, Tughlaq, Sayyid and Lodi.',
+ 'It expanded under rulers such as Alauddin Khalji and resisted Mongol invasions. Timur’s sack of Delhi in 1398 weakened it, and Babur’s victory at Panipat in 1526 ended it and led to Mughal rule.',
+ 'The Qutb Minar, begun around 1199, is about 73 metres tall and a UNESCO World Heritage Site.', 28.52, 77.19, 'Qutb complex, Delhi, India',
+ 'Delhi, Daulatabad, Multan', 'The Qutb Minar, new coinage and administration', 'It blended Persian and Indian traditions and shaped Indo-Islamic architecture');
+addC(3, 'Qing Dynasty', '1644 – 1912 CE', 'qing', 'Summer_Palace', 'The last imperial dynasty of China, founded by the Manchus.',
+ 'The Manchu-led Qing dynasty took Beijing in 1644. In the 18th century, under emperors such as Kangxi and Qianlong, it expanded China’s borders to include Xinjiang, Tibet and Mongolia.',
+ 'In the 19th century the Opium Wars, the Taiping Rebellion and foreign pressure weakened it. The last emperor, Puyi, abdicated in 1912, ending more than 2,000 years of imperial rule in China.',
+ 'Qing men were required to wear a long braid, the queue, as a sign of submission to the dynasty.', 39.9, 116.4, 'Beijing, China',
+ 'Beijing, Shenyang, Chengde', 'The Forbidden City, a vast territory, porcelain and tea trade', 'Much of modern China’s territory was shaped under the Qing');
+addC(4, 'British Empire', 'c. 1600 – 1997 CE', 'britemp', 'Gateway_of_India', 'The largest empire in history, once covering about a quarter of the world’s land.',
+ 'Britain’s overseas empire grew from trading posts and colonies in the 1600s. By the 1920s it ruled about a quarter of the world’s land and a large share of its people, with India as its most valuable possession.',
+ 'The empire spread trade, railways and the English language, but also brought conquest, slavery, forced labour and famine. After World War II most colonies became independent, and the handover of Hong Kong in 1997 is often seen as its end.',
+ 'The Gateway of India in Mumbai was built to mark the 1911 visit of King George V; the last British troops left India through it in 1948.', 18.92, 72.83, 'Gateway of India, Mumbai, India',
+ 'London, Calcutta, Cape Town, Hong Kong', 'Global trade, colonial rule, the Industrial Revolution', 'Its legacy of language, law and borders is still debated today');
+addC(4, 'United States of America', '1776 CE – present', 'usa', 'Statue_of_Liberty', 'A republic born in revolution that became a global superpower.',
+ 'The Declaration of Independence in 1776 announced that thirteen British colonies were free. The Constitution, adopted in 1787, set up a federal republic with separated powers.',
+ 'The country expanded across North America, fought a Civil War (1861 – 1865) that ended slavery, and became a leading industrial power. After World War II it emerged as one of two superpowers alongside the Soviet Union.',
+ 'The Statue of Liberty, a gift from France, was dedicated in 1886.', 40.69, -74.04, 'Liberty Island, New York, USA',
+ 'Washington, D.C., New York, Philadelphia', 'The Constitution, industry, the Moon landing', 'Its economy, technology and culture shape the modern world');
+addC(4, 'Soviet Union', '1922 – 1991 CE', 'ussr', 'Sputnik_1', 'A communist superpower that spanned eleven time zones.',
+ 'The Soviet Union was formed in 1922 after the Russian Revolution of 1917 and the civil war that followed. It was a one-party communist state with a planned economy, governed from Moscow.',
+ 'It played a major part in defeating Nazi Germany, launched the first satellite, Sputnik 1, in 1957 and sent Yuri Gagarin into space in 1961. After decades of Cold War rivalry with the United States, it dissolved in December 1991 into fifteen independent countries.',
+ 'At its height it covered about one-sixth of Earth’s land surface.', 55.75, 37.62, 'Moscow, Russia',
+ 'Moscow, Leningrad, Kyiv', 'Space exploration, the Cold War, a planned economy', 'Its breakup created fifteen new countries and ended the Cold War');
+addC(4, 'Republic of India', '1947 CE – present', 'repindia', 'India_Gate', 'The world’s most populous democracy, independent since 1947.',
+ 'India became independent on 15 August 1947 and a republic on 26 January 1950, when its Constitution, drafted by a committee chaired by B. R. Ambedkar, came into force.',
+ 'Despite great diversity of languages, religions and regions, it has held regular national elections since 1951 – 52. Its space programme reached Mars orbit in 2014 and landed near the Moon’s south pole in 2023, and its economy is now among the world’s largest.',
+ 'Twenty-two languages are listed in the Eighth Schedule of India’s Constitution.', 28.61, 77.21, 'New Delhi, India',
+ 'New Delhi, Mumbai, Bengaluru', 'Democracy, the Constitution, a space programme', 'Its independence movement inspired decolonisation across Asia and Africa');
+addC(4, 'People’s Republic of China', '1949 CE – present', 'prc', 'Pudong', 'A country that rebuilt after a century of upheaval and became a major economy.',
+ 'The People’s Republic of China was proclaimed by Mao Zedong in Beijing on 1 October 1949, after the Chinese Civil War. The early decades brought land reform, the Great Leap Forward and the Cultural Revolution, with famine and great upheaval.',
+ 'From 1978, Deng Xiaoping’s reforms opened the economy to markets and trade. China has since become the world’s second-largest economy and a leading manufacturer, and hundreds of millions of people have risen out of extreme poverty.',
+ 'Shanghai’s Pudong district was largely farmland in 1990; today it has one of the world’s best-known skylines.', 39.9, 116.4, 'Beijing, China',
+ 'Beijing, Shanghai, Shenzhen', 'Economic reform, manufacturing, high-speed rail', 'Its rise has reshaped global trade and technology');
+addC(4, 'European Union', '1993 CE – present', 'euro', 'Berlaymont_building', 'A union of European countries that share a single market and many laws.',
+ 'The EU grew out of the European Coal and Steel Community of 1951 and the 1957 Treaty of Rome. The Maastricht Treaty created the European Union on 1 November 1993.',
+ 'It has a single market and free movement of people, goods and money, and many members use the euro as their currency. It has 27 member states; the United Kingdom left in 2020.',
+ 'The European Union received the Nobel Peace Prize in 2012.', 50.84, 4.38, 'Brussels, Belgium',
+ 'Brussels, Strasbourg, Luxembourg', 'A single market, the euro, free movement', 'A new model of countries sharing sovereignty after centuries of war');
+
 facts.push(
  'Ashurbanipal’s library at Nineveh held tens of thousands of clay tablets, and the best-preserved copies of the Epic of Gilgamesh come from it.',
  'Around 450 CE, Teotihuacan may have had more than 100,000 residents, making it one of the largest cities in the world at that time.',
