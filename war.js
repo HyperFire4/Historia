@@ -76,7 +76,6 @@ function build(k){
   var d=D[k],h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
   h.push(sl("a cover","top",y0,d.name,'<div class="tx"><div class="yr">'+d.years+"</div><h1>"+d.name+'</h1><p class="lead">'+d.lead+'</p><div class="st">'+d.stats.map(function(s){return"<div><b>"+s[0]+"</b><span>"+s[1]+"</span></div>"}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p></div>'+photo(d.name,"l",7)+'<div class="clf" aria-hidden="true">Declassified<small>Archive file '+y0+'</small></div><div class="cue" aria-hidden="true"><span></span>Scroll</div>'));
   h.push(mid("origins",y0,"Origins of "+d.name,"How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
-  if(window.WARMAP&&WARMAP.has(k))h.push(WARMAP.html(k));
   d.tl.forEach(function(e,j){n++;h.push([evA,evC,evB][j%3](e,n+j*2))});
   d.battles.forEach(function(b,j){
     var y=(b[1].match(/\d{4}/)||[yl])[0];
@@ -84,6 +83,7 @@ function build(k){
   });
   h.push(sl("c ld","leaders",yl,"Leaders",'<div class="tx"><h3 class="top">Leaders</h3><i class="rl"></i><p class="hint">Drag or scroll sideways to meet them all →</p><div class="cnav"><button type="button" data-d="-1" aria-label="Previous leader">‹</button><button type="button" data-d="1" aria-label="Next leader">›</button></div></div><div class="cards">'+d.leaders.map(function(l,j){return'<article class="idc" style="--r:'+(j%2?2:-2)+'deg"><div class="ih"><span>Service record</span><span>'+d.years+'</span></div><div class="por" data-w="'+esc(l[3]||"")+'" role="img" aria-label="Portrait of '+esc(l[0])+'"></div><h3>'+l[0]+"</h3><small>"+l[1]+"</small><p>"+l[2]+"</p></article>"}).join("")+"</div>"));
   h.push(sl("a end","after",yl,"Aftermath",'<div class="tx"><h3 class="top">Aftermath</h3><i class="rl"></i><ul class="al">'+d.after.map(function(a){return"<li>"+a+"</li>"}).join("")+'</ul></div><div class="doc india"><div class="dl"><b>India and the war</b></div><p>'+d.india+"</p></div>"));
+  if(window.WARMAP&&WARMAP.has(k))h.push(WARMAP.html(k));        /* the map sits right above the story */
   if(window.WARSTORY&&WARSTORY.has(k))h.push(WARSTORY.html(k));
   return h.join("");
 }

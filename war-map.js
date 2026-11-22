@@ -54,7 +54,7 @@ function mount(k){
      spdBtn:wrap.querySelector(".mspd"),fsBtn:wrap.querySelector(".mfsb"),
      K:d.steps.length,step:-1,cam:{x:0,y:0,z:1},tw:null,W:0,H:0,s0:1,fx:.6,fy:.5,dpr:Math.min(devicePixelRatio||1,mob?1.5:2),
      inview:false,fs:false,pfs:false,timer:0,speed:1,raf:0,last:0,top:0,sh:1,ro:null,fns:[],base:"",
-     sets:{},items:[],labels:[],wheelAcc:0,wheelT:0};
+     sets:{},items:[],labels:[],wheelAcc:0,wheelT:0,auto:!reduce,grace:0};
   var st=JSON.parse(JSON.stringify(d.init)),sts=[],key,name2grp={},name2cls={},grp;
   d.steps.forEach(function(s){for(key in s.st)st[key]=s.st[key];sts.push(JSON.parse(JSON.stringify(st)))});
   S.sts=sts;
@@ -134,7 +134,8 @@ function mount(k){
     if(ty0===null)return;var dy=ty0-e.changedTouches[0].clientY;ty0=null;
     if(Math.abs(dy)>50&&!e.target.closest(".mcard,.mctl")){stop();goTo(S.step+(dy>0?1:-1))}
   },{passive:true});
-  ["wheel","touchstart","pointerdown"].forEach(function(n){on(window,n,function(e){if(S.timer&&!S.fs&&!(e.target.closest&&e.target.closest(".mctl")))stop()},{passive:true})});
+  /* touching or scrolling takes over from the tour (ignoring the first moments, so the scroll that brought you here does not cancel it) */
+  ["wheel","touchstart","pointerdown"].forEach(function(n){on(window,n,function(e){if(S.timer&&!S.fs&&performance.now()>S.grace&&!(e.target.closest&&e.target.closest(".mctl")))stop()},{passive:true})});
   if(window.ResizeObserver){S.ro=new ResizeObserver(measure);S.ro.observe(S.stage)}
   measure();
   apply(0,true);
@@ -398,6 +399,8 @@ function onScroll(){
   }
   var o=window.scrollY-S.top,i=clamp(Math.floor(o/S.sh),0,S.K-1);
   if(i!==S.step)apply(i);
+  /* the first time the map fills the screen, the tour starts by itself */
+  if(S.auto&&inview&&r.top<=24&&!S.timer&&S.step<S.K-1){S.auto=false;S.grace=performance.now()+1800;play(true)}
 }
 function play(restart){
   if(!S)return;

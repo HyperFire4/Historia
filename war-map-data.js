@@ -4,7 +4,7 @@
    st = countries that change side at that step (al = Allies, cp = Central Powers / Axis, oc = occupied, ex = defeated / left the war). */
 window.WAR_MAPS={
 ww1:{
-"intro":{"k":"The war on the map","t":"Scroll to watch the borders, fronts and armies of 1914–1918 change. Press play for an automatic tour."},
+"intro":{"k":"The war on the map","t":"The tour plays by itself. Scroll or use the buttons below to take control."},
 "credit":"Borders: simplified from Historical Basemaps (aourednik/historical-basemaps, GPL-3.0). Front lines and troop positions are approximate.",
 "groups":{"GB":["United Kingdom of Great Britain and Ireland","Egypt","British Protectorate","British Raj","Kuwait"],"FR":["France","Algeria","Tunisia","Morocco","French West Africa"],"RU":["Russian Empire","Grand Duchy of Finland","Georgia","Armenia","Azerbaijan"],"BE":["Belgium"],"SR":["Serbia"],"MN":["Montenegro"],"IT":["Kingdom of Italy","Libya"],"RO":["Romania"],"PT":["Portugal"],"GR":["Greece"],"DE":["German Empire"],"AH":["Austro-Hungarian Empire"],"TR":["Ottoman Empire"],"BG":["Bulgaria"]},
 "init":{"GB":"al","FR":"al","RU":"al","DE":"cp","AH":"cp"},
@@ -34,7 +34,7 @@ ww1:{
 ]
 },
 ww2:{
-"intro":{"k":"The war on the map","t":"Scroll to watch the fronts, conquests and armies of 1939–1945 change. Press play for an automatic tour."},
+"intro":{"k":"The war on the map","t":"The tour plays by itself. Scroll or use the buttons below to take control."},
 "credit":"Borders: simplified from Historical Basemaps (aourednik/historical-basemaps, GPL-3.0). Front lines, occupied areas and troop positions are approximate.",
 "bases":{"38":"1938","45":"1945"},
 "bbox":[-25,-42,208,72],
