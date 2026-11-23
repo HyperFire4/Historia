@@ -8,7 +8,7 @@ function sec(id,y,l,cls,h){return'<section class="cws '+cls+'" id="'+id+'" data-
 function head(code,t){return'<header class="c-h"><span class="c-code">'+code+"</span><h2>"+t+'</h2><i class="c-led on"></i></header>'}
 function gauge(g,max){
   var a=-90+Math.min(1,g[1]/max)*180;
-  return'<div class="c-gw"><svg viewBox="0 0 200 124" role="img" aria-label="'+g[0]+': '+g[2]+' warheads"><path d="M20 104A80 80 0 0 1 180 104" fill="none" stroke="#0c0e0d" stroke-width="16"/><path d="M20 104A80 80 0 0 1 180 104" fill="none" stroke="#d5a64a" stroke-width="3" stroke-dasharray="2 8.4"/><path d="M148 38A80 80 0 0 1 180 104" fill="none" stroke="#b94a43" stroke-width="5"/><g class="nd" style="--a:'+a+'deg"><path d="M98 104L100 28L102 104Z" fill="#d5c7a0"/></g><circle cx="100" cy="104" r="8" fill="#3a403c" stroke="#0c0e0d" stroke-width="3"/></svg><b>'+g[2]+"</b><small>"+g[0]+"</small></div>";
+  return'<div class="c-gw"><svg viewBox="0 0 200 124" role="img" aria-label="'+g[0]+': '+g[2]+' warheads"><path d="M20 104A80 80 0 0 1 180 104" fill="none" stroke="#0c0e0d" stroke-width="16"/><path d="M20 104A80 80 0 0 1 180 104" fill="none" stroke="#d5a64a" stroke-width="3" stroke-dasharray="2 8.4"/><path d="M148 38A80 80 0 0 1 180 104" fill="none" stroke="#b94a43" stroke-width="5"/><g class="cwnd" style="--a:'+a+'deg"><path d="M98 104L100 28L102 104Z" fill="#d5c7a0"/></g><circle cx="100" cy="104" r="8" fill="#3a403c" stroke="#0c0e0d" stroke-width="3"/></svg><b>'+g[2]+"</b><small>"+g[0]+"</small></div>";
 }
 function html(d){
   D=d;var h="",i;
@@ -35,7 +35,7 @@ function html(d){
 function ev(n){
   var e=D.tl[n],el=document.getElementById("c-ev");if(!el)return;tlN=n;
   el.classList.remove("boot");void el.offsetWidth;if(!reduce)el.classList.add("boot");
-  el.innerHTML='<small>'+e[0].toUpperCase()+"</small><h3>&gt; "+e[1]+'<span class="cur">_</span></h3><p>'+e[2]+"</p>";
+  el.innerHTML='<small>'+e[0].toUpperCase()+"</small><h3>&gt; "+e[1]+'<span class="cwcur">_</span></h3><p>'+e[2]+"</p>";
   document.getElementById("c-ix").textContent=String(n+1).padStart(2,"0")+" / "+D.tl.length;
   [].forEach.call(document.querySelectorAll("#c-scale button"),function(b,j){b.setAttribute("aria-selected",j===n);b.firstChild.classList.toggle("on",j===n);if(j===n)b.scrollIntoView({block:"nearest",inline:"center",behavior:reduce?"auto":"smooth"})});
 }
@@ -57,7 +57,7 @@ function mount(root){
   (function type(){
     if(!document.body.contains(tty))return;
     if(li>=L.length)return;
-    if(ci<L[li].length){ci++;tty.innerHTML=out+L[li].slice(0,ci)+'<span class="cur">█</span>';timers.push(setTimeout(type,24))}
+    if(ci<L[li].length){ci++;tty.innerHTML=out+L[li].slice(0,ci)+'<span class="cwcur">█</span>';timers.push(setTimeout(type,24))}
     else{out+=L[li]+"<br>";li++;ci=0;timers.push(setTimeout(type,260))}
   })();
   var y=1947;timers.push(setInterval(function(){y=y>=1991?1947:y+1;yEl.textContent=y},140));

@@ -101,19 +101,14 @@ function act(el){
   var i=slides.indexOf(el);idx=i;document.body.classList.toggle("instory",el.classList.contains("story"));slides.forEach(function(s){s.classList.toggle("cur",s===el)});
   [].forEach.call(rail.children,function(b,j){b.classList.toggle("on",j===i)});
 }
-/* the Cold War has its own effects, so the WWI/WWII battlefield FX is switched off there and restored afterwards */
-var cfx=false;
-function fxCold(on){var b=$("#fxbtn");if(!b)return;
-  if(on){if(b.getAttribute("aria-pressed")==="true"){b.click();cfx=true}}
-  else if(cfx){cfx=false;if(b.getAttribute("aria-pressed")!=="true")b.click()}}
 function render(k){
   var d=D[k];if(!d)return;
   cur=k;document.body.dataset.war=k;document.title=d.name+" — HISTORIA";
-  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":"#0e1220";fxCold(!!d.cold);
+  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":"#0e1220";
   tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
   if(io)io.disconnect();if(io2)io2.disconnect();
   if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();if(window.WARCOLD)WARCOLD.unmount();
-  main.innerHTML=build(k);
+  main.innerHTML=(d.cold&&!window.WARCOLD)?'<section class="sl a" data-y="1947" data-l="Cold War"><div class="tx"><h3>Cold War module not loaded</h3><p>Upload war-cold.js, war-cold-data.js and war-cold.css next to war.html.</p></div></section>':build(k);
   slides=[].slice.call(main.children);
   rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
   io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
@@ -127,7 +122,7 @@ function render(k){
   }
   /* while the gate is closed the page is built behind it; reveal animations wait for the doors to open */
   if(window.WARGATE&&WARGATE.opened)WARGATE.opened(reveal);else reveal();
-  if(d.cold){if(window.WARCOLD)WARCOLD.mount(main)}
+  if(d.cold){if(window.WARCOLD)WARCOLD.mount(main);else console.warn("HISTORIA: war-cold.js is not loaded.")}
   else if(window.WARMAP&&WARMAP.has(k))WARMAP.mount(k);
   if(!d.cold&&window.WARSTORY&&WARSTORY.has(k))WARSTORY.mount(k);
   [].forEach.call(main.querySelectorAll(".por"),portrait);
