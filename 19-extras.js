@@ -88,12 +88,13 @@ function dayCard() {
 }
 dayCard();
 
-/* ----- photo credit: a tiny note in the bottom corner that opens a small box on tap ----- */
-const cr = mk('div', 'xs-credit'), btn = mk('button', 'xs-cbtn'), pop = mk('div', 'xs-cpop');
-btn.type = 'button'; btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Photo credits');
-btn.append(mk('span', null, tx('Photos: Wikipedia & Wikimedia Commons')), mk('i', null, '\u00a9'));
-pop.textContent = 'Photos come from Wikipedia and Wikimedia Commons. Each belongs to its photographer or artist, under an open licence such as CC BY-SA or the public domain. Open any card to see a link to the Wikipedia page where the author and licence are listed.';
-btn.onclick = () => { const o = cr.classList.toggle('open'); btn.setAttribute('aria-expanded', o); };
-document.addEventListener('pointerdown', e => { if (!cr.contains(e.target)) { cr.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
-cr.append(pop, btn); document.body.appendChild(cr);
+/* ----- photo credit: a quiet line in the footer, under the copyright ----- */
+const copy = document.querySelector('footer .copy');
+if (copy) {
+  const p = mk('p', 'xs-fcredit');
+  p.append(tx('Photos: Wikipedia & Wikimedia Commons') + '. ');
+  p.append('Each photo belongs to its photographer or artist under an open licence such as CC BY-SA or the public domain. Open any card for a link to the Wikipedia page that lists the author and licence. ');
+  const a = mk('a', null, 'commons.wikimedia.org'); a.href = 'https://commons.wikimedia.org'; a.target = '_blank'; a.rel = 'noopener'; p.append(a);
+  copy.after(p);
+}
 })();
