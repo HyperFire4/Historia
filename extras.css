@@ -11,10 +11,5 @@ html[lang="gu"] .xs-same>b,html[lang="gu"] .xs-day h3{letter-spacing:0;text-tran
 .xs-day h3{font:600 .75rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
 .xs-day p{font-size:.98rem;line-height:1.6;margin:.35rem 0}
 .xs-day p b{color:var(--gold2);font-family:var(--serif);font-size:1.1rem}
-.xs-credit{position:fixed;right:76px;bottom:6px;z-index:40;font:.64rem/1 var(--sans)}
-.xs-cbtn{padding:.3rem .5rem;border-radius:8px;background:transparent;color:var(--text);opacity:.5;cursor:pointer}
-.xs-cbtn:hover,.xs-cbtn:focus-visible,.xs-cbtn[aria-expanded="true"]{opacity:1;background:rgba(11,16,32,.85)}
-.xs-cbtn i{display:none;font-style:normal;font-size:.9rem}
-.xs-cpop{position:absolute;right:0;bottom:calc(100% + 6px);width:min(300px,86vw);padding:.8rem 1rem;border-radius:12px;background:rgba(11,16,32,.95);border:1px solid var(--line);font-size:.76rem;line-height:1.55;color:var(--text);display:none}
-.xs-credit.open .xs-cpop{display:block}
-@media(max-width:700px){.xs-cbtn span{display:none}.xs-cbtn i{display:inline}.xs-credit{right:68px;bottom:12px}}
+.xs-fcredit{max-width:760px;margin:.5rem auto 0;padding:0 1.5rem 1.2rem;text-align:center;font-size:.72rem;line-height:1.6;opacity:.6}
+.xs-fcredit a{color:var(--gold2);text-decoration:underline}
