@@ -259,6 +259,66 @@ addC(4, 'European Union', '1993 CE – present', 'euro', 'Berlaymont_building', 
  'The European Union received the Nobel Peace Prize in 2012.', 50.84, 4.38, 'Brussels, Belgium',
  'Brussels, Strasbourg, Luxembourg', 'A single market, the euro, free movement', 'A new model of countries sharing sovereignty after centuries of war');
 
+
+/* ---- Update 9: more historical figures ---- */
+Object.assign(EMB, {archimedes:['star',200], buddha:['ashoka',45], marcopolo:['compass',220], harsha:['ashoka',70], shahjahan:['mughal',20], shakespeare:['scroll',330], lincoln:['torch',215], churchill:['crown',350], lenin:['star',355], mao:['star',5], nehru:['ashoka',150], lovelace:['gear',280], bose:['torch',30], lakshmibai:['fort',350]});
+addF(1, 'Archimedes', 'Mathematician and inventor', 'c. 287 – 212 BCE', 'archimedes', 'Archimedes', 'Greek scientist of Syracuse who explained buoyancy and the lever.',
+ 'Archimedes lived in Syracuse, Sicily. He worked out the principle of buoyancy, formulas for the area of a circle and the volume of a sphere, and the law of the lever.',
+ 'He designed machines that helped defend Syracuse against Rome. He was killed when the Romans captured the city in 212 BCE.',
+ 'He is said to have shouted “Eureka!” on finding the buoyancy principle in his bath, but that story was written down long after his death.', 37.07, 15.29, 'Syracuse, Sicily, Italy', 'Born', 'Syracuse, c. 287 BCE', 'Buoyancy, the lever, bounds for pi', 'His methods anticipated ideas of calculus');
+addF(1, 'Gautama Buddha', 'Spiritual teacher and founder of Buddhism', 'c. 563 – 483 BCE (traditional dates)', 'buddha', 'Gautama_Buddha', 'Taught the path to end suffering; his teachings spread across Asia.',
+ 'Siddhartha Gautama was born into the Shakya clan at Lumbini, in present-day Nepal. According to tradition he left his sheltered life to search for an end to suffering.',
+ 'He is said to have gained enlightenment at Bodh Gaya, preached his first sermon at Sarnath and died at Kushinagar. His teachings spread across Asia, helped by rulers such as Ashoka.',
+ 'The dates above are traditional; some scholars place his life about a century later.', 27.47, 83.28, 'Lumbini, Nepal', 'Born', 'Lumbini, present-day Nepal', 'The Four Noble Truths, the Middle Way', 'Buddhism is followed by hundreds of millions of people today');
+addF(2, 'Marco Polo', 'Venetian merchant and traveller', '1254 – 1324 CE', 'marcopolo', 'Marco_Polo', 'His book described the courts and cities of Asia for European readers.',
+ 'Marco Polo left Venice with his father and uncle around 1271 and travelled along the Silk Road to the court of Kublai Khan, where he stayed for many years.',
+ 'After returning in 1295, he dictated an account of his travels in a Genoese prison. The book inspired later explorers, though historians debate how much he saw himself.',
+ 'Christopher Columbus is known to have owned and annotated a copy of Marco Polo’s book.', 45.44, 12.33, 'Venice, Italy', 'Born', 'Venice, 1254', 'Travels to the court of Kublai Khan', 'His book opened Europe’s imagination to Asia');
+addF(2, 'Harsha', 'Emperor of northern India', 'c. 590 – 647 CE', 'harsha', 'Harsha', 'Ruled much of northern India after the Gupta Empire.',
+ 'Harsha (Harshavardhana) became king of Thanesar in 606 CE and built a large kingdom in northern India with his capital at Kannauj. He was also a writer and a patron of learning.',
+ 'The Chinese Buddhist monk Xuanzang visited his court and described his generosity and the university at Nalanda. After Harsha died in 647 CE his empire broke up.',
+ 'Harsha is traditionally credited with writing three Sanskrit plays, including Ratnavali.', 27.05, 79.92, 'Kannauj, Uttar Pradesh, India', 'Born', 'Thanesar, c. 590', 'Kannauj, Xuanzang’s visit, support for Nalanda', 'A well-documented ruler of early medieval India');
+addF(3, 'Shah Jahan', 'Mughal emperor', '1592 – 1666 CE', 'shahjahan', 'Shah_Jahan', 'Built the Taj Mahal and made Mughal architecture famous.',
+ 'Shah Jahan became the fifth Mughal emperor in 1628. His reign saw great building, including the Red Fort and Jama Masjid in Delhi and the Taj Mahal, begun in 1631 as a tomb for his wife Mumtaz Mahal.',
+ 'He founded the walled city of Shahjahanabad, now Old Delhi. In 1658 his son Aurangzeb took the throne, and Shah Jahan spent his last years confined in Agra Fort.',
+ 'The Taj Mahal took about 22 years to build and is a UNESCO World Heritage Site.', 27.17, 78.04, 'Agra, Uttar Pradesh, India', 'Born', 'Lahore, 1592', 'The Taj Mahal, the Red Fort, Shahjahanabad', 'He defined the high point of Mughal architecture');
+addF(3, 'William Shakespeare', 'Playwright and poet', '1564 – 1616 CE', 'shakespeare', 'William_Shakespeare', 'England’s most famous writer, author of Hamlet and Romeo and Juliet.',
+ 'Born in Stratford-upon-Avon, Shakespeare became an actor and writer in London. He wrote about 37 plays, including Hamlet, Macbeth, Othello and Romeo and Juliet, and 154 sonnets.',
+ 'His company performed at the Globe Theatre, and his plays were collected in the First Folio in 1623, seven years after his death. His works have been translated into many languages.',
+ 'He is credited with popularising many English words and phrases, though some of those claims are exaggerated.', 52.19, -1.71, 'Stratford-upon-Avon, England', 'Born', 'Stratford-upon-Avon, 1564', 'Hamlet, Macbeth, the Globe Theatre', 'His plays are performed around the world today');
+addF(4, 'Abraham Lincoln', '16th President of the United States', '1809 – 1865 CE', 'lincoln', 'Abraham_Lincoln', 'Led the United States through the Civil War and helped end slavery.',
+ 'Abraham Lincoln was born in a log cabin in Kentucky and became a lawyer in Illinois. He was elected president in 1860, and eleven Southern states then left the Union.',
+ 'He led the Union through the Civil War, issued the Emancipation Proclamation in 1863 and backed the 13th Amendment, which abolished slavery. He was shot at Ford’s Theatre on 14 April 1865 and died the next day.',
+ 'His Gettysburg Address of 1863 is only about 270 words long.', 38.89, -77.05, 'Lincoln Memorial, Washington, D.C., USA', 'Born', 'Near Hodgenville, Kentucky, 1809', 'The Civil War, the Emancipation Proclamation', 'Remembered for preserving the Union and ending slavery');
+addF(4, 'Winston Churchill', 'Prime Minister of the United Kingdom', '1874 – 1965 CE', 'churchill', 'Winston_Churchill', 'Led Britain through most of World War II.',
+ 'Winston Churchill was a soldier, journalist and politician before he became Prime Minister in May 1940, as Nazi Germany swept across Europe.',
+ 'His speeches rallied Britain, and he worked with the United States and the Soviet Union against Germany. He lost the 1945 election, returned as Prime Minister in 1951 and won the Nobel Prize in Literature in 1953.',
+ 'Many historians strongly criticise his policies in India, including during the 1943 Bengal famine.', 51.84, -1.36, 'Blenheim Palace, England', 'Born', 'Blenheim Palace, 1874', 'Leading Britain in World War II, speeches, writing', 'A towering and much-debated figure of the 20th century');
+addF(4, 'Vladimir Lenin', 'Revolutionary and first leader of the Soviet state', '1870 – 1924 CE', 'lenin', 'Vladimir_Lenin', 'Led the Bolsheviks in the 1917 October Revolution.',
+ 'Vladimir Lenin, born Vladimir Ulyanov, led the Bolshevik party. After the Russian Revolution of 1917 he headed the new Soviet government.',
+ 'He led the Bolsheviks to victory in the Russian Civil War and helped found the Soviet Union in 1922. A one-party state with harsh repression took shape under him, and he died in 1924.',
+ 'His embalmed body has been on display in a mausoleum in Moscow’s Red Square since 1924.', 54.32, 48.39, 'Ulyanovsk (formerly Simbirsk), Russia', 'Born', 'Simbirsk, 1870', 'The October Revolution, founding the Soviet state', 'His ideas, called Leninism, shaped communist movements worldwide');
+addF(4, 'Mao Zedong', 'Chinese Communist leader', '1893 – 1976 CE', 'mao', 'Mao_Zedong', 'Founded the People’s Republic of China in 1949.',
+ 'Mao Zedong helped found the Chinese Communist Party in 1921 and led it through the Long March and the civil war against the Nationalists. He proclaimed the People’s Republic on 1 October 1949.',
+ 'He ruled until 1976. His Great Leap Forward (1958 – 62) was followed by a catastrophic famine, and the Cultural Revolution (1966 – 76) caused great upheaval. Historians estimate that tens of millions died in the famine.',
+ 'His portrait still hangs at Tiananmen, the entrance to the Forbidden City in Beijing.', 27.92, 112.53, 'Shaoshan, Hunan, China', 'Born', 'Shaoshan, Hunan, 1893', 'The Long March, founding the PRC, the Cultural Revolution', 'He remains a deeply debated figure in China and abroad');
+addF(4, 'Jawaharlal Nehru', 'First Prime Minister of India', '1889 – 1964 CE', 'nehru', 'Jawaharlal_Nehru', 'Led India as Prime Minister from independence in 1947 until 1964.',
+ 'Jawaharlal Nehru, born in Allahabad (now Prayagraj), became a leader of the Indian National Congress and a close associate of Mahatma Gandhi. He spent about nine years in British prisons.',
+ 'He became India’s first Prime Minister on 15 August 1947 and gave the “Tryst with Destiny” speech. He promoted a democratic constitution, planned industrial growth, science institutions such as the IITs, and non-alignment in the Cold War.',
+ 'His birthday, 14 November, is celebrated as Children’s Day in India.', 25.43, 81.84, 'Prayagraj, Uttar Pradesh, India', 'Born', 'Allahabad, 1889', 'Tryst with Destiny, planning, non-alignment', 'He helped set up India’s democratic institutions');
+addF(4, 'Ada Lovelace', 'Mathematician and early computing pioneer', '1815 – 1852 CE', 'lovelace', 'Ada_Lovelace', 'Wrote what is often called the first computer program.',
+ 'Ada Lovelace, daughter of the poet Lord Byron, studied mathematics and worked with Charles Babbage on his proposed Analytical Engine.',
+ 'In 1843 she published notes that included a method for the engine to calculate Bernoulli numbers, often called the first computer program, and she suggested such machines could work with more than numbers.',
+ 'The programming language Ada is named in her honour.', 51.51, -0.13, 'London, England', 'Born', 'London, 1815', 'Notes on the Analytical Engine', 'She is seen as a visionary of the computer age');
+addF(4, 'Subhas Chandra Bose', 'Indian nationalist leader', '1897 – c. 1945 CE', 'bose', 'Subhas_Chandra_Bose', 'Led the Indian National Army and fought for independence from outside India.',
+ 'Born in Cuttack, Subhas Chandra Bose passed the Indian Civil Service exam but resigned in 1921 to join the freedom movement. He was twice elected president of the Congress but left it after differences with Gandhi.',
+ 'During World War II he sought foreign support, led the Indian National Army with Japanese help and formed the Provisional Government of Free India in 1943. He is reported to have died in a plane crash in Taiwan in August 1945; the details remain debated.',
+ 'He popularised the greeting “Jai Hind” and the slogan “Delhi Chalo”.', 20.46, 85.88, 'Cuttack, Odisha, India', 'Born', 'Cuttack, 1897', 'The Indian National Army, “Delhi Chalo”', 'Honoured across India as a symbol of the freedom struggle');
+addF(4, 'Rani Lakshmibai', 'Queen of Jhansi', 'c. 1828 – 1858 CE', 'lakshmibai', 'Lakshmibai,_Rani_of_Jhansi', 'A leader of the 1857 uprising against the East India Company.',
+ 'Born Manikarnika in Varanasi, she married the ruler of Jhansi and became queen. After her husband’s death the East India Company refused to recognise her adopted son and annexed Jhansi in 1854 under the Doctrine of Lapse.',
+ 'In the Rebellion of 1857 she led the defence of Jhansi against British forces in 1858, then escaped and joined other rebel leaders. She died fighting near Gwalior in June 1858.',
+ 'She is remembered in the famous Hindi poem “Jhansi ki Rani” by Subhadra Kumari Chauhan.', 25.45, 78.57, 'Jhansi, Uttar Pradesh, India', 'Born', 'Varanasi, c. 1828', 'The siege of Jhansi, the Rebellion of 1857', 'A lasting symbol of courage and resistance in India');
+
 facts.push(
  'Ashurbanipal’s library at Nineveh held tens of thousands of clay tablets, and the best-preserved copies of the Epic of Gilgamesh come from it.',
  'Around 450 CE, Teotihuacan may have had more than 100,000 residents, making it one of the largest cities in the world at that time.',

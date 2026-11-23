@@ -1,6 +1,6 @@
 /* ============ UPDATE 6: search, world map, quiz, sound shortcut ============ */
 (() => {
-const ERA_COL = ['#d4af37', '#7fb5ff', '#6fcf97', '#e88a6a', '#c792ea'];   // one pin colour per era
+const ERA_COL = ['#d4af37', '#7fb5ff', '#6fcf97', '#e88a6a', '#c792ea', '#c9a27a'];   // one pin colour per era
 const mk = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
 const store = {get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }};
 const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -123,7 +123,18 @@ const QUIZ = [
  [3, 'Whose book, published in 1543, proposed that the Earth moves around the Sun?', ['Nicolaus Copernicus', 'Isaac Newton', 'Galileo Galilei', 'Leonardo da Vinci'], 'Copernicus’s book appeared in the year he died.'],
  [4, 'Who became the first non-European to win the Nobel Prize in Literature, in 1913?', ['Rabindranath Tagore', 'Mahatma Gandhi', 'Swami Vivekananda', 'Sardar Vallabhbhai Patel'], 'Tagore won for his poetry collection Gitanjali.'],
  [4, 'Which mathematician wrote to G. H. Hardy in 1913 and was invited to Cambridge?', ['Srinivasa Ramanujan', 'Aryabhata', 'Albert Einstein', 'Marie Curie'], 'Ramanujan was elected a Fellow of the Royal Society in 1918.'],
- [4, 'The Meiji Restoration began the modernisation of which country?', ['Japan', 'China', 'India', 'Russia'], 'It made Japan the first major non-Western industrial power.']
+ [4, 'The Meiji Restoration began the modernisation of which country?', ['Japan', 'China', 'India', 'Russia'], 'It made Japan the first major non-Western industrial power.'],
+ [5, 'Which stone-tool tradition, named after a gorge in Tanzania, is among the oldest known?', ['Oldowan', 'Acheulean', 'Mousterian', 'Clovis'], 'Oldowan tools, about 2.6 million years old, are named after Olduvai Gorge.'],
+ [5, 'Which site in south-eastern T\u00fcrkiye has T-shaped pillars built around 9500 BCE?', ['G\u00f6bekli Tepe', '\u00c7atalh\u00f6y\u00fck', 'Troy', 'Ephesus'], 'It is more than 6,000 years older than Stonehenge.'],
+ [5, 'Which two metals make bronze?', ['Copper and tin', 'Iron and carbon', 'Gold and silver', 'Lead and zinc'], 'Bronze is mainly copper with tin, and is harder than copper alone.'],
+ [5, 'Mehrgarh, an early farming site, lies in which modern country?', ['Pakistan', 'India', 'Iran', 'Afghanistan'], 'It is in Balochistan and is seen as a forerunner of the Indus cities.'],
+ [5, 'What does the word \u201cPaleolithic\u201d mean?', ['Old stone', 'New stone', 'Bronze age', 'Fire age'], 'It comes from Greek words for \u201cold stone\u201d.'],
+ [1, 'Where is the Buddha traditionally said to have been born?', ['Lumbini', 'Sarnath', 'Bodh Gaya', 'Kushinagar'], 'Lumbini is in present-day Nepal; he is said to have preached first at Sarnath.'],
+ [3, 'Which Mughal emperor built the Taj Mahal?', ['Shah Jahan', 'Akbar', 'Babur', 'Aurangzeb'], 'He began it in 1631 as a tomb for his wife Mumtaz Mahal.'],
+ [4, 'Which leader gave the \u201cTryst with Destiny\u201d speech at India\u2019s independence?', ['Jawaharlal Nehru', 'Mahatma Gandhi', 'Subhas Chandra Bose', 'B. R. Ambedkar'], 'Nehru became India\u2019s first Prime Minister.'],
+ [4, 'Who wrote notes in 1843 that included the first published computer program?', ['Ada Lovelace', 'Marie Curie', 'Florence Nightingale', 'Mary Shelley'], 'She worked with Charles Babbage on the Analytical Engine.'],
+ [4, 'In which year did the Soviet Union dissolve?', ['1991', '1989', '1985', '2000'], 'It split into fifteen independent countries in December 1991.'],
+ [4, 'The Gateway of India in Mumbai marks the 1911 visit of which king?', ['George V', 'Edward VII', 'George VI', 'William IV'], 'The monument was completed in 1924.']
 ];
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function openQuiz() {
