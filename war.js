@@ -104,10 +104,10 @@ function act(el){
 function render(k){
   var d=D[k];if(!d)return;
   cur=k;document.body.dataset.war=k;document.title=d.name+" — HISTORIA";
-  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":k==="nw"?"#211C18":"#0e1220";
-  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
+  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":k==="nw"?"#211C18":k==="tk"?"#211D19":"#0e1220";
+  tabs.forEach(function(b){var on=b.dataset.k===k;b.setAttribute("aria-selected",on);if(on&&b.scrollIntoView)b.scrollIntoView({inline:"center",block:"nearest"})});
   if(io)io.disconnect();if(io2)io2.disconnect();
-  if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();if(window.WARCOLD)WARCOLD.unmount();if(window.WARNAP)WARNAP.unmount();
+  if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();if(window.WARCOLD)WARCOLD.unmount();if(window.WARNAP)WARNAP.unmount();if(window.WARTK)WARTK.unmount();
   main.innerHTML=(d.cold&&!window[d.mod||"WARCOLD"])?'<section class="sl a" data-y="1947" data-l="Module"><div class="tx"><h3>Module not loaded</h3><p>Upload the script, data and css files for this tab next to war.html.</p></div></section>':build(k);
   slides=[].slice.call(main.children);
   rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
