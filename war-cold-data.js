@@ -52,3 +52,23 @@ figs:[
 ["Fidel Castro","Cuban leader","Cuba","1959–2008","Aligned revolutionary Cuba with the USSR, 90 miles from the US.","Fidel Castro"]],
 after:["Communist governments fell across Eastern Europe in 1989, and the Soviet Union split into fifteen independent states in 1991.","Germany was reunified in 1990.","Poland, Hungary and the Czech Republic joined NATO in 1999, the first of several rounds of expansion.","Large nuclear arsenals remain, governed by later arms-control treaties.","Proxy wars left lasting damage in Korea, Vietnam, Afghanistan and Africa."],
 india:"India led the Non-Aligned Movement, whose first summit was held in Belgrade in 1961, but it drew closer to Moscow over time. The Indo-Soviet Treaty of Peace, Friendship and Cooperation was signed in August 1971, and in December that year the US sent a naval task force toward the Bay of Bengal during the Bangladesh war."};
+
+Object.assign(window.WAR_DATA.cw,{
+space:[
+["Sputnik 1","USSR","4 Oct 1957","Satellite","The first artificial satellite. Its radio beeps were heard around the world and shocked the United States.","Polished sphere, ≈84 kg","Sputnik 1"],
+["Vostok 1","USSR","12 Apr 1961","Crewed capsule","Yuri Gagarin becomes the first human in space and completes one orbit of Earth.","Flight time 108 minutes","Vostok 1"],
+["Freedom 7","USA","5 May 1961","Crewed capsule","Alan Shepard becomes the first American in space on a short suborbital flight.","Flight time ≈15 minutes","Freedom 7"],
+["Vostok 6","USSR","16 Jun 1963","Crewed capsule","Valentina Tereshkova becomes the first woman in space.","Almost three days in orbit","Vostok 6"],
+["Voskhod 2","USSR","18 Mar 1965","Crewed capsule","Alexei Leonov performs the first spacewalk.","Spacewalk ≈12 minutes","Voskhod 2"],
+["Luna 9","USSR","3 Feb 1966","Lunar lander","The first spacecraft to make a soft landing on the Moon and transmit photographs from its surface.","Landed in the Ocean of Storms","Luna 9"],
+["Saturn V","USA","1967–1973","Launch vehicle","The rocket that carried the Apollo crews to the Moon. It remains the most powerful rocket to have flown successfully.","≈110 m tall, ≈34 MN thrust","Saturn V"],
+["Apollo 8","USA","21–27 Dec 1968","Crewed spacecraft","The first crew to leave Earth orbit and circle the Moon.","Ten lunar orbits","Apollo 8"],
+["Apollo 11","USA","16–24 Jul 1969","Crewed spacecraft","Neil Armstrong and Buzz Aldrin land on the Moon on 20 July while Michael Collins orbits above.","≈2.5 h on the surface","Apollo 11"],
+["Lunokhod 1","USSR","Nov 1970","Lunar rover","The first remote-controlled rover on another world, driven from Earth.","Active for about ten months","Lunokhod 1"],
+["Salyut 1","USSR","19 Apr 1971","Space station","The first space station. Its first crew, on Soyuz 11, died during their return to Earth.","Launched unmanned","Salyut 1"],
+["Apollo–Soyuz","BOTH","15–24 Jul 1975","Joint mission","American and Soviet spacecraft dock in orbit, a symbol of détente.","Docked 17 Jul 1975","Apollo–Soyuz Test Project"],
+["Space Shuttle Columbia","USA","12 Apr 1981","Reusable orbiter","The first flight of the Space Shuttle, the first reusable crewed spacecraft.","STS-1","Space Shuttle Columbia"],
+["Mir","USSR","20 Feb 1986","Space station","The first modular space station, built up in orbit over about a decade.","Core module launched 1986","Mir"],
+["Buran","USSR","15 Nov 1988","Reusable orbiter","The Soviet shuttle made one uncrewed orbital flight, landing automatically. The programme was then cancelled.","One flight only","Buran (spacecraft)"]],
+rockets:[["Saturn V (USA)",111,"≈111 m"],["N1 (USSR)",105,"≈105 m"],["Space Shuttle (USA)",56,"≈56 m"]],
+rknote:"The Soviet N1 never reached orbit. All four launch attempts between 1969 and 1972 failed, and the USSR lost the race to the Moon."});

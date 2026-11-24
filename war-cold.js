@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,timers=[],tlN=0,D=null;
-var NAV=[["OVERVIEW","top"],["TIMELINE","c-tl"],["SUPERPOWERS","c-sp"],["ARMS RACE","c-ar"],["CONFLICTS","c-cf"],["ESPIONAGE","c-es"],["KEY FIGURES","c-kf"],["ARCHIVES","c-ac"]];
+var NAV=[["OVERVIEW","top"],["TIMELINE","c-tl"],["SUPERPOWERS","c-sp"],["ARMS RACE","c-ar"],["SPACE RACE","c-sx"],["CONFLICTS","c-cf"],["ESPIONAGE","c-es"],["KEY FIGURES","c-kf"],["ARCHIVES","c-ac"]];
 function yr(d){return(d.match(/\d{4}/)||[""])[0]}
 function sec(id,y,l,cls,h){return'<section class="cws '+cls+'" id="'+id+'" data-y="'+y+'" data-l="'+l+'">'+h+"</section>"}
 function head(code,t){return'<header class="c-h"><span class="c-code">'+code+"</span><h2>"+t+'</h2><i class="c-led on"></i></header>'}
@@ -22,6 +22,8 @@ function html(d){
   h+=sec("c-sp","1949","Superpowers","c-sc",head("MOD. 02 / TERMINALS","Superpowers")+'<div class="c-2">'+d.powers.map(function(p){return'<div class="pnl"><div class="crt c-pf"><b class="c-pc">'+p[0]+"</b><h3>"+p[1].toUpperCase()+"</h3><dl><dt>LEADERSHIP</dt><dd>"+p[2]+"</dd><dt>IDEOLOGY</dt><dd>"+p[3]+"</dd><dt>ALLIANCES</dt><dd>"+p[4]+"</dd><dt>MILITARY</dt><dd>"+p[5]+"</dd></dl></div></div>"}).join("")+"</div>");
   /* arms */
   h+=sec("c-ar","1967","Arms race","c-sc",head("MOD. 03 / GAUGES","Arms race")+'<div class="pnl c-gs">'+d.arms.g.map(function(g){return gauge(g,d.arms.max)}).join("")+'<p class="tw">'+d.arms.note+"</p></div>");
+  /* space race */
+  h+=sec("c-sx","1957","Space race","c-sc",head("MOD. 08 / MISSION CONTROL","Space race")+'<div class="pnl sx-top"><div class="sx-orb" aria-hidden="true"><i><b></b></i></div><div class="sx-f" role="group" aria-label="Filter by programme">'+[["ALL","all"],["USA","USA"],["USSR","USSR"]].map(function(f,j){return'<button type="button" class="tgl'+(j?"":" on")+'" data-f="'+f[1]+'" aria-pressed="'+(j===0)+'"><i></i><span>'+f[0]+"</span></button>"}).join("")+'</div></div><div class="sx-g" id="sx-g">'+d.space.map(function(m){return'<article class="sx-c" data-a="'+m[1]+'"><div class="c-ph" data-w="'+m[6]+'"><div class="c-rd" aria-hidden="true"><i></i></div></div><div class="sx-b"><small>'+m[1]+" / "+m[2].toUpperCase()+" / "+m[3].toUpperCase()+"</small><h3>"+m[0]+"</h3><p>"+m[4]+'</p><span class="sx-t">'+m[5]+"</span></div></article>"}).join("")+'</div><div class="pnl sx-rk" role="img" aria-label="Launch vehicle heights: '+d.rockets.map(function(r){return r[0]+" "+r[2]}).join(", ")+'"><small class="c-code">LAUNCH VEHICLE SCALE</small><div class="sx-bars">'+d.rockets.map(function(r){return'<div><b>'+r[2]+'</b><i style="--h:'+r[1]+'"></i><span>'+r[0]+"</span></div>"}).join("")+"</div><p>"+d.rknote+"</p></div>");
   /* conflicts */
   h+=sec("c-cf","1950","Conflicts","c-sc",head("MOD. 04 / SITUATION REPORTS","Conflicts")+d.conf.map(function(c,j){return'<article class="pnl c-sr"><div class="c-ph" data-w="'+c[5]+'"><div class="c-rd" aria-hidden="true"><i></i></div></div><div class="c-fl"><small>SITREP '+String(j+1).padStart(2,"0")+" / "+c[2].toUpperCase()+"</small><h3>"+c[0]+'</h3><span class="c-dt">'+c[1]+"</span><dl><dt>PARTIES</dt><dd>"+c[3]+"</dd><dt>OUTCOME</dt><dd>"+c[4]+"</dd></dl></div></article>"}).join(""));
   /* espionage */
@@ -64,7 +66,8 @@ function mount(root){
 }
 function unmount(){timers.forEach(function(t){clearTimeout(t);clearInterval(t)});timers=[]}
 document.addEventListener("click",function(e){
-  var b=e.target.closest("[data-go],[data-t],[data-step]");if(!b||!document.getElementById("c-scale")&&!b.dataset.go)return;
+  var b=e.target.closest("[data-go],[data-t],[data-step],[data-f]");if(!b||!document.getElementById("c-scale")&&!b.dataset.go)return;
+  if(b.dataset.f){var f=b.dataset.f;[].forEach.call(document.querySelectorAll(".sx-f .tgl"),function(t){var on=t===b;t.classList.toggle("on",on);t.setAttribute("aria-pressed",on)});[].forEach.call(document.querySelectorAll(".sx-c"),function(c){c.hidden=!(f==="all"||c.dataset.a===f||c.dataset.a==="BOTH")});return}
   if(b.dataset.go){var s=document.getElementById(b.dataset.go);if(s)s.scrollIntoView({behavior:reduce?"auto":"smooth"});
     [].forEach.call(document.querySelectorAll(".c-nav .tgl"),function(t){t.classList.toggle("on",t===b)})}
   else if(D&&b.dataset.t)ev(+b.dataset.t);
