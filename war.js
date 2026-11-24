@@ -73,7 +73,7 @@ function mid(id,y,label,head,text,foot,n){
 function evB(e,n){var y=split(e[0]);return mid("s"+n,y[0],e[1],e[1],e[2],'<h3 class="foot">'+e[0]+"</h3>",n)}
 
 function build(k){
-  var d=D[k];if(d.cold&&window.WARCOLD)return WARCOLD.html(d);var h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
+  var d=D[k];if(d.cold&&window[d.mod||"WARCOLD"])return window[d.mod||"WARCOLD"].html(d);var h=[],n=1,y0=d.years.match(/\d{4}/)[0],yl=d.years.match(/\d{4}/g).pop(),i;
   h.push(sl("a cover","top",y0,d.name,'<div class="tx"><div class="yr">'+d.years+"</div><h1>"+d.name+'</h1><p class="lead">'+d.lead+'</p><div class="st">'+d.stats.map(function(s){return"<div><b>"+s[0]+"</b><span>"+s[1]+"</span></div>"}).join("")+'</div><p class="fine">*Figures are estimates and vary by source.</p></div>'+photo(d.name,"l",7)+'<div class="clf" aria-hidden="true">Declassified<small>Archive file '+y0+'</small></div><div class="cue" aria-hidden="true"><span></span>Scroll</div>'));
   h.push(mid("origins",y0,"Origins of "+d.name,"How it began",d.why,d.sides.map(function(s){return"<h4>"+s[0]+'</h4><p class="sd">'+s[1]+"</p>"}).join(""),11));
   d.tl.forEach(function(e,j){n++;h.push([evA,evC,evB][j%3](e,n+j*2))});
@@ -104,11 +104,11 @@ function act(el){
 function render(k){
   var d=D[k];if(!d)return;
   cur=k;document.body.dataset.war=k;document.title=d.name+" — HISTORIA";
-  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":"#0e1220";
+  document.querySelector("meta[name=theme-color]").content=k==="ww1"?"#15140e":k==="cw"?"#171B19":k==="nw"?"#211C18":"#0e1220";
   tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===k)});
   if(io)io.disconnect();if(io2)io2.disconnect();
-  if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();if(window.WARCOLD)WARCOLD.unmount();
-  main.innerHTML=(d.cold&&!window.WARCOLD)?'<section class="sl a" data-y="1947" data-l="Cold War"><div class="tx"><h3>Cold War module not loaded</h3><p>Upload war-cold.js, war-cold-data.js and war-cold.css next to war.html.</p></div></section>':build(k);
+  if(window.WARMAP)WARMAP.unmount();if(window.WARSTORY)WARSTORY.unmount();if(window.WARCOLD)WARCOLD.unmount();if(window.WARNAP)WARNAP.unmount();
+  main.innerHTML=(d.cold&&!window[d.mod||"WARCOLD"])?'<section class="sl a" data-y="1947" data-l="Module"><div class="tx"><h3>Module not loaded</h3><p>Upload the script, data and css files for this tab next to war.html.</p></div></section>':build(k);
   slides=[].slice.call(main.children);
   rail.innerHTML=slides.map(function(s,i){return'<button data-i="'+i+'" aria-label="'+esc(s.dataset.l)+'"><span>'+esc(s.dataset.l)+"</span></button>"}).join("");
   io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");act(en.target)}})},{threshold:.4});
@@ -122,7 +122,7 @@ function render(k){
   }
   /* while the gate is closed the page is built behind it; reveal animations wait for the doors to open */
   if(window.WARGATE&&WARGATE.opened)WARGATE.opened(reveal);else reveal();
-  if(d.cold){if(window.WARCOLD)WARCOLD.mount(main);else console.warn("HISTORIA: war-cold.js is not loaded.")}
+  if(d.cold){var M=window[d.mod||"WARCOLD"];if(M)M.mount(main);else console.warn("HISTORIA: the module for "+k+" is not loaded.")}
   else if(window.WARMAP&&WARMAP.has(k))WARMAP.mount(k);
   if(!d.cold&&window.WARSTORY&&WARSTORY.has(k))WARSTORY.mount(k);
   [].forEach.call(main.querySelectorAll(".por"),portrait);
