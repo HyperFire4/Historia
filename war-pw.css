@@ -150,3 +150,45 @@ body[data-war=pw] .pw{padding:80px 18px 56px}
 }
 @media(max-width:520px){.pw-tiles{grid-template-columns:repeat(2,1fr)}.pw-tiles b{font-size:20px}}
 @media(prefers-reduced-motion:reduce){.pw-r{opacity:1;transform:none}.pw-dust{display:none}.pw-art .im{transition:none}}
+
+/* ---- map: fixed aspect ratio so it can never be clipped; sections never clip vertically ---- */
+body[data-war=pw] main>.pw{overflow-x:clip;overflow-y:visible;contain:none!important;content-visibility:visible!important;height:auto!important;max-height:none!important;min-height:0}
+body[data-war=pw] .pw-hero{min-height:100svh!important}
+.pw-in{display:flow-root}
+.pw-mw{aspect-ratio:1000/523;max-height:82svh;width:100%;margin-inline:auto;overflow:hidden}
+.pw-mw svg{position:absolute;inset:0;width:100%;height:100%}
+@media(max-width:860px){.pw-mw{aspect-ratio:auto;max-height:none;overflow-x:auto}.pw-mw svg{position:static;min-width:640px;height:auto}}
+/* ---- paintings and photographs on cards ---- */
+.pw-bc .cardart{background:none;z-index:0}.pw-bc .cardart .im{filter:grayscale(.45) sepia(.3) brightness(.72)}
+.pw-bc::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 28%,rgba(23,21,19,.95));opacity:0;transition:.5s;pointer-events:none}.pw-bc:has(.ok)::after{opacity:1}
+.pw-bc .cardart.ok~.em{opacity:.08}.pw-bc:hover .cardart.ok .im{transform:scale(1.07)}
+.pw-bc .cardart .cap{left:14px;right:auto;top:10px;bottom:auto;max-width:80%}
+.pw-art.pic{position:relative;inset:auto;aspect-ratio:16/9;margin-top:20px;border:1px solid var(--br);box-shadow:0 18px 40px rgba(0,0,0,.45)}.pw-art.pic:not(.ok){display:none}
+.pw-art.side:not(.ok){opacity:.55}
+.pw-fall .bgart::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(rgba(23,21,19,.96),rgba(13,9,9,.82) 50%,rgba(36,18,16,.93))}
+/* ---- entrance: temple doors open on the hero ---- */
+.pw-enter{position:fixed;inset:0;z-index:95;cursor:pointer;overflow:hidden}
+.pw-enter .dr{position:absolute;top:0;bottom:0;width:50.3%;background:linear-gradient(#1c1915,#0c0b09);transition:transform 1.6s cubic-bezier(.77,0,.18,1)}
+.pw-enter .dr.l{left:0;border-right:3px solid var(--br);box-shadow:inset -60px 0 90px rgba(0,0,0,.6)}.pw-enter .dr.r{right:0;border-left:3px solid var(--br);box-shadow:inset 60px 0 90px rgba(0,0,0,.6)}
+.pw-enter .dr::before{content:"";position:absolute;inset:22px;border:1px solid rgba(169,134,77,.45)}
+.pw-enter .dr::after{content:"";position:absolute;left:36px;right:36px;top:46px;height:18px;background:var(--key) repeat-x;opacity:.55;box-shadow:0 calc(100svh - 110px) 0 0 transparent}
+.pw-enter.open .l{transform:translateX(-102%)}.pw-enter.open .r{transform:translateX(102%)}
+.pw-enter .ct{position:absolute;inset:0;z-index:2;display:grid;place-content:center;justify-items:center;gap:18px;text-align:center;transition:opacity .8s,transform 1.4s}
+.pw-enter.open .ct{opacity:0;transform:scale(1.15)}
+.pw-enter .gr{font:500 clamp(13px,2.4vw,22px) var(--sf);color:var(--br);letter-spacing:.42em;animation:pwl 1.6s ease both}
+@keyframes pwl{from{letter-spacing:1em;opacity:0}}
+.pw-enter svg{width:clamp(70px,12vw,110px);fill:none;stroke:var(--br);stroke-width:1.2;stroke-dasharray:480;stroke-dashoffset:480;animation:pwdr 1.5s .35s ease forwards}
+@keyframes pwdr{to{stroke-dashoffset:0}}
+.pw-enter .yr{font:400 clamp(18px,3vw,30px) var(--sf);letter-spacing:.3em;color:var(--mb);animation:pwf 1.2s .9s both}
+@keyframes pwf{from{opacity:0;transform:translateY(10px)}}
+.pw-enter .ln{width:0;height:2px;background:var(--br);animation:pwg 1.4s .6s ease forwards}
+@keyframes pwg{to{width:min(60vw,360px)}}
+.pw-bg{transition:opacity 2.2s,filter 2.2s}.pw-hero.hold .pw-bg{opacity:0;filter:blur(10px) brightness(.5)}
+.pw-hero.hold .pw-r{opacity:0!important;transform:translateY(36px) scale(.96)!important}
+.pw-hero h1.pw-r{transition-duration:1.5s}
+.pw-frame .mt,.pw-frame .mb{transition:transform 1.3s cubic-bezier(.2,.7,.2,1) .15s}.pw-hero.hold .pw-frame .mt{transform:translateY(-160%)}.pw-hero.hold .pw-frame .mb{transform:translateY(160%)}
+.pw-frame .cl,.pw-frame .cr{transform-origin:bottom;transition:transform 1.5s cubic-bezier(.2,.7,.2,1) .3s}.pw-hero.hold .pw-frame .cl,.pw-hero.hold .pw-frame .cr{transform:scaleY(0)}
+.pw-hero.hold .pw-tiles button{opacity:0}
+.pw-hero.go .pw-tiles button{animation:pwup .9s calc(.9s + var(--i)*90ms) cubic-bezier(.2,.7,.2,1) both}
+@keyframes pwup{from{opacity:0;transform:translateY(46px)}}
+@media(prefers-reduced-motion:reduce){.pw-enter{display:none}}
