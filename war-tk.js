@@ -13,18 +13,55 @@ function ridge(seed,base,amp,n,W){var r=rng(seed),p=[],i,x,y,d="M0 600L0 "+base;
   for(i=0;i<=n;i++){x=i/n*W;y=base-amp*(.25+.75*Math.abs(Math.sin(i*1.7+seed)*r()+r()*.6));p.push([x,y])}
   for(i=0;i<p.length;i++){var q=p[i],pr=p[i-1]||[0,base];d+="Q"+((pr[0]+q[0])/2).toFixed(0)+" "+(Math.min(pr[1],q[1])-amp*.1).toFixed(0)+" "+q[0].toFixed(0)+" "+q[1].toFixed(0)}
   return d+"L"+W+" 600Z"}
+function peaks(seed,base,hMin,hMax,n,fill,op,filt){
+  var r=rng(seed),d="",i,x=-120;
+  for(i=0;i<n;i++){var w=140+r()*180,h=hMin+r()*(hMax-hMin),cx=x+w*.5;
+    d+="M"+x.toFixed(0)+" "+base+"L"+(x+w*.16).toFixed(0)+" "+(base-h*.4).toFixed(0)+"L"+(x+w*.3).toFixed(0)+" "+(base-h*.6).toFixed(0)+"L"+(cx-w*.05).toFixed(0)+" "+(base-h).toFixed(0)+"L"+(cx+w*.14).toFixed(0)+" "+(base-h*.72).toFixed(0)+"L"+(x+w*.78).toFixed(0)+" "+(base-h*.46).toFixed(0)+"L"+(x+w).toFixed(0)+" "+base+"Z";x+=w*.6}
+  return'<path d="'+d+'" fill="'+fill+'" opacity="'+op+'"'+(filt?' filter="url(#'+filt+')"':"")+"/>"}
+function pine(x,y,s){return'<g transform="translate('+x+" "+y+") scale("+s+')" fill="#14110e"><rect x="-1.5" y="0" width="3" height="26"/><path d="M0-26L13-6H-13Z"/><path d="M0-14L16 8H-16Z"/><path d="M0-2L19 20H-19Z"/></g>'}
+function strokes(seed,x0,x1,y0,y1,n){var r=rng(seed),o="",i;for(i=0;i<n;i++){var x=x0+r()*(x1-x0),y=y0+r()*(y1-y0);o+="M"+x.toFixed(0)+" "+y.toFixed(0)+"l"+(r()*6-3).toFixed(1)+" "+(14+r()*34).toFixed(0)}return'<path d="'+o+'" stroke="#e9dfc9" stroke-opacity=".16" stroke-width="1.5" fill="none"/>'}
 function hero(){
-  var W=1600,o='<svg class="tk-land" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="tkg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38251F" stop-opacity="0"/><stop offset="1" stop-color="#211D19"/></linearGradient></defs>';
-  o+='<circle cx="1180" cy="170" r="70" fill="#8C302B" opacity=".55"/><circle cx="1180" cy="170" r="70" fill="none" stroke="#C6A46A" stroke-opacity=".25"/>';
-  o+='<path d="'+ridge(3,360,200,9,W)+'" fill="#4a4036" opacity=".35"/><path d="'+ridge(7,420,170,11,W)+'" fill="#3a3028" opacity=".6"/>';
-  /* fortress and banners on the middle ridge */
-  o+='<g fill="#1d1916" opacity=".9" transform="translate(300 360)"><path d="M0 120V70H120V120ZM-14 70L60 34L134 70Z"/><path d="M20 34V10H100V34ZM6 10L60-18L114 10Z"/><rect x="50" y="-40" width="3" height="26"/></g>';
-  [[760,340],[1020,365],[1380,330]].forEach(function(b,i){o+='<g transform="translate('+b[0]+" "+b[1]+')"><g class="tk-bn" style="animation-delay:'+i*.7+'s"><rect x="0" y="0" width="3" height="80" fill="#1d1916"/><path d="M3 4H46L38 16L46 28H3Z" fill="'+["#8C302B","#6f9c8a","#b98a4a"][i]+'" opacity=".85"/></g></g>'});
-  o+='<path d="'+ridge(11,500,150,13,W)+'" fill="#26211c"/><path d="'+ridge(19,560,90,15,W)+'" fill="#1b1815"/><rect width="1600" height="600" fill="url(#tkg)"/></svg>';
+  var o='<svg class="tk-land" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><filter id="tkb" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter><filter id="tkm" x="-30%" y="-400%" width="160%" height="900%"><feGaussianBlur stdDeviation="26"/></filter><filter id="tkr" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".018 .055" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="16"/><feGaussianBlur stdDeviation=".7"/></filter><linearGradient id="tkg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#211D19" stop-opacity="0"/><stop offset="1" stop-color="#211D19"/></linearGradient></defs>';
+  o+='<circle cx="1210" cy="190" r="74" fill="#8C302B" opacity=".5"/><circle cx="1210" cy="190" r="74" fill="none" stroke="#C6A46A" stroke-opacity=".25"/>';
+  o+=peaks(3,470,330,520,9,"#8a7b66",.5,"tkb")+'<ellipse cx="500" cy="430" rx="620" ry="52" fill="#e9dfc9" opacity=".3" filter="url(#tkm)"/>';
+  o+=peaks(8,540,260,460,9,"#5a4d40",.85,"tkr")+'<ellipse cx="1000" cy="520" rx="700" ry="56" fill="#e9dfc9" opacity=".28" filter="url(#tkm)"/>';
+  o+=peaks(13,630,160,330,8,"#2f2822",.95,"tkr")+strokes(5,0,1600,380,640,260);
+  o+='<g fill="#14110e" transform="translate(1080 410)"><path d="M-40 90H40V102H-40Z"/><path d="M-30 90V56M30 90V56M0 90V56" stroke="#14110e" stroke-width="3"/><path d="M-46 56Q0 40 46 56L34 44Q0 28-34 44Z"/><path d="M-30 44Q0 18 30 44L18 26Q0 6-18 26Z"/></g>';
+  o+=pine(240,586,1.3)+pine(290,598,1)+pine(1390,596,1.4)+pine(1440,610,1.05)+pine(1340,614,.8);
+  o+='<g transform="translate(700 650)"><path d="M-26 0Q0 10 26 0Z" fill="#14110e"/><path d="M0 0V-22" stroke="#14110e" stroke-width="2"/><path d="M0-22L14-6H0Z" fill="#14110e" opacity=".8"/></g>';
+  o+=peaks(19,720,120,230,9,"#17130f",1,"tkr")+'<ellipse cx="800" cy="650" rx="900" ry="46" fill="#e9dfc9" opacity=".24" filter="url(#tkm)"/><rect y="450" width="1600" height="250" fill="url(#tkg)"/></svg>';
   return o;
 }
+function wdef(){
+  var F='fill="currentColor"',S='fill="none" stroke="currentColor" stroke-linecap="round"',ban=function(id,ch){return'<symbol id="'+id+'" viewBox="0 0 100 200"><g '+F+'><rect x="18" y="18" width="4" height="180"/><circle cx="20" cy="14" r="6"/><path d="M24 30H94L82 62L94 94H24Z"/></g><path d="M20 12L8 0M20 12L32 0" '+S+' stroke-width="2"/><text x="58" y="74" text-anchor="middle" font-size="40" font-weight="700" font-family="Noto Serif SC,serif" fill="#211D19">'+ch+"</text></symbol>"};
+  return'<svg class="tk-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>'+
+  '<symbol id="tkw-ji" viewBox="0 0 100 200"><g '+F+'><rect x="48" y="34" width="4" height="164"/><path d="M50 0L57 30H43Z"/><path d="M52 36C88 32 92 74 62 88L52 76C72 70 74 52 52 50Z"/><rect x="44" y="30" width="12" height="6"/><path d="M50 188L42 200H58Z"/></g><path d="M45 38Q38 58 44 78" '+S+' stroke-width="2"/></symbol>'+
+  '<symbol id="tkw-spear" viewBox="0 0 100 200"><g '+F+'><rect x="48.5" y="44" width="3" height="154"/><path d="M50 0C62 20 62 38 50 48C38 38 38 20 50 0Z"/><path d="M42 48H58L56 54H44Z"/></g><path d="M44 54Q34 82 40 100M56 54Q66 82 60 100" '+S+' stroke-width="2"/></symbol>'+
+  '<symbol id="tkw-dao" viewBox="0 0 100 200"><g '+F+'><path d="M46 4H54L57 128H43Z"/><rect x="32" y="128" width="36" height="7" rx="2"/><rect x="47" y="135" width="6" height="34"/></g><circle cx="50" cy="182" r="12" '+S+' stroke-width="4"/></symbol>'+
+  '<symbol id="tkw-jian" viewBox="0 0 100 200"><g '+F+'><path d="M50 0L58 122H42Z"/><rect x="28" y="122" width="44" height="8" rx="3"/><rect x="47" y="130" width="6" height="40"/><circle cx="50" cy="178" r="8"/></g></symbol>'+
+  '<symbol id="tkw-nu" viewBox="0 0 100 200"><g '+S+' stroke-width="4"><path d="M4 70Q50 22 96 70"/><path d="M4 70L50 92L96 70" stroke-width="1.6"/></g><g '+F+'><rect x="45" y="66" width="10" height="126"/><rect x="38" y="84" width="24" height="26" rx="3"/><path d="M50 18L57 40H43Z"/></g><path d="M50 36V150" '+S+' stroke-width="2"/></symbol>'+
+  '<symbol id="tkw-drum" viewBox="0 0 100 200"><g '+F+'><ellipse cx="50" cy="70" rx="38" ry="13"/><path d="M12 72V132Q50 152 88 132V72Q50 92 12 72Z" opacity=".85"/></g><path d="M12 90Q50 110 88 90M12 112Q50 132 88 112" '+S+' stroke="#211D19" stroke-width="2"/><path d="M22 140L8 196M78 140L92 196M50 148V196" '+S+' stroke-width="5"/></symbol>'+
+  '<symbol id="tkw-cloud" viewBox="0 0 100 200"><g '+S+' stroke-width="3"><path d="M8 130C8 108 34 104 44 116C44 92 82 88 88 114C102 112 110 130 96 136H12Z"/><path d="M34 120C30 110 42 106 44 116M70 112C68 102 82 100 84 108"/></g></symbol>'+
+  ban("tkw-bw","魏")+ban("tkw-bs","蜀")+ban("tkw-bu","吳")+"</defs></svg>";
+}
+var WS=["ji","dao","jian","nu","spear","drum","bw","bs","bu","cloud"];
+function bgd(k){
+  var r=rng(k*97+11),o="",i,used={};
+  for(i=0;i<5;i++){var s;do{s=WS[Math.floor(r()*WS.length)]}while(used[s]);used[s]=1;
+    var side=i%2,sz=190+r()*190,top=4+i*18+r()*8,rot=(r()*44-22).toFixed(0),off=2+r()*6;
+    o+='<svg class="wm'+(i%3===1?" rd":"")+'" aria-hidden="true" style="'+(side?"right":"left")+":"+off.toFixed(1)+"%;top:"+top.toFixed(0)+"%;height:"+sz.toFixed(0)+"px;transform:rotate("+rot+'deg)"><use href="#tkw-'+s+'"/></svg>'}
+  return'<div class="tk-bgd" aria-hidden="true">'+o+"</div>";
+}
+function palace(){
+  var el=document.getElementById("tk-pal");if(el)return;
+  var lan='<svg viewBox="0 0 40 90"><path d="M20 0V16" stroke="#C6A46A" stroke-width="1.5"/><rect x="12" y="14" width="16" height="5" fill="#C6A46A"/><path d="M20 19C42 22 42 64 20 68C-2 64-2 22 20 19Z" fill="#a8322b" stroke="#C6A46A" stroke-width="1.2"/><path d="M20 19V68M10 22C4 36 4 52 10 65M30 22C36 36 36 52 30 65" stroke="#e2b96f" stroke-width=".8" fill="none" opacity=".8"/><rect x="13" y="66" width="14" height="5" fill="#C6A46A"/><path d="M20 71V86M16 71V80M24 71V80" stroke="#C6A46A" stroke-width="1.2"/></svg>';
+  el=document.createElement("div");el.id="tk-pal";el.setAttribute("aria-hidden","true");
+  el.innerHTML='<i class="pl l"></i><i class="pl r"></i><i class="pt"></i><i class="pb"></i><span class="lw l">'+lan+'</span><span class="lw r">'+lan+"</span>";
+  document.body.appendChild(el);document.documentElement.style.scrollPaddingTop="106px";
+}
+function unpalace(){var el=document.getElementById("tk-pal");if(el)el.remove();document.documentElement.style.scrollPaddingTop=""}
 function seal(t,c){return'<span class="tk-seal'+(c?" "+c:"")+'" aria-hidden="true"><b>'+t+"</b></span>"}
-function sec(id,y,l,cls,h,m){return'<section class="tks '+cls+'" id="'+id+'" data-y="'+y+'" data-l="'+l+'"><div class="tk-mt" aria-hidden="true"><svg viewBox="0 0 1600 200" preserveAspectRatio="none"><path d="'+ridge(m*5+2,170,110,10,1600).replace(/M0 600/,"M0 200").replace(/L1600 600Z/,"L1600 200Z")+'" fill="currentColor"/></svg></div><div class="tk-w">'+h+"</div></section>"}
+function sec(id,y,l,cls,h,m){return'<section class="tks '+cls+'" id="'+id+'" data-y="'+y+'" data-l="'+l+'"><div class="tk-mt" aria-hidden="true"><svg viewBox="0 0 1600 200" preserveAspectRatio="none"><path d="'+ridge(m*5+2,170,110,10,1600).replace(/M0 600/,"M0 200").replace(/L1600 600Z/,"L1600 200Z")+'" fill="currentColor"/></svg></div>'+bgd(m)+'<div class="tk-w">'+h+"</div></section>"}
 function head(n,t,s){return'<header class="tk-h tk-rv"><span class="tk-no">'+n+'</span><h2>'+t+"</h2><p>"+s+'</p><div class="tk-dv"><i></i>'+seal("三國","sm")+"<i></i></div></header>"}
 function ph(w,c){return'<div class="tk-ph '+(c||"")+'" data-w="'+w+'" role="img" aria-label="'+w.split("|")[0]+'"><i></i></div>'}
 function scroll(w,c,inner){return'<div class="tk-hs '+(c||"")+'"><span class="tk-rl"></span><div class="tk-pp">'+inner+'</div><span class="tk-rl"></span></div>'}
@@ -37,7 +74,7 @@ function mini(i){
 var SL={"Cao Cao":"曹","Liu Bei":"劉","Sun Quan":"孫","Zhuge Liang":"諸","Guan Yu":"關","Zhang Fei":"張","Zhou Yu":"周","Sima Yi":"司","Lu Xun":"陸"};
 function html(d){
   D=d;var h="",i;
-  h+='<section class="tks tk-hero" id="top" data-y="220" data-l="Overview">'+hero()+'<div class="tk-mist m1"></div><div class="tk-mist m2"></div><div class="tk-mist m3"></div><div class="tk-w tk-ht"><div class="tk-eb"><span>220 – 280 AD</span></div><h1 aria-label="The Three Kingdoms">'+"THE THREE KINGDOMS".split("").map(function(c,j){return c===" "?" ":'<span style="--i:'+j+'">'+c+"</span>"}).join("")+'</h1><p class="tk-sub">An empire divided. Three kingdoms rising.</p><p class="tk-lead">'+d.lead+'</p><button class="tk-btn" type="button" data-go="tk-kg">'+seal("三國","sm")+'<span>Enter the Three Kingdoms</span></button></div><nav class="tk-nav" aria-label="Chapters">'+NAV.map(function(n){return'<button type="button" data-go="'+n[2]+'"><i>'+n[0]+"</i><span>"+n[1]+"</span></button>"}).join("")+"</nav></section>";
+  h+='<section class="tks tk-hero" id="top" data-y="220" data-l="Overview">'+wdef()+hero()+'<div class="tk-ph tk-art" data-w="Travelers Among Mountains and Streams|Early Spring (painting)|Dwelling in the Fuchun Mountains|Shan shui" aria-hidden="true"><i></i></div><div class="tk-vei"></div>'+'<div class="tk-mist m1"></div><div class="tk-mist m2"></div><div class="tk-mist m3"></div><div class="tk-w tk-ht"><div class="tk-eb"><span>220 – 280 AD</span></div><h1 aria-label="The Three Kingdoms">'+(function(){var n=0;return"THE THREE KINGDOMS".split(" ").map(function(w){return'<span class="tk-wd">'+w.split("").map(function(c){return'<span style="--i:'+(n++)+'">'+c+"</span>"}).join("")+"</span>"}).join(" ")})()+'</h1><p class="tk-sub">An empire divided. Three kingdoms rising.</p><p class="tk-lead">'+d.lead+'</p><button class="tk-btn" type="button" data-go="tk-kg">'+seal("三國","sm")+'<span>Enter the Three Kingdoms</span></button></div><nav class="tk-nav" aria-label="Chapters">'+NAV.map(function(n){return'<button type="button" data-go="'+n[2]+'"><i>'+n[0]+"</i><span>"+n[1]+"</span></button>"}).join("")+"</nav></section>";
   h+=sec("tk-kg","220","Kingdoms","tk-s",head("The Three States","Wei, Shu and Wu","Three rival kingdoms rose from the ruins of the Han")+'<div class="tk-fcs" id="tk-fcs">'+d.fac.map(function(f,j){return'<button type="button" class="tk-fc '+["wei","shu","wu"][j]+(j===0?" on":"")+' tk-rv" data-f="'+j+'" aria-pressed="'+(j===0)+'"><span class="tk-ch" aria-hidden="true">'+f[1]+"</span><small>"+f[3]+"</small><h3>"+f[0]+"</h3><em>"+f[2]+'</em><div class="tk-mm">'+mini(j)+"</div><b>Explore ›</b></button>"}).join("")+'</div><div class="tk-fd" id="tk-fd"></div>',1);
   h+=sec("tk-ov","184","Chronicle","tk-s",head("Historical Chronicle","The Fall of the Han","From imperial decline to reunification")+d.era.map(function(e,j){return'<article class="tk-ch2 tk-rv'+(j%2?" rev":"")+'"><div class="tk-fr">'+ph(e[3])+"</div>"+scroll(0,"tk-ar",'<small>'+e[1]+"</small><h3>"+e[0]+"</h3><p>"+e[2]+"</p>")+"</article>"}).join(""),2);
   h+=sec("tk-tl","184","Timeline","tk-s",head("Timeline","Bamboo Slips of the Age","Choose a year to unroll the record")+'<div class="tk-bam tk-rv" id="tk-bam" role="tablist" aria-label="Events">'+d.tl.map(function(e,j){return'<button type="button" role="tab" data-t="'+j+'" aria-selected="'+(j===0)+'" style="--k:'+FC[e[3]]+'"><b>'+e[0]+"</b><span>"+e[1]+"</span></button>"}).join("")+'</div><div class="tk-rv" id="tk-ev"></div>',3);
@@ -108,14 +145,14 @@ function photos(root){
   });
 }
 function mount(root){
-  photos(root);
+  palace();photos(root);
   var rv=root.querySelectorAll(".tk-rv");
   if(reduce||!window.IntersectionObserver){[].forEach.call(rv,function(e){e.classList.add("vis")})}
   else{io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("vis");io.unobserve(e.target)}})},{threshold:.08});[].forEach.call(rv,function(e){io.observe(e)})}
   fd(0);ev(0);sel=-1;pn(-1);
   var last=innerWidth;rz=function(){if(innerWidth!==last){last=innerWidth;map()}};addEventListener("resize",rz);
 }
-function unmount(){if(io){io.disconnect();io=null}if(rz){removeEventListener("resize",rz);rz=null}}
+function unmount(){unpalace();if(io){io.disconnect();io=null}if(rz){removeEventListener("resize",rz);rz=null}}
 document.addEventListener("click",function(e){
   if(!D)return;var b=e.target.closest("[data-go]");
   if(b){var s=document.getElementById(b.dataset.go);if(s&&document.body.dataset.war==="tk")s.scrollIntoView({behavior:reduce?"auto":"smooth"});return}
