@@ -22,13 +22,13 @@ function html(d){
   for(i=0;i<22;i++)dust+='<i style="left:'+(i*4.4+(i*37%9))+'%;animation-duration:'+(10+i%7*2)+'s;animation-delay:-'+(i%9*2)+'s"></i>';
   h+=sec("pw-hero","431 BC","Overview",'<div class="pw-bg">'+art("hero")+sym("helm","c")+'</div><div class="pw-dust">'+dust+'</div><div class="pw-frame" aria-hidden="true"><i class="mt"></i><i class="mb"></i><i class="cl"></i><i class="cr"></i><b class="k1"></b><b class="k2"></b><b class="k3"></b><b class="k4"></b></div><div class="pw-in pw-hc"><div class="pw-gr pw-r">ΠΕΛΟΠΟΝΝΗΣΙΑΚΟΣ ΠΟΛΕΜΟΣ</div><div class="pw-date pw-r">431 — 404 BC</div><h1 class="pw-r" id="pw-top">The Peloponnesian War</h1><div class="pw-sub pw-r">The struggle that divided the Greek world.</div><p class="pw-r">For nearly three decades, Athens and Sparta fought for supremacy over the ancient Greek world, unleashing a conflict that would reshape the destiny of Greece.</p><a class="pw-btn big pw-r" href="#" data-go="1">Enter the Ancient Greek World</a></div><nav class="pw-tiles" aria-label="Sections">'+T.map(function(t,j){return'<button type="button" style="--i:'+j+'" data-nav="'+t+'"><b>'+GN[j]+"</b><small>0"+(j+1)+" —</small><span>"+t+"</span></button>"}).join("")+"</nav>");
   h+=sec("","432 BC","Rival Powers",sym("col","l")+'<div class="pw-in">'+head("Athens vs Sparta","The Rival Powers","Select a power to open its profile.")+'<div class="pw-split pw-r">'+d.powers.map(function(p,j){return'<button class="pw-fac '+p.k+'" data-f="'+j+'" aria-expanded="false">'+art(p.k==="ath"?"ath":"spa")+'<span class="ic">'+sv(j?"shield":"owl")+"</span><b>"+p.t+"</b><h3>"+p.n+"</h3><span>"+p.s+"</span></button>"}).join("")+'</div><div class="pw-prof" id="pw-prof"><div id="pw-pi"></div></div></div>');
-  h+=sec("","431 BC","Timeline",sym("ship","r")+'<div class="pw-in">'+head("Chronology","Three Phases of the War")+'<div class="pw-ph">'+d.phases.map(function(p,j){return'<div class="pw-it pw-r"><div class="pw-rn">'+p.r+'</div><div class="tx"><h3>'+p.n+'</h3><div class="d">'+p.d+"</div><p>"+p.s+"</p><details><summary>Key events</summary><ul>"+p.h.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul></details></div>"+art("p"+(j+1),"side")+"</div>"}).join("")+"</div></div>");
-  h+=sec("","432 BC","Battles",sym("helm","l")+'<div class="pw-in">'+head("The record","Battle Archive")+'<div class="pw-ctl" id="pw-fl">'+["all","land","sea","siege","politics"].map(function(t,j){return'<button class="pw-btn s'+(j?"":" on")+'" data-t="'+t+'">'+t+"</button>"}).join("")+'<button class="pw-btn s" id="pw-so">Oldest first ↑</button></div><div class="pw-bt" id="pw-bt"></div></div>');
-  h+=sec("","495 BC","Commanders",sym("laurel","r")+'<div class="pw-in">'+head("Personalities","Commanders &amp; Statesmen")+'<div class="pw-pp">'+d.people.map(function(p,j){return'<button class="pw-pc pw-r" data-pp="'+j+'"><div class="ph">'+sv(p.f==="a"?"owl":"helm")+'<div class="im" data-w="'+esc(p.w)+'"></div></div><h3>'+p.n+"</h3><small class="+p.f+'>'+FN[p.f]+" · "+p.r+"</small><p>"+p.b+"</p></button>"}).join("")+"</div></div>");
+  h+=sec("","431 BC","Timeline",sym("ship","r")+'<div class="pw-in">'+art("b1","band")+head("Chronology","Three Phases of the War")+'<div class="pw-ph">'+d.phases.map(function(p,j){return'<div class="pw-it pw-r"><div class="pw-rn">'+p.r+'</div><div class="tx"><h3>'+p.n+'</h3><div class="d">'+p.d+"</div><p>"+p.s+"</p><details><summary>Key events</summary><ul>"+p.h.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul></details></div>"+art("p"+(j+1),"side")+"</div>"}).join("")+"</div></div>");
+  h+=sec("","432 BC","Battles",sym("helm","l")+'<div class="pw-in">'+art("b2","band")+head("The record","Battle Archive")+'<div class="pw-ctl" id="pw-fl">'+["all","land","sea","siege","politics"].map(function(t,j){return'<button class="pw-btn s'+(j?"":" on")+'" data-t="'+t+'">'+t+"</button>"}).join("")+'<button class="pw-btn s" id="pw-so">Oldest first ↑</button></div><div class="pw-bt" id="pw-bt"></div></div>');
+  h+=sec("","495 BC","Commanders",sym("laurel","r")+'<div class="pw-in">'+art("b3","band")+head("Personalities","Commanders &amp; Statesmen")+'<div class="pw-pp">'+d.people.map(function(p,j){return'<button class="pw-pc pw-r" data-pp="'+j+'"><div class="ph">'+sv(p.f==="a"?"owl":"helm")+'<div class="im" data-w="'+esc(p.w)+'"></div></div><h3>'+p.n+"</h3><small class="+p.f+'>'+FN[p.f]+" · "+p.r+"</small><p>"+p.b+"</p></button>"}).join("")+"</div></div>");
   h+=sec("pw-ms","431–404 BC","Map",'<div class="pw-in">'+head("Geography","Campaign Map","Choose a phase and toggle layers. Select any marker for details.")+'<div class="pw-ctl" id="pw-ph">'+["All phases","I · 431–421","II · 415–413","III · 413–404"].map(function(t,j){return'<button class="pw-btn s'+(j?"":" on")+'" data-p="'+j+'">'+t+"</button>"}).join("")+'</div><div class="pw-ctl" id="pw-ly">'+[["a","Athenian side"],["s","Spartan side"],["b","Battles"],["r","Campaign routes"]].map(function(t){return'<button class="pw-btn s" aria-pressed="true" data-ly="'+t[0]+'">'+t[1]+"</button>"}).join("")+'</div><div class="pw-mw">'+map()+'</div><div class="pw-info" id="pw-in"><b>Campaign map</b><p>Select a city or a battle.</p></div><p class="pw-note">Coastlines: Natural Earth. Routes are schematic straight lines between known places, not exact paths.</p></div>');
-  h+=sec("","Hoplites","Warfare",sym("shield","l")+'<div class="pw-in">'+head("Arms &amp; strategy","Military Warfare")+'<div class="pw-wr pw-r"><div class="pw-wt" id="pw-wt">'+d.war.map(function(w,j){return'<button class="pw-btn s'+(j?"":" on")+'" data-wt="'+j+'">'+w.n+"</button>"}).join("")+'</div><div class="pw-wp" id="pw-wp"></div></div></div>');
-  h+=sec("pw-fall","404 BC","The Fall of Athens",art("fall","bgart")+sym("col","c")+'<div class="pw-in"><div class="pw-eb pw-r">Spring, 404 BC</div><h2 class="pw-r">The End of Athenian Supremacy</h2><div class="big pw-r">404 BC</div><div class="pw-key pw-r"></div><div class="pw-st">'+d.fall.map(function(t){return'<p class="pw-r">'+t+"</p>"}).join("")+"</div></div>");
-  h+=sec("pw-leg","371 BC","Legacy",art("leg","bgart")+'<div class="pw-in">'+head("Consequences","Legacy of the War")+'<div class="pw-lg">'+d.legacy.map(function(l){return'<div class="pw-r"><h3>'+l[0]+"</h3><p>"+l[1]+"</p></div>"}).join("")+'</div><div class="pw-gr pw-r" style="text-align:center">ΚΤΗΜΑ ΕΣ ΑΙΕΙ</div><div class="pw-end pw-r">THE WAR ENDED.<em>THE GREEK WORLD WOULD NEVER BE THE SAME.</em></div><div style="text-align:center"><a class="pw-btn" href="#" data-go="0">↑ Back to top</a></div></div>');
+  h+=sec("","Hoplites","Warfare",sym("shield","l")+'<div class="pw-in">'+art("b4","band")+head("Arms &amp; strategy","Military Warfare")+'<div class="pw-wr pw-r"><div class="pw-wt" id="pw-wt">'+d.war.map(function(w,j){return'<button class="pw-btn s'+(j?"":" on")+'" data-wt="'+j+'">'+w.n+"</button>"}).join("")+'</div><div class="pw-wp" id="pw-wp"></div></div></div>');
+  h+=sec("pw-fall","404 BC","The Fall of Athens",art("fall","bgart")+sym("col","c")+'<div class="pw-in"><div class="pw-eb pw-r">Spring, 404 BC</div><h2 class="pw-r">The End of Athenian Supremacy</h2><div class="big pw-r">404 BC</div><div class="pw-key pw-r"></div><div class="pw-st">'+d.fall.map(function(t,k){return'<div class="stp pw-r"><div class="pw-art th" data-wq="'+(12+k)+'"><div class="im"></div><small class="cap"></small></div><p>'+t+"</p></div>"}).join("")+"</div></div>");
+  h+=sec("pw-leg","371 BC","Legacy",art("leg","bgart")+'<div class="pw-in">'+head("Consequences","Legacy of the War")+'<div class="pw-lg">'+d.legacy.map(function(l,k){return'<div class="pw-r"><div class="pw-art th" data-wq="'+(17+k)+'"><div class="im"></div><small class="cap"></small></div><h3>'+l[0]+"</h3><p>"+l[1]+"</p></div>"}).join("")+'</div><div class="pw-gr pw-r" style="text-align:center">ΚΤΗΜΑ ΕΣ ΑΙΕΙ</div><div class="pw-end pw-r">THE WAR ENDED.<em>THE GREEK WORLD WOULD NEVER BE THE SAME.</em></div><div style="text-align:center"><a class="pw-btn" href="#" data-go="0">↑ Back to top</a></div></div>');
   return h;
 }
 
@@ -70,9 +70,13 @@ function show(el,s,cap){
   var im=new Image();im.onload=function(){if(!el.isConnected)return;var b=el.querySelector(".im")||el;b.style.backgroundImage="url('"+s+"')";el.classList.add("ok");var cp=el.querySelector(".cap");if(cp&&cap)cp.textContent=cap};im.src=s;
 }
 /* Only real high-resolution raster images are accepted; if nothing qualifies the drawn Greek emblem stays. */
-function load(el,list,min,W,q){
-  var i=0;
-  function fin(){if(!q||!el.isConnected)return;csearch(q,min,W).then(function(r){var c=r.filter(function(x){return!used[x.u]})[0];if(c){used[c.u]=1;show(el,c.u,c.t.slice(0,70)+" · Wikimedia Commons")}})}
+var GEN={land:["Greek hoplite battle painting","hoplite phalanx ancient Greece"],sea:["Greek trireme painting","ancient Greek warship"],siege:["ancient Greek fortification wall ruins","ancient Greek city siege painting"],politics:["ancient Athens painting","Pnyx Athens assembly"],any:["ancient Greece painting","Acropolis Athens","ancient Greek hoplite"],none:[]};
+function load(el,list,min,W,q,kind){
+  var i=0,qs=[].concat(q||[],GEN[kind||"any"]||[]);
+  function fin(){
+    if(!el.isConnected)return;
+    (function tryq(n){if(n>=qs.length)return;csearch(qs[n],min,W).then(function(r){if(!el.isConnected)return;var c=r.filter(function(x){return!used[x.u]})[0];if(c){used[c.u]=1;show(el,c.u,c.t.slice(0,70)+" · Wikimedia Commons")}else tryq(n+1)})})(0);
+  }
   (function next(){
     if(!el.isConnected)return;if(i>=list.length)return fin();var c=list[i++],t=typeof c==="string"?c:c[0];
     summ(t).then(function(o){
@@ -87,15 +91,19 @@ function lazy(root){
   if(!lz)lz=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;lz.unobserve(en.target);var e=en.target,f=e._f;if(f)f()})},{rootMargin:"700px 0px"});
   $$("[data-art],[data-bi],[data-wq],.pw-pc .ph",root).forEach(function(e){if(e._l)return;e._l=1;
     var k=e.dataset.art,bi=e.dataset.bi,w=e.dataset.wq,side=e.classList.contains("side");
-    if(k)e._f=function(){load(e,ART[k]||[],900,side?1000:1800,Q[k])};
-    else if(bi!==undefined)e._f=function(){var b=D.battles[bi],c=BQ[bi]||[];load(e,[b.w].concat(c[0]||[]),800,1100,c[1])};
-    else if(w!==undefined)e._f=function(){load(e,[],800,1100,WQ[w])};
-    else e._f=function(){var im=$(".im",e),t=im.dataset.w;load(e,[t],450,520,t.replace(/ \(.*\)/,"")+" bust sculpture")};
+    if(k)e._f=function(){var bd=e.classList.contains("band");load(e,ART[k]||[],bd?1400:900,bd?2000:side?1000:1800,Q[k],"any")};
+    else if(bi!==undefined)e._f=function(){var b=D.battles[bi],c=BQ[bi]||[];load(e,[b.w].concat(c[0]||[]),700,1100,c[1],b.t)};
+    else if(w!==undefined)e._f=function(){load(e,[],700,1100,WQ[w],"any")};
+    else e._f=function(){var im=$(".im",e),t=im.dataset.w;load(e,[t],450,520,t.replace(/ \(.*\)/,"")+" bust sculpture","none")};
     k==="hero"?e._f():lz.observe(e)});
 }
 var Q={hero:"Greek hoplites battle painting",ath:"Pericles Athens painting",spa:"Spartan warriors painting",p1:"plague of Athens painting",p2:"Sicilian Expedition Syracuse",p3:"Athenian trireme fleet painting",fall:"Acropolis Athens ruins painting",leg:"Parthenon Athens painting"};
 var BQ=[[[],"Potidaea Chalcidice ancient Greek battle"],[["Plague of Athens"],"Plague of Athens Thucydides painting"],[["Sphacteria"],"Sphacteria Pylos Navarino bay"],[["Delium"],"Battle of Delium Socrates retreat painting"],[[],"Nicias Athens Sparta peace treaty"],[["Syracuse, Sicily"],"Athenian expedition Syracuse harbour"],[[],"Arginusae Lesbos Athenian fleet painting"],[["Lysander"],"Aegospotami Hellespont Lysander"],[["Long Walls"],"Long Walls Athens Piraeus Lysander"]];
-var WQ=["Greek hoplite vase painting","","Olympias trireme reconstruction","Greek siege warfare painting","Spartan hoplite statue","Athenian trireme relief"];
+Q.b1=["ancient Athens painting","Parthenon Acropolis painting"];Q.b2=["Greek hoplites phalanx painting","ancient Greek battle painting"];Q.b3=["ancient Greek marble bust","Parthenon frieze sculpture"];Q.b4=["Olympias trireme","ancient Greek trireme painting"];
+var WQ=["Greek hoplite vase painting","Greek phalanx hoplites painting","Olympias trireme reconstruction","Greek siege warfare painting","Spartan hoplite statue","Athenian trireme relief",
+"Acropolis of Athens","Piraeus harbour ancient Athens Long Walls","Athenian trireme relief","Sparta ancient ruins Taygetus","Leonidas statue Sparta","Spartan hoplite bronze figurine",
+"Aegospotami Hellespont Gallipoli coast","Piraeus Zea Munichia harbour ruins","Athens Acropolis painting","Long Walls Athens ruins","Delian League Athenian Empire",
+"Ancient Corinth ruins temple of Apollo","Parthenon Athens","Sparta ancient theatre acropolis","Persian king Greek cities painting","Philip II of Macedon bust","Thucydides bust"];
 function battles(){
   var a=D.battles.filter(function(b){return filt==="all"||b.t===filt}).sort(function(x,y){return sortAsc?x.yn-y.yn:y.yn-x.yn});
   $("#pw-bt",root).innerHTML=a.map(function(b){return'<button class="pw-bc" data-b="'+D.battles.indexOf(b)+'"><div class="pw-art cardart" data-bi="'+D.battles.indexOf(b)+'"><div class="im"></div><small class="cap"></small></div><div class="em">'+sv(EM[b.t])+'</div><div class="tx"><small>'+b.y+" · "+b.p+"</small><h3>"+b.n+'</h3><div class="mo">'+b.v+" — "+b.o+"</div></div></button>"}).join("");lazy(root);
@@ -116,7 +124,7 @@ function click(e){
   if(b=t.closest("[data-f]")){var p=D.powers[b.dataset.f],pr=$("#pw-prof",root),same=b.getAttribute("aria-expanded")==="true";
     $$(".pw-fac",root).forEach(function(f){f.setAttribute("aria-expanded","false")});
     if(same){pr.classList.remove("open");return}
-    b.setAttribute("aria-expanded","true");$("#pw-pi",root).innerHTML='<div class="pw-pg">'+p.f.map(function(f){return"<div><h4>"+f[0]+"</h4><p>"+f[1]+"</p></div>"}).join("")+"</div>";pr.classList.add("open");return}
+    b.setAttribute("aria-expanded","true");$("#pw-pi",root).innerHTML='<div class="pw-pg">'+p.f.map(function(f){return"<div><h4>"+f[0]+"</h4><p>"+f[1]+"</p></div>"}).join("")+"</div><div class=\"pw-strip\">"+[0,1,2].map(function(n){return'<div class="pw-art" data-wq="'+(6+b.dataset.f*3+n)+'"><div class="im"></div><small class="cap"></small></div>'}).join("")+"</div>";pr.classList.add("open");lazy(root);return}
   if(b=t.closest("[data-p]")){phase=+b.dataset.p;$$("#pw-ph button",root).forEach(function(x){x.classList.toggle("on",x===b)});mapUpdate();return}
   if(b=t.closest("[data-ly]")){var k=b.dataset.ly,on=b.getAttribute("aria-pressed")!=="true";layers[k]=on?1:0;b.setAttribute("aria-pressed",on);mapUpdate();return}
   if(b=t.closest(".pw-m")){var q=D.places[b.dataset.i];$("#pw-in",root).innerHTML="<b>"+q[0]+" · "+(q[3]==="a"?"Athenian side":q[3]==="s"?"Spartan side":"Neutral")+"</b><p>"+q[6]+"</p>";return}
@@ -128,10 +136,11 @@ function ovClick(e){
   var t=e.target,b;
   if(t===ov||t.closest("[data-x]"))return close();
 }
+function ovimg(el){var im=el&&el.querySelector(".im"),bg=im&&im.style.backgroundImage;if(!bg)return"";var c=el.querySelector(".cap");return'<div class="pw-art pic ok"><div class="im" style="background-image:'+esc(bg)+'"></div><small class="cap">'+(c?esc(c.textContent):"")+"</small></div>"}
 function bind(e){
   var b=e.target.closest("[data-b]"),p=e.target.closest("[data-pp]");
-  if(b){var x=D.battles[b.dataset.b];open("<small class='pw-eb'>"+x.y+" · "+x.p+"</small><h3>"+x.n+"</h3><dl><dt>Sides</dt><dd>"+x.v+"</dd><dt>Outcome</dt><dd>"+x.o+"</dd><dt>Type</dt><dd>"+x.t+"</dd></dl><p>"+x.d+"</p>")}
-  else if(p){var q=D.people[p.dataset.pp];open("<small class='pw-eb'>"+FN[q.f]+" · "+q.y+"</small><h3>"+q.n+"</h3><p><b>"+q.r+".</b> "+q.b+"</p><p>"+q.d+"</p>")}
+  if(b){var x=D.battles[b.dataset.b];open("<small class='pw-eb'>"+x.y+" · "+x.p+"</small><h3>"+x.n+"</h3><dl><dt>Sides</dt><dd>"+x.v+"</dd><dt>Outcome</dt><dd>"+x.o+"</dd><dt>Type</dt><dd>"+x.t+"</dd></dl>"+ovimg(b)+"<p>"+x.d+"</p>")}
+  else if(p){var q=D.people[p.dataset.pp];open("<small class='pw-eb'>"+FN[q.f]+" · "+q.y+"</small><h3>"+q.n+"</h3><p><b>"+q.r+".</b> "+q.b+"</p>"+ovimg(p)+"<p>"+q.d+"</p>")}
 }
 function key(e){if(e.key==="Escape"&&ov.classList.contains("on"))close()}
 
