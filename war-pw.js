@@ -14,7 +14,8 @@ function sv(k){return'<svg viewBox="0 0 100 100" aria-hidden="true">'+S[k]+"</sv
 function sym(k,c){return'<div class="pw-sym '+c+'">'+sv(k)+"</div>"}
 function art(k,c){return'<div class="pw-art '+(c||"")+'" data-art="'+k+'"><div class="im"></div><small class="cap"></small></div>'}
 var T=["Overview","Rival Powers","Timeline","Battles","Commanders","Map","Warfare","Legacy"],GN=["Α΄","Β΄","Γ΄","Δ΄","Ε΄","Ϛ΄","Ζ΄","Η΄"];
-var ART={hero:[["Leonidas at Thermopylae","Jacques-Louis David, 1814 · Persian Wars"]],ath:[["Pericles' Funeral Oration","Philipp von Foltz, 1852"]],spa:[["Young Spartans Exercising","Edgar Degas, c. 1860"]],p1:[["Plague in an Ancient City","Michiel Sweerts, c. 1652"]],p2:[["Alcibiades Being Taught by Socrates","François-André Vincent, 1776"]],leg:[["The Death of Socrates","Jacques-Louis David, 1787"]],p3:[],fall:[]};
+var Kw={spa:/spart|lacedaem|leonid|thermop|lycurg/i,ath:/athen|pericl|perikl|acropol|parthenon/i};
+var ART={hero:[{f:"Leónidas en las Termópilas, por Jacques-Louis David.jpg",c:"Leonidas at Thermopylae — Jacques-Louis David, 1814 · Persian Wars"},["Leonidas at Thermopylae","Jacques-Louis David, 1814 · Persian Wars"]],ath:[["Pericles' Funeral Oration","Philipp von Foltz, 1852"]],spa:[{f:"Edgar degas, giovani spartani che si esercitano, 1860 ca. 01.jpg",c:"Young Spartans Exercising — Edgar Degas, c. 1860"}],p1:[["Plague in an Ancient City","Michiel Sweerts, c. 1652"]],p2:[["Alcibiades Being Taught by Socrates","François-André Vincent, 1776"]],leg:[["The Death of Socrates","Jacques-Louis David, 1787"]],p3:[],fall:[]};
 var EM={land:"helm",sea:"ship",siege:"col",politics:"laurel"};
 
 function html(d){
@@ -54,7 +55,7 @@ function mapUpdate(){
   if(i)$("#pw-in",root).innerHTML="<b>Phase "+ROM[phase]+" · "+i.n+"</b><p>"+i.m+"</p>";
 }
 
-var pc={},cc={},used={},BAD=/map|plan|diagram|chart|flag|coat|arms|seal|logo|icon|locator|stamp|coin|banknote|postcard|screenshot|poster|cartoon|scheme|plaque|svg|portrait of a|sketch|modern|stadium/i;
+var pc={},cc={},used={},BAD=/\(\d{6,}\)|panel|label|exhibit|museum|decline|text|inscri|map|plan|diagram|chart|flag|coat|arms|seal|logo|icon|locator|stamp|coin|banknote|postcard|screenshot|poster|cartoon|scheme|plaque|svg|portrait of a|sketch|modern|stadium/i;
 function summ(t){return pc[t]=pc[t]||fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(t.replace(/ /g,"_"))).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function sized(o,W){var u=o.originalimage,s=u.source;if(u.width<=W||!/upload\.wikimedia\.org\/wikipedia\/commons\/[0-9a-f]\//.test(s))return s;return s.replace("/commons/","/commons/thumb/")+"/"+W+"px-"+s.split("/").pop()}
 /* Commons search: finds a real high-resolution jpeg for the topic when no article image qualifies */
@@ -71,14 +72,15 @@ function show(el,s,cap){
 }
 /* Only real high-resolution raster images are accepted; if nothing qualifies the drawn Greek emblem stays. */
 var GEN={land:["Greek hoplite battle painting","hoplite phalanx ancient Greece"],sea:["Greek trireme painting","ancient Greek warship"],siege:["ancient Greek fortification wall ruins","ancient Greek city siege painting"],politics:["ancient Athens painting","Pnyx Athens assembly"],any:["ancient Greece painting","Acropolis Athens","ancient Greek hoplite"],none:[]};
-function load(el,list,min,W,q,kind){
+function load(el,list,min,W,q,kind,kw){
   var i=0,qs=[].concat(q||[],GEN[kind||"any"]||[]);
   function fin(){
     if(!el.isConnected)return;
-    (function tryq(n){if(n>=qs.length)return;csearch(qs[n],min,W).then(function(r){if(!el.isConnected)return;var c=r.filter(function(x){return!used[x.u]})[0];if(c){used[c.u]=1;show(el,c.u,c.t.slice(0,70)+" · Wikimedia Commons")}else tryq(n+1)})})(0);
+    (function tryq(n){if(n>=qs.length)return;csearch(qs[n],min,W).then(function(r){if(!el.isConnected)return;var c=r.filter(function(x){return!used[x.u]&&(!kw||kw.test(x.t))})[0];if(c){used[c.u]=1;show(el,c.u,c.t.slice(0,70)+" · Wikimedia Commons")}else tryq(n+1)})})(0);
   }
   (function next(){
     if(!el.isConnected)return;if(i>=list.length)return fin();var c=list[i++],t=typeof c==="string"?c:c[0];
+    if(c&&c.f){var u="https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(c.f)+"?width="+W;if(used[u])return next();var im=new Image();im.onload=function(){used[u]=1;show(el,u,c.c)};im.onerror=next;im.src=u;return}
     summ(t).then(function(o){
       var u=o&&o.originalimage;
       if(!u||u.width<min||!/\.(jpe?g|png|webp)$/i.test(u.source)||BAD.test(u.source.split("/").pop())||used[u.source])return next();
@@ -91,13 +93,13 @@ function lazy(root){
   if(!lz)lz=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;lz.unobserve(en.target);var e=en.target,f=e._f;if(f)f()})},{rootMargin:"700px 0px"});
   $$("[data-art],[data-bi],[data-wq],.pw-pc .ph",root).forEach(function(e){if(e._l)return;e._l=1;
     var k=e.dataset.art,bi=e.dataset.bi,w=e.dataset.wq,side=e.classList.contains("side");
-    if(k)e._f=function(){var bd=e.classList.contains("band");load(e,ART[k]||[],bd?1400:900,bd?2000:side?1000:1800,Q[k],"any")};
+    if(k)e._f=function(){var bd=e.classList.contains("band");load(e,ART[k]||[],bd?1400:900,bd?2000:side?1000:1800,Q[k],"any",Kw[k])};
     else if(bi!==undefined)e._f=function(){var b=D.battles[bi],c=BQ[bi]||[];load(e,[b.w].concat(c[0]||[]),700,1100,c[1],b.t)};
     else if(w!==undefined)e._f=function(){load(e,[],700,1100,WQ[w],"any")};
     else e._f=function(){var im=$(".im",e),t=im.dataset.w;load(e,[t],450,520,t.replace(/ \(.*\)/,"")+" bust sculpture","none")};
     k==="hero"?e._f():lz.observe(e)});
 }
-var Q={hero:"Greek hoplites battle painting",ath:"Pericles Athens painting",spa:"Spartan warriors painting",p1:"plague of Athens painting",p2:"Sicilian Expedition Syracuse",p3:"Athenian trireme fleet painting",fall:"Acropolis Athens ruins painting",leg:"Parthenon Athens painting"};
+var Q={hero:"Greek hoplites battle painting",ath:"Pericles Athens painting",spa:["Sparta Spartan warrior painting","Leonidas Thermopylae painting","Spartan hoplite"],p1:"plague of Athens painting",p2:"Sicilian Expedition Syracuse",p3:"Athenian trireme fleet painting",fall:"Acropolis Athens ruins painting",leg:"Parthenon Athens painting"};
 var BQ=[[[],"Potidaea Chalcidice ancient Greek battle"],[["Plague of Athens"],"Plague of Athens Thucydides painting"],[["Sphacteria"],"Sphacteria Pylos Navarino bay"],[["Delium"],"Battle of Delium Socrates retreat painting"],[[],"Nicias Athens Sparta peace treaty"],[["Syracuse, Sicily"],"Athenian expedition Syracuse harbour"],[[],"Arginusae Lesbos Athenian fleet painting"],[["Lysander"],"Aegospotami Hellespont Lysander"],[["Long Walls"],"Long Walls Athens Piraeus Lysander"]];
 Q.b1=["ancient Athens painting","Parthenon Acropolis painting"];Q.b2=["Greek hoplites phalanx painting","ancient Greek battle painting"];Q.b3=["ancient Greek marble bust","Parthenon frieze sculpture"];Q.b4=["Olympias trireme","ancient Greek trireme painting"];
 var WQ=["Greek hoplite vase painting","Greek phalanx hoplites painting","Olympias trireme reconstruction","Greek siege warfare painting","Spartan hoplite statue","Athenian trireme relief",
