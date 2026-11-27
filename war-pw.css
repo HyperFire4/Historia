@@ -192,3 +192,15 @@ body[data-war=pw] .pw-hero{min-height:100svh!important}
 .pw-hero.go .pw-tiles button{animation:pwup .9s calc(.9s + var(--i)*90ms) cubic-bezier(.2,.7,.2,1) both}
 @keyframes pwup{from{opacity:0;transform:translateY(46px)}}
 @media(prefers-reduced-motion:reduce){.pw-enter{display:none}}
+
+/* ---- extra image slots: banners, profile strips, thumbnails ---- */
+.pw-art.band{position:relative;inset:auto;aspect-ratio:21/8;margin:0 0 44px;border:1px solid var(--br);outline:1px solid rgba(169,134,77,.35);outline-offset:6px;box-shadow:0 26px 60px rgba(0,0,0,.5)}
+.pw-art.band:not(.ok){display:none}.pw-art.band::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(transparent 55%,rgba(23,21,19,.8));pointer-events:none}
+.pw-art.band .im{filter:sepia(.18) contrast(1.04)}
+.pw-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:30px 4px 0}
+.pw-strip .pw-art{position:relative;inset:auto;aspect-ratio:4/3;border:1px solid var(--br)}.pw-strip .pw-art:not(.ok){display:none}
+.pw-art.th{position:relative;inset:auto;aspect-ratio:16/10;border:1px solid var(--br);margin-bottom:14px}.pw-art.th:not(.ok){display:none}
+.stp{display:grid;grid-template-columns:minmax(0,190px) 1fr;gap:22px;align-items:center;margin-bottom:6px}.stp .pw-art.th{margin:0}
+.stp:has(.th:not(.ok)){grid-template-columns:1fr}
+.pw-ov .pw-art.pic{margin:0 0 16px;aspect-ratio:16/9}
+@media(max-width:860px){.pw-strip{grid-template-columns:1fr}.stp{grid-template-columns:1fr}.pw-art.band{aspect-ratio:16/9}}
